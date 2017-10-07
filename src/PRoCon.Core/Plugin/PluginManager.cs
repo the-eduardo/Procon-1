@@ -662,18 +662,19 @@ namespace PRoCon.Core.Plugin {
 					// 4. Prepare compilation of the plugin
 					CSharpParseOptions parseOptions = this.GetCSharpParseOptions();
 
-					SyntaxTree syntaxTree;
-					if (this.ProconClient.Parent.OptionsSettings.EnablePluginDebugging)
+					// create a list of syntax trees and add the main source file by default
+					List<SyntaxTree> syntaxTrees = new List<SyntaxTree> { CSharpSyntaxTree.ParseText(fullPluginSource, parseOptions, pluginFile.FullName, Encoding.UTF8) };
+
+					// get all related partial source files and add them to the list too
+					DirectoryInfo pluginsDirectoryInfo = new DirectoryInfo(PluginBaseDirectory);
+					foreach (FileInfo partialPluginFile in pluginsDirectoryInfo.GetFiles(pluginClassName + ".*.cs"))
 					{
-						syntaxTree = CSharpSyntaxTree.ParseText(fullPluginSource, parseOptions, pluginFile.FullName, Encoding.UTF8);
-					}
-					else
-					{
-						syntaxTree = CSharpSyntaxTree.ParseText(fullPluginSource, parseOptions);
+						string partialPluginSource = File.ReadAllText(partialPluginFile.FullName);
+						syntaxTrees.Add(CSharpSyntaxTree.ParseText(partialPluginSource, parseOptions, partialPluginFile.FullName, Encoding.UTF8));
 					}
 
 					IEnumerable<MetadataReference> compilationReferences = this.GetCSharpCompilationReferences();
-					CSharpCompilation compilation = CSharpCompilation.Create(pluginClassName + ".dll", new SyntaxTree[] { syntaxTree }, compilationReferences, compilationOptions);
+					CSharpCompilation compilation = CSharpCompilation.Create(pluginClassName + ".dll", syntaxTrees, compilationReferences, compilationOptions);
 
 					// 4.1. Now compile the plugin
 					this.PrintPluginResults(pluginFile, compilation.Emit(outputAssembly, pdbPath, xmlDocPath));
@@ -840,6 +841,15 @@ namespace PRoCon.Core.Plugin {
                     try
                     {
                         className = Regex.Replace(pluginFile.Name, "\\.cs$", "");
+
+						// skip partial classes (only continue with the "main" partial class, the rest is getting added on compilation)
+						// files containing a dot (.) will be treated as additional partial classes/files, the main file does not contain any dots
+						// Example: MyPlugin.cs => Main file, so the file name equals the class name
+						//			MyPlugin.Additional.cs => additional file(s)
+						if (className.Contains("."))
+						{
+							continue;
+						}
 
                         if (IgnoredPluginClassNames.Contains(className) == false)
                         {
