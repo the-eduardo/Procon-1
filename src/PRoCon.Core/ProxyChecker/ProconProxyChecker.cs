@@ -40,7 +40,7 @@ namespace PRoCon.Core.ProxyChecker
         {
             string response = "";
             
-            if (ipAddress == "")
+            if (string.IsNullOrEmpty(ipAddress))
             {
                 return false;
             }
