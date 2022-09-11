@@ -596,7 +596,7 @@ namespace PRoCon.Controls
         private static void SetPlayerTeamID(ListViewItem player, int iTeamID)
         {
 
-            if (player.Tag is AdditionalPlayerInfo tag&& tag.Player != null)
+            if (player.Tag is AdditionalPlayerInfo tag && tag.Player != null)
             {
                 tag.Player.TeamID = iTeamID;
             }
@@ -605,7 +605,7 @@ namespace PRoCon.Controls
         private void SetPlayerSquadID(ListViewItem player, int squadId)
         {
 
-            if (player.Tag is AdditionalPlayerInfo tag&& tag.Player != null)
+            if (player.Tag is AdditionalPlayerInfo tag && tag.Player != null)
             {
                 if (this.Client != null && this.Client.Game != null && this.Client.Game.HasSquads == true)
                 {
