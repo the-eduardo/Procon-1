@@ -81,7 +81,7 @@ namespace PRoCon.Console
                     // Check if the environemnt variable "PROCON_GAMESERVER_IP" exists
                     string PROCON_GAMESERVER_IP = System.Environment.GetEnvironmentVariable("PROCON_GAMESERVER_IP") ?? "";
                     
-                    if (PROCON_GAMESERVER_IP != "")
+                    if (!string.IsNullOrEmpty(PROCON_GAMESERVER_IP))
                     {
                         // Run a background thread to keep checking if the connection is still alive, otherwise close application.
                         Thread t = new(new ThreadStart(delegate
