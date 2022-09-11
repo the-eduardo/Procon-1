@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -31,7 +31,7 @@ namespace PRoCon.Core.Plugin
         {
             get
             {
-                return this.Where(plugin => plugin.IsEnabled == true).Select(plugin => plugin.ClassName).ToList();
+                return this.Where(plugin => plugin.IsEnabled).Select(plugin => plugin.ClassName).ToList();
             }
         }
 
@@ -39,7 +39,7 @@ namespace PRoCon.Core.Plugin
         {
             get
             {
-                return this.Where(plugin => plugin.IsLoaded == true).Select(plugin => plugin.ClassName).ToList();
+                return this.Where(plugin => plugin.IsLoaded).Select(plugin => plugin.ClassName).ToList();
             }
         }
 
@@ -47,7 +47,7 @@ namespace PRoCon.Core.Plugin
         {
             bool isEnabled = false;
 
-            if (this.Contains(className) == true)
+            if (this.Contains(className))
             {
                 isEnabled = this[className].IsEnabled;
             }
@@ -59,7 +59,7 @@ namespace PRoCon.Core.Plugin
         {
             bool isLoaded = false;
 
-            if (this.Contains(className) == true)
+            if (this.Contains(className))
             {
                 isLoaded = this[className].IsLoaded;
             }
@@ -74,7 +74,7 @@ namespace PRoCon.Core.Plugin
 
         public void AddLoadedPlugin(string className, IPRoConPluginInterface type)
         {
-            if (this.Contains(className) == false)
+            if (!this.Contains(className))
             {
                 this.Add(new Plugin(className, type));
             }
@@ -87,12 +87,12 @@ namespace PRoCon.Core.Plugin
         public void SetCachedPluginVariable(string className, string variable, string value)
         {
 
-            if (this.Contains(className) == false)
+            if (!this.Contains(className))
             {
                 this.Add(new Plugin(className));
             }
 
-            if (this[className].CacheFailCompiledPluginVariables.ContainsKey(variable) == true)
+            if (this[className].CacheFailCompiledPluginVariables.ContainsKey(variable))
             {
                 this[className].CacheFailCompiledPluginVariables[variable] = value;
             }

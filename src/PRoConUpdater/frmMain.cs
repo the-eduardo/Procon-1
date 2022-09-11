@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -184,7 +184,7 @@ namespace PRoConUpdater
                         zip.AddDirectory(connectionConfigDirectory.FullName, connectionConfigDirectory.Name);
                     }
 
-                    if (Directory.Exists(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs"), "Backups")) == false)
+                    if (!Directory.Exists(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs"), "Backups")))
                     {
                         Directory.CreateDirectory(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs"), "Backups"));
                     }
@@ -231,7 +231,7 @@ namespace PRoConUpdater
                             {
                                 blProconRunning = true;
 
-                                if (blDisplayedStatusUpdate == false)
+                                if (!blDisplayedStatusUpdate)
                                 {
                                     if (iWaitCounter == 0)
                                     {
@@ -250,7 +250,7 @@ namespace PRoConUpdater
                                 {
                                     pcProcon.Kill();
 
-                                    if (blDisplayedStatusUpdate == false)
+                                    if (!blDisplayedStatusUpdate)
                                     {
                                         this.Invoke(new EmptyParameterHandler(this.KillingProconProcess));
                                         this.Invoke(new frmMain.AppendStatusHandler(this.AppendNewlineStatus), "Killing process..");
@@ -265,7 +265,7 @@ namespace PRoConUpdater
 
                 iWaitCounter++;
                 Thread.Sleep(100);
-            } while (blProconRunning == true);
+            } while (blProconRunning);
 
             this.Invoke(new EmptyParameterHandler(this.ProconClosed));
 
@@ -283,7 +283,7 @@ namespace PRoConUpdater
                 catch (Exception ex) { }
 
                 dlgUpdateErrorsPage = DialogResult.None;
-                if (Directory.Exists(strUpdateDir) == true)
+                if (Directory.Exists(strUpdateDir))
                 {
                     dlgUpdateErrorsPage = MessageBox.Show("There were some errors during the update process.  If these problems persist you can see the errors encountered in the update.log file.", "PRoCon Frostbite", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Information);
                 }
@@ -297,7 +297,7 @@ namespace PRoConUpdater
 
             bool blRestartProcon = true;
 
-            if (File.Exists("PRoConUpdater.xml") == true)
+            if (File.Exists("PRoConUpdater.xml"))
             {
 
                 XmlDocument doc = new XmlDocument();
@@ -310,7 +310,7 @@ namespace PRoConUpdater
 
                     if (OptionsList.Count > 0)
                     {
-                        if (bool.TryParse(OptionsList[0].InnerText, out blRestartProcon) == false)
+                        if (!bool.TryParse(OptionsList[0].InnerText, out blRestartProcon))
                         {
                             blRestartProcon = true;
                         }
@@ -330,10 +330,10 @@ namespace PRoConUpdater
 
                 this.Invoke(new EmptyParameterHandler(this.EndFileUpdates));
 
-                if (File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PRoCon.exe")) == true)
+                if (File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PRoCon.exe")))
                 {
 
-                    if (blRestartProcon == true)
+                    if (blRestartProcon)
                     {
 
                         if (this.ma_strArgs.Length == 0)
@@ -377,7 +377,7 @@ namespace PRoConUpdater
 
             this.Invoke(new frmMain.AppendStatusHandler(this.AppendNewlineStatus), String.Format("Moving contents of directory {0}", strPath));
 
-            if (Directory.Exists(strPath) == true)
+            if (Directory.Exists(strPath))
             {
                 foreach (string strFile in Directory.GetFiles(strPath, "*"))
                 {
@@ -416,7 +416,7 @@ namespace PRoConUpdater
                         try
                         {
 
-                            if (Directory.Exists(Path.GetDirectoryName(strDestination)) == false)
+                            if (!Directory.Exists(Path.GetDirectoryName(strDestination)))
                             {
                                 Directory.CreateDirectory(Path.GetDirectoryName(strDestination));
                             }
@@ -429,7 +429,7 @@ namespace PRoConUpdater
                             this.Invoke(new frmMain.AppendStatusHandler(this.AppendNewlineStatus), String.Format("\t{0}", e.Message));
                         }
 
-                        if (File.Exists(strFile) == true)
+                        if (File.Exists(strFile))
                         {
                             this.Invoke(new frmMain.AppendStatusHandler(this.AppendNewlineStatus), String.Format("\tError: {0} still exists!", strFile));
                         }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace PRoCon.Core.Remote.Layer
@@ -455,7 +455,7 @@ namespace PRoCon.Core.Remote.Layer
         {
             if (request.Words.Count >= 1)
             {
-                if (this.RequestDelegates.ContainsKey(request.Words[0]) == true)
+                if (this.RequestDelegates.ContainsKey(request.Words[0]))
                 {
                     this.RequestDelegates[request.Words[0]](sender, request);
                 }

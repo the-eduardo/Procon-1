@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -116,7 +116,7 @@ namespace PRoCon.Core.Plugin.Commands
 
             Match mtcCommandMatch = Regex.Match(strText, String.Format("^/?(?<scope>{0})(?<command>{1})[ ]?(?<arguments>.*)", String.Join("|", this.Scope.ToArray()), this.Command), RegexOptions.IgnoreCase);
 
-            if (mtcCommandMatch.Success == true)
+            if (mtcCommandMatch.Success)
             {
 
                 string strRemainderArguments = mtcCommandMatch.Groups["arguments"].Value;
@@ -281,7 +281,7 @@ namespace PRoCon.Core.Plugin.Commands
                 string strBestCharsSubstringLower = strArguments.Substring(0, iBestCharactersMatched).ToLower();
                 for (int i = 0; i < lstMatches.Count; i++)
                 {
-                    if (lstMatches[i].LowerCaseMatchedText.Contains(strBestCharsSubstringLower) == true)
+                    if (lstMatches[i].LowerCaseMatchedText.Contains(strBestCharsSubstringLower))
                     {
                         iSimilarity = lstMatches[i].MatchedScore;
                         strMatchedDictionaryKey = lstMatches[i].MatchedText;

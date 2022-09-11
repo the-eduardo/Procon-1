@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Security;
 using System.Security.Permissions;
@@ -131,7 +131,7 @@ namespace PRoCon.Core.Options
             }
             set
             {
-                if (this.m_praApplication.BlockUpdateChecks == true)
+                if (this.m_praApplication.BlockUpdateChecks)
                 {
                     this.m_isAutoCheckDownloadUpdatesEnabled = false;
                 }
@@ -177,7 +177,7 @@ namespace PRoCon.Core.Options
             }
             set
             {
-                if (this.m_praApplication.BlockUpdateChecks == true)
+                if (this.m_praApplication.BlockUpdateChecks)
                 {
                     this.m_isAutoCheckGameConfigsForUpdatesEnabled = false;
                 }
@@ -490,7 +490,7 @@ namespace PRoCon.Core.Options
         {
             get
             {
-                if (this.m_isBlockRssFeedNewsEnabled == true)
+                if (this.m_isBlockRssFeedNewsEnabled)
                 {
                     this.m_praApplication.UpdateRss();
                 }
@@ -618,7 +618,7 @@ namespace PRoCon.Core.Options
 
                 PermissionSet psetPluginPermissions;
 
-                if (this.RunPluginsInTrustedSandbox == true)
+                if (this.RunPluginsInTrustedSandbox)
                 {
 
                     psetPluginPermissions = new PermissionSet(PermissionState.None);
@@ -637,14 +637,14 @@ namespace PRoCon.Core.Options
                         psetPluginPermissions.AddPermission(new System.Net.DnsPermission(PermissionState.Unrestricted));
 
                         // TO DO: rename to something like "Allow all database connections"
-                        if (this.AllowAllODBCConnections == true)
+                        if (this.AllowAllODBCConnections)
                         {
                             psetPluginPermissions.AddPermission(new System.Data.Odbc.OdbcPermission(PermissionState.Unrestricted));
                             // Also allow all MySQL connections when ODBC is enabled, allowing the .NET MySQL connector to work with sandbox enabled
                             psetPluginPermissions.AddPermission(new MySql.Data.MySqlClient.MySqlClientPermission(PermissionState.Unrestricted));
                         }
 
-                        if (this.AllowAllSmtpConnections == true)
+                        if (this.AllowAllSmtpConnections)
                         {
                             psetPluginPermissions.AddPermission(new System.Net.Mail.SmtpPermission(System.Net.Mail.SmtpAccess.ConnectToUnrestrictedPort));
                         }

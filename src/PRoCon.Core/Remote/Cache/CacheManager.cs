@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -69,14 +69,14 @@ namespace PRoCon.Core.Remote.Cache
         {
             IPacketCache cache = null;
 
-            if (request.IsResponse == false)
+            if (!request.IsResponse)
             {
                 var key = request.ToString();
 
                 lock (this.CacheLock)
                 {
                     // Have we got it cached and is it valid?
-                    if (this.Cache.ContainsKey(key) == true)
+                    if (this.Cache.ContainsKey(key))
                     {
                         if (this.Cache[key].Response != null)
                         {
@@ -98,7 +98,7 @@ namespace PRoCon.Core.Remote.Cache
 
         public void Response(Packet response)
         {
-            if (response.IsResponse == true)
+            if (response.IsResponse)
             {
                 lock (this.CacheLock)
                 {

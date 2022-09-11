@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -115,7 +115,7 @@ namespace PRoCon.Forms
             this.m_paProcon = this.WindowLoaded(false);
 
             string licenseAgreementRevision = "October 20, 2011";
-            if (this.m_paProcon.LicenseAgreements.Contains(licenseAgreementRevision) == false)
+            if (!this.m_paProcon.LicenseAgreements.Contains(licenseAgreementRevision))
             {
                 new LicenseAgreement(this.m_paProcon, licenseAgreementRevision).ShowDialog();
             }
@@ -294,10 +294,10 @@ namespace PRoCon.Forms
             this.InvokeIfRequired(() =>
             {
 
-                if (this.m_dicPages.ContainsKey(item.HostNamePort) == true)
+                if (this.m_dicPages.ContainsKey(item.HostNamePort))
                 {
 
-                    if (this.cboServerList.Items.Contains(this.m_dicPages[item.HostNamePort]) == true)
+                    if (this.cboServerList.Items.Contains(this.m_dicPages[item.HostNamePort]))
                     {
 
                         if (this.cboServerList.SelectedItem == this.m_dicPages[item.HostNamePort])
@@ -438,7 +438,7 @@ namespace PRoCon.Forms
 
             ToolTipIcon ttiDisplayIcon = ToolTipIcon.Info;
 
-            if (isError == true)
+            if (isError)
             {
                 ttiDisplayIcon = ToolTipIcon.Error;
             }
@@ -529,7 +529,7 @@ namespace PRoCon.Forms
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.m_blPopupVersionResults == true)
+                if (this.m_blPopupVersionResults)
                 {
                     MessageBox.Show(this.m_clocLanguage.GetLocalized("frmMain.MessageBox.NoUpdateAvailable", null), "PRoCon Frostbite", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.m_blPopupVersionResults = false;
@@ -543,7 +543,7 @@ namespace PRoCon.Forms
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.m_blPopupGcCheckResults == true)
+                if (this.m_blPopupGcCheckResults)
                 {
                     MessageBox.Show(this.m_clocLanguage.GetLocalized("frmMain.MessageBox.GameConfigUpdated", null), "PRoCon Frostbite", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.m_blPopupGcCheckResults = false;
@@ -637,7 +637,7 @@ namespace PRoCon.Forms
         private void toolStripDownloading_Click(object sender, EventArgs e)
         {
 
-            if (this.toolStripDownloading.IsLink == true)
+            if (this.toolStripDownloading.IsLink)
             {
                 DialogResult dlgVisitPage = MessageBox.Show(this.m_clocLanguage.GetLocalized("frmMain.MessageBox.RestartProcon"), "PRoCon Frostbite", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
@@ -654,7 +654,7 @@ namespace PRoCon.Forms
 
         private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.m_paProcon.AutoUpdater.VersionChecker.FileDownloading == false)
+            if (!this.m_paProcon.AutoUpdater.VersionChecker.FileDownloading)
             {
                 this.m_blPopupVersionResults = true;
                 this.m_blPopupGcCheckResults = true;
@@ -721,7 +721,7 @@ namespace PRoCon.Forms
                 {
                     this.chkAutomaticallyConnect.Checked = ((uscServerConnection)selectedServer).Client.AutomaticallyConnect;
 
-                    if (this.chkAutomaticallyConnect.Checked == true)
+                    if (this.chkAutomaticallyConnect.Checked)
                     {
                         this.chkAutomaticallyConnect.Image = this.iglIcons.Images["tick.png"];
                     }
@@ -940,7 +940,7 @@ namespace PRoCon.Forms
 
         private void RefreshServerListing()
         {
-            if (this.IsDisposed == false)
+            if (!this.IsDisposed)
             {
                 this.cboServerList_SelectedIndexChanged(null, null);
 
@@ -954,7 +954,7 @@ namespace PRoCon.Forms
 
                     if (selectedServer.Client.State == ConnectionState.Connecting || (selectedServer.Client.State == ConnectionState.Connected && selectedServer.Client.IsLoggedIn == false))
                     {
-                        if (this.btnConnectDisconnect.Bounds.Contains(cursor) == true)
+                        if (this.btnConnectDisconnect.Bounds.Contains(cursor))
                         {
                             this.btnConnectDisconnect_MouseEnter(null, null);
                         }
@@ -1043,7 +1043,7 @@ namespace PRoCon.Forms
                 }
 
                 //this.m_dicConnectionPages[strServerHostnamePort].BFBC2Connection.Destroying();
-                if (this.cboServerList.ComboBox.Items.Contains(selectedServer) == true)
+                if (this.cboServerList.ComboBox.Items.Contains(selectedServer))
                 {
                     this.cboServerList.ComboBox.Items.Remove(selectedServer);
                 }
@@ -1056,7 +1056,7 @@ namespace PRoCon.Forms
 
                 try
                 {
-                    if (File.Exists(Path.Combine("Configs", strConfigFile)) == true)
+                    if (File.Exists(Path.Combine("Configs", strConfigFile)))
                     {
                         File.Delete(Path.Combine("Configs", strConfigFile));
                     }
@@ -1073,7 +1073,7 @@ namespace PRoCon.Forms
                 ((uscServerConnection)this.cboServerList.SelectedItem).Client.AutomaticallyConnect = this.chkAutomaticallyConnect.Checked;
             }
 
-            if (this.chkAutomaticallyConnect.Checked == true)
+            if (this.chkAutomaticallyConnect.Checked)
             {
                 this.chkAutomaticallyConnect.Image = this.iglIcons.Images["tick.png"];
             }

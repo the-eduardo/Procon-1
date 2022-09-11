@@ -1,4 +1,4 @@
-﻿using PRoCon.Core.Remote.Cache;
+using PRoCon.Core.Remote.Cache;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -263,7 +263,7 @@ namespace PRoCon.Core.Remote
             lock (this.QueueUnqueuePacketLock)
             {
 
-                if (isSending == true)
+                if (isSending)
                 {
                     // If we have something that has been sent and is awaiting a response
                     if (this.OutgoingPackets.Count > 0)
@@ -287,7 +287,7 @@ namespace PRoCon.Core.Remote
                     // Remove the packet 
                     if (packet != null)
                     {
-                        if (this.OutgoingPackets.ContainsKey(packet.SequenceNumber) == true)
+                        if (this.OutgoingPackets.ContainsKey(packet.SequenceNumber))
                         {
                             this.OutgoingPackets.Remove(packet.SequenceNumber);
                         }
@@ -401,7 +401,7 @@ namespace PRoCon.Core.Remote
                 else
                 {
                     // Null return because we're not popping a packet, just checking to see if this one needs to be queued.
-                    if (this.QueueUnqueuePacket(true, cpPacket, out cpNullPacket) == false)
+                    if (!this.QueueUnqueuePacket(true, cpPacket, out cpNullPacket))
                     {
                         // No need to queue, queue is empty.  Send away..
                         this.SendAsync(cpPacket);
@@ -428,7 +428,7 @@ namespace PRoCon.Core.Remote
 
             lock (this.QueueUnqueuePacketLock)
             {
-                if (this.OutgoingPackets.ContainsKey(cpRecievedPacket.SequenceNumber) == true)
+                if (this.OutgoingPackets.ContainsKey(cpRecievedPacket.SequenceNumber))
                 {
                     cpRequestPacket = this.OutgoingPackets[cpRecievedPacket.SequenceNumber];
                 }
@@ -498,7 +498,7 @@ namespace PRoCon.Core.Remote
                                 }
 
                                 Packet cpNextPacket = null;
-                                if (this.QueueUnqueuePacket(false, packet, out cpNextPacket) == true)
+                                if (this.QueueUnqueuePacket(false, packet, out cpNextPacket))
                                 {
                                     this.SendAsync(cpNextPacket);
                                 }
@@ -522,7 +522,7 @@ namespace PRoCon.Core.Remote
 
                                 // Now try to recover..
                                 Packet cpNextPacket = null;
-                                if (this.QueueUnqueuePacket(false, packet, out cpNextPacket) == true)
+                                if (this.QueueUnqueuePacket(false, packet, out cpNextPacket))
                                 {
                                     this.SendAsync(cpNextPacket);
                                 }
@@ -585,7 +585,7 @@ namespace PRoCon.Core.Remote
             {
                 restart = this.OutgoingPackets.Any(outgoingPacket => outgoingPacket.Value.Stamp < DateTime.Now.AddMinutes(-2));
 
-                if (restart == true)
+                if (restart)
                 {
                     this.OutgoingPackets.Clear();
                     this.QueuedPackets.Clear();
@@ -593,7 +593,7 @@ namespace PRoCon.Core.Remote
             }
 
             // We do this outside of the lock to ensure calls outside this method won't result in a deadlock elsewhere.
-            if (restart == true)
+            if (restart)
             {
                 this.Shutdown(new Exception("Failed to hear response to packet within two minutes, forced shutdown."));
             }
@@ -668,7 +668,7 @@ namespace PRoCon.Core.Remote
         {
             IPAddress ipReturn = IPAddress.None;
 
-            if (IPAddress.TryParse(hostName, out ipReturn) == false)
+            if (!IPAddress.TryParse(hostName, out ipReturn))
             {
 
                 ipReturn = IPAddress.None;

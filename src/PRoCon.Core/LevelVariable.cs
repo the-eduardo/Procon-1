@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -51,7 +51,7 @@ namespace PRoCon.Core
             T tReturn = tDefault;
 
             TypeConverter tycPossible = TypeDescriptor.GetConverter(typeof(T));
-            if (tycPossible.CanConvertFrom(typeof(string)) == true)
+            if (tycPossible.CanConvertFrom(typeof(string)))
             {
                 tReturn = (T)tycPossible.ConvertFrom(this.RawValue);
             }
@@ -86,7 +86,7 @@ namespace PRoCon.Core
                 {
                     contextTarget = contextList[offset++];
                 }
-                else if (skipAllContext == true)
+                else if (skipAllContext)
                 {
                     offset++;
                 }

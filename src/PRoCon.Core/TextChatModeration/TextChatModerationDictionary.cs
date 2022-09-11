@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -35,7 +35,7 @@ namespace PRoCon.Core.TextChatModeration
 
         public void AddEntry(TextChatModerationEntry item)
         {
-            if (this.Contains(item.SoldierName) == true)
+            if (this.Contains(item.SoldierName))
             {
                 this.SetItem(this.IndexOf(this[item.SoldierName]), item);
             }
@@ -47,7 +47,7 @@ namespace PRoCon.Core.TextChatModeration
 
         public void RemoveEntry(TextChatModerationEntry item)
         {
-            if (this.Contains(item.SoldierName) == true)
+            if (this.Contains(item.SoldierName))
             {
                 this.Remove(item.SoldierName);
             }

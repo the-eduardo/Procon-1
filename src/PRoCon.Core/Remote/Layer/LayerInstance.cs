@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
@@ -63,7 +63,7 @@ namespace PRoCon.Core.Remote.Layer
             foreach (Account accAccount in this._application.AccountsList)
             {
 
-                if (this.AccountPrivileges.Contains(accAccount.Name) == false)
+                if (!this.AccountPrivileges.Contains(accAccount.Name))
                 {
                     AccountPrivilege apPrivs = new AccountPrivilege(accAccount, new CPrivileges());
                     apPrivs.AccountPrivilegesChanged += new AccountPrivilege.AccountPrivilegesChangedHandler(apPrivs_AccountPrivilegesChanged);
@@ -156,7 +156,7 @@ namespace PRoCon.Core.Remote.Layer
 
         private void apPrivs_AccountPrivilegesChanged(AccountPrivilege item)
         {
-            if (item.Privileges.CanLogin == false)
+            if (!item.Privileges.CanLogin)
             {
                 this.ForcefullyDisconnectAccount(item.Owner.Name);
             }
@@ -218,7 +218,7 @@ namespace PRoCon.Core.Remote.Layer
 
         private void client_LayerClientQuit(ILayerClient sender)
         {
-            if (this.Clients.ContainsKey(sender.IPPort) == true)
+            if (this.Clients.ContainsKey(sender.IPPort))
             {
                 this.Clients.Remove(sender.IPPort);
                 this.BroadcastAccountLogout(sender.Username);
@@ -272,7 +272,7 @@ namespace PRoCon.Core.Remote.Layer
 
             foreach (ILayerClient client in new List<ILayerClient>(this.Clients.Values))
             {
-                if (loggedInAccountUsernames.Contains(client.Username) == false)
+                if (!loggedInAccountUsernames.Contains(client.Username))
                 {
                     loggedInAccountUsernames.Add(client.Username);
                 }
@@ -287,11 +287,11 @@ namespace PRoCon.Core.Remote.Layer
 
             foreach (ILayerClient plcConnection in new List<ILayerClient>(this.Clients.Values))
             {
-                if (loggedInAccounts.Contains(plcConnection.Username) == false)
+                if (!loggedInAccounts.Contains(plcConnection.Username))
                 {
                     loggedInAccounts.Add(plcConnection.Username);
 
-                    if (listUids == true)
+                    if (listUids)
                     {
                         loggedInAccounts.Add(plcConnection.ProconEventsUid);
                     }
@@ -315,12 +315,12 @@ namespace PRoCon.Core.Remote.Layer
                         ILayerClient client = new LayerClient(this, new LayerConnection(tcpClient), this._application, this._client);
 
                         // Issue #24. Somewhere the end port connection+port isn't being removed.
-                        if (this.Clients.ContainsKey(client.IPPort) == true)
+                        if (this.Clients.ContainsKey(client.IPPort))
                         {
                             this.Clients[client.IPPort].Shutdown();
 
                             // If, for some reason, the client wasn't removed during shutdown..
-                            if (this.Clients.ContainsKey(client.IPPort) == true)
+                            if (this.Clients.ContainsKey(client.IPPort))
                             {
                                 this.Clients.Remove(client.IPPort);
                             }
@@ -365,7 +365,7 @@ namespace PRoCon.Core.Remote.Layer
         {
             IPAddress ipReturn = IPAddress.None;
 
-            if (IPAddress.TryParse(hostName, out ipReturn) == false)
+            if (!IPAddress.TryParse(hostName, out ipReturn))
             {
 
                 ipReturn = IPAddress.None;

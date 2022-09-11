@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -147,7 +147,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendAdminMovePlayerPacket(string soldierName, int destinationTeamId, int destinationSquadId, bool forceKill)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("admin.movePlayer", soldierName, destinationTeamId.ToString(CultureInfo.InvariantCulture), Packet.Bltos(forceKill));
             }
@@ -157,7 +157,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendReservedSlotsListPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("reservedSpectateSlots.list");
             }
@@ -165,7 +165,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendReservedSlotsAddPlayerPacket(string soldierName)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("reservedSpectateSlots.addPlayer", soldierName);
             }
@@ -173,7 +173,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendReservedSlotsRemovePlayerPacket(string soldierName)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("reservedSpectateSlots.removePlayer", soldierName);
             }
@@ -181,7 +181,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendReservedSlotsSavePacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("reservedSpectateSlots.save");
             }
@@ -454,7 +454,7 @@ namespace PRoCon.Core.Remote
             {
                 int iTeamID = 0;
 
-                if (int.TryParse(cpRequestPacket.Words[2], out iTeamID) == true)
+                if (int.TryParse(cpRequestPacket.Words[2], out iTeamID))
                 {
                     if (PlayerChangedTeam != null)
                     {

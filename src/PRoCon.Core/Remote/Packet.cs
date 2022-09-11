@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -121,7 +121,7 @@ namespace PRoCon.Core.Remote
                 }
                 else if (c == '"')
                 {
-                    if (escaped == false)
+                    if (!escaped)
                     {
                         if (quoteStack == 0)
                         {
@@ -140,7 +140,7 @@ namespace PRoCon.Core.Remote
                 }
                 else if (c == '\\')
                 {
-                    if (escaped == true)
+                    if (escaped)
                     {
                         fullWord += '\\';
                         escaped = false;
@@ -164,7 +164,7 @@ namespace PRoCon.Core.Remote
 
         public static string Bltos(bool blBoolean)
         {
-            return (blBoolean == true ? "true" : "false");
+            return (blBoolean? "true" : "false");
         }
 
         public static UInt32 DecodePacketSize(byte[] rawPacket)
@@ -185,12 +185,12 @@ namespace PRoCon.Core.Remote
             // Construct the header uint32
             UInt32 ui32Header = this.SequenceNumber & 0x3fffffff;
 
-            if (this.OriginatedFromServer == true)
+            if (this.OriginatedFromServer)
             {
                 ui32Header += 0x80000000;
             }
 
-            if (this.IsResponse == true)
+            if (this.IsResponse)
             {
                 ui32Header += 0x40000000;
             }

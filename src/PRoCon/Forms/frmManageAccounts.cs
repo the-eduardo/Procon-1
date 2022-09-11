@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -110,12 +110,12 @@ namespace PRoCon.Forms
         {
             this.ShowPanel(this.pnlEditingUser);
 
-            if (this.m_paProcon.AccountsList.Contains(strAccountName) == true)
+            if (this.m_paProcon.AccountsList.Contains(strAccountName))
             {
 
                 foreach (PRoConClient prcClient in this.m_paProcon.Connections)
                 {
-                    if (prcClient.Layer.AccountPrivileges.Contains(strAccountName) == true)
+                    if (prcClient.Layer.AccountPrivileges.Contains(strAccountName))
                     {
                         prcClient.Layer.AccountPrivileges[strAccountName].SetPrivileges(spUpdatedPrivs);
                     }
@@ -188,7 +188,7 @@ namespace PRoCon.Forms
 
         private void AccountsList_AccountAdded(Account item)
         {
-            if (this.lstAccounts.Items.ContainsKey(item.Name) == false)
+            if (!this.lstAccounts.Items.ContainsKey(item.Name))
             {
                 ListViewItem lviNewAccount = new ListViewItem(item.Name);
                 lviNewAccount.Tag = item.Password;
@@ -219,7 +219,7 @@ namespace PRoCon.Forms
 
         private void AccountsList_AccountRemoved(Account item)
         {
-            if (this.lstAccounts.Items.ContainsKey(item.Name) == true)
+            if (this.lstAccounts.Items.ContainsKey(item.Name))
             {
                 this.lstAccounts.Items.Remove(this.lstAccounts.Items[item.Name]);
             }
@@ -228,7 +228,7 @@ namespace PRoCon.Forms
         public void DeleteAccount(string strUsername)
         {
 
-            if (this.m_paProcon.AccountsList.Contains(strUsername) == true)
+            if (this.m_paProcon.AccountsList.Contains(strUsername))
             {
                 this.m_paProcon.AccountsList.Remove(strUsername);
             }
@@ -245,7 +245,7 @@ namespace PRoCon.Forms
         public void ChangePassword(string strUsername, string strPassword)
         {
 
-            if (this.m_paProcon.AccountsList.Contains(strUsername) == true)
+            if (this.m_paProcon.AccountsList.Contains(strUsername))
             {
                 this.m_paProcon.AccountsList[strUsername].Password = strPassword;
             }
@@ -265,7 +265,7 @@ namespace PRoCon.Forms
 
             foreach (PRoConClient prcClient in this.m_paProcon.Connections)
             {
-                if (prcClient.Layer.AccountPrivileges.Contains(strUsername) == true)
+                if (prcClient.Layer.AccountPrivileges.Contains(strUsername))
                 {
                     prcClient.Layer.AccountPrivileges[strUsername].SetPrivileges(default(CPrivileges));
                 }
@@ -492,7 +492,7 @@ namespace PRoCon.Forms
 
             CPrivileges spLowestPrivileges = new CPrivileges();
 
-            if (this.m_paProcon.AccountsList.Contains(strAccountName) == true)
+            if (this.m_paProcon.AccountsList.Contains(strAccountName))
             {
                 spLowestPrivileges.PrivilegesFlags = CPrivileges.FullPrivilegesFlags;
 

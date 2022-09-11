@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -186,7 +186,7 @@ namespace PRoCon.Forms
 
                 this.m_praApplication.OptionsSettings.PluginMaxRuntime_m = this.m_praApplication.OptionsSettings.PluginMaxRuntime_m;
                 this.m_praApplication.OptionsSettings.PluginMaxRuntime_s = this.m_praApplication.OptionsSettings.PluginMaxRuntime_s;
-                if (this.m_praApplication.OptionsSettings.PluginMaxRuntimeLocked == true)
+                if (this.m_praApplication.OptionsSettings.PluginMaxRuntimeLocked)
                 {
                     this.numPluginMaxRuntimeMin.Enabled = false;
                     this.numPluginMaxRuntimeSec.Enabled = false;
@@ -349,7 +349,7 @@ namespace PRoCon.Forms
 
                 string strLink = this.lnkBasicsAuthor.Tag.ToString();
 
-                if (Regex.Match(strLink, "^http://.*?$").Success == false)
+                if (!Regex.Match(strLink, "^http://.*?$").Success)
                 {
                     strLink = "http://" + strLink;
                 }
@@ -373,7 +373,7 @@ namespace PRoCon.Forms
 
                 e.Graphics.FillRectangle(SystemBrushes.Window, e.Bounds);
 
-                if (this.m_frmParent.iglFlags.Images.ContainsKey(clocDraw.GetLocalized("file.flag", null) + ".png") == true)
+                if (this.m_frmParent.iglFlags.Images.ContainsKey(clocDraw.GetLocalized("file.flag", null) + ".png"))
                 {
 
                     imgFlag = this.m_frmParent.iglFlags.Images[clocDraw.GetLocalized("file.flag", null) + ".png"];
@@ -446,7 +446,7 @@ namespace PRoCon.Forms
 
             ushort iPort = 0;
 
-            if (ushort.TryParse(this.txtPluginsTrustedPort.Text, out iPort) == true)
+            if (ushort.TryParse(this.txtPluginsTrustedPort.Text, out iPort))
             {
 
                 this.m_praApplication.OptionsSettings.TrustedHostsWebsitesPorts.Add(new TrustedHostWebsitePort(this.txtPluginsTrustedHostDomain.Text, iPort));
@@ -528,7 +528,7 @@ namespace PRoCon.Forms
         private void chkBasicsAutoApplyUpdates_CheckedChanged(object sender, EventArgs e)
         {
             this.m_praApplication.OptionsSettings.AutoApplyUpdates = this.chkBasicsAutoApplyUpdates.Checked;
-            if (this.chkBasicsAutoApplyUpdates.Checked == false)
+            if (!this.chkBasicsAutoApplyUpdates.Checked)
             {
                 MessageBox.Show(this.m_strAutoApplyUpdateInfo, "Important Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -628,7 +628,7 @@ namespace PRoCon.Forms
 
         void OptionsSettings_ShowTrayIconChanged(bool blEnabled)
         {
-            if (blEnabled == true)
+            if (blEnabled)
             {
                 this.chkBasicsCloseToTray.Enabled = true;
                 this.chkBasicsMinimizeToTray.Enabled = true;
@@ -648,7 +648,7 @@ namespace PRoCon.Forms
 
         private void cboBasicsShowWindow_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.m_isLoadingForm == false)
+            if (!this.m_isLoadingForm)
             {
                 if (this.cboBasicsShowWindow.SelectedIndex == frmOptions.INT_OPTIONS_PREFERENCES_SHOWWINDOW_TASKBARANDTRAY)
                 {
@@ -689,7 +689,7 @@ namespace PRoCon.Forms
         {
             this.pnlSandboxOptions.Enabled = blEnabled;
 
-            if (blEnabled == true)
+            if (blEnabled)
             {
                 this.cboPluginsSandboxOptions.SelectedIndex = 0;
             }
@@ -702,7 +702,7 @@ namespace PRoCon.Forms
 
         private void cboSandboxOptions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.m_isLoadingForm == false)
+            if (!this.m_isLoadingForm)
             {
                 this.m_praApplication.OptionsSettings.RunPluginsInTrustedSandbox = (this.cboPluginsSandboxOptions.SelectedIndex == 0);
             }

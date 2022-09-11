@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -90,7 +90,7 @@ namespace PRoCon.Core.HttpServer
             this.Headers = new WebHeaderCollection();
 
             Match methodFileMatch = Regex.Match(document, @"^(?<method>GET|POST) (?<request>.*?) HTTP/(?<http_version>[0-9\.]*)[\r\n]+?", RegexOptions.IgnoreCase);
-            if (methodFileMatch.Success == true)
+            if (methodFileMatch.Success)
             {
 
                 this.Method = methodFileMatch.Groups["method"].Value;
@@ -117,7 +117,7 @@ namespace PRoCon.Core.HttpServer
                 this.Headers = new WebHeaderCollection();
                 Match headersMatch = Regex.Match(document, @"(?<header>.*?)[ ]*?:[ ]*?(?<value>.*?)[\r\n]+?");
 
-                while (headersMatch.Success == true)
+                while (headersMatch.Success)
                 {
 
                     this.Headers.Set(headersMatch.Groups["header"].Value, headersMatch.Groups["value"].Value);

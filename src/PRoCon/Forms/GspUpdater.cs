@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -100,7 +100,7 @@ namespace PRoCon.Forms
         private void SetStatus(RunningStatus status, string version, string directory, string proconPath)
         {
 
-            if (this.lsvInstalls.Items.ContainsKey(proconPath) == true)
+            if (this.lsvInstalls.Items.ContainsKey(proconPath))
             {
                 this.lsvInstalls.Items[proconPath].Text = status.ToString();
                 this.lsvInstalls.Items[proconPath].Tag = status;
@@ -171,7 +171,7 @@ namespace PRoCon.Forms
         private void ProconStatus(string proconPath)
         {
 
-            if (File.Exists(proconPath) == true)
+            if (File.Exists(proconPath))
             {
                 RunningStatus status = RunningStatus.Stopped;
                 string version = "Unknown";
@@ -223,7 +223,7 @@ namespace PRoCon.Forms
 
             this.lsvInstalls.BeginUpdate();
 
-            if (Directory.Exists(path) == true)
+            if (Directory.Exists(path))
             {
 
                 List<string> lstDirectories = new List<string>(Directory.GetDirectories(path));
@@ -232,7 +232,7 @@ namespace PRoCon.Forms
                 foreach (string directory in lstDirectories)
                 {
                     DirectoryInfo dirInfo = new DirectoryInfo(directory);
-                    if (this.m_lstIgnoreDirectories.Contains(dirInfo.Name.ToLower()) == false)
+                    if (!this.m_lstIgnoreDirectories.Contains(dirInfo.Name.ToLower()))
                     {
                         this.DiscoverProcons(directory);
 
@@ -317,7 +317,7 @@ namespace PRoCon.Forms
 
         public static void CopyAll(DirectoryInfo source, DirectoryInfo target)
         {
-            if (Directory.Exists(target.FullName) == false)
+            if (!Directory.Exists(target.FullName))
             {
                 Directory.CreateDirectory(target.FullName);
             }
@@ -342,7 +342,7 @@ namespace PRoCon.Forms
 
             int iUpdatedCopies = 0, iSkippedCopies = 0; ;
 
-            if (Directory.Exists(this.m_gspUpdatesDirectory) == true)
+            if (Directory.Exists(this.m_gspUpdatesDirectory))
             {
                 foreach (ListViewItem selectedItem in this.lsvInstalls.SelectedItems)
                 {
@@ -469,7 +469,7 @@ namespace PRoCon.Forms
 
             if (result == DialogResult.OK)
             {
-                if (Directory.Exists(this.folderBrowser.SelectedPath) == true)
+                if (Directory.Exists(this.folderBrowser.SelectedPath))
                 {
                     this.txtBrowseFolder.Text = this.folderBrowser.SelectedPath;
 

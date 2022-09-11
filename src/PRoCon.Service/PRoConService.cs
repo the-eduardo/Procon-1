@@ -1,4 +1,4 @@
-﻿/*  Copyright 2011 Christian 'XpKiller' Suhr & Geoffrey 'Phogue' Green
+/*  Copyright 2011 Christian 'XpKiller' Suhr & Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -52,7 +52,7 @@ namespace PRoCon.Service
                 }
             }
 
-            if (PRoConApplication.IsProcessOpen() == false)
+            if (!PRoConApplication.IsProcessOpen())
             {
                 try
                 {

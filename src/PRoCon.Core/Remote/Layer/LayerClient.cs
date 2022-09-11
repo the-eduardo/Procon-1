@@ -1,4 +1,4 @@
-﻿using PRoCon.Core.Remote.Layer.PacketDispatchers;
+using PRoCon.Core.Remote.Layer.PacketDispatchers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -420,9 +420,9 @@ namespace PRoCon.Core.Remote.Layer
         // DispatchProconApplicationShutdownRequest
         private void DispatchProconApplicationShutdownRequest(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanShutdownServer == true)
+                if (this.Privileges.CanShutdownServer)
                 {
                     sender.SendResponse(packet, LayerClient.ResponseOk, "but nothing will happen");
                     // shutdowns only the connection not the whole procon... this.m_praApplication.Shutdown();
@@ -445,13 +445,13 @@ namespace PRoCon.Core.Remote.Layer
             this.Username = packet.Words[1];
 
             // We send back any errors in the login process after they attempt to login.
-            if (this.Application.AccountsList.Contains(this.Username) == true)
+            if (this.Application.AccountsList.Contains(this.Username))
             {
                 this.Privileges = this.GetAccountPrivileges(this.Username);
 
                 this.Privileges.SetLowestPrivileges(this.Client.Privileges);
 
-                sender.SendResponse(packet, this.Privileges.CanLogin == true ? LayerClient.ResponseOk : LayerClient.ResponseInsufficientPrivileges);
+                sender.SendResponse(packet, this.Privileges.CanLogin? LayerClient.ResponseOk : LayerClient.ResponseInsufficientPrivileges);
             }
             else
             {
@@ -462,15 +462,15 @@ namespace PRoCon.Core.Remote.Layer
         private void DispatchProconRegisterUidRequest(ILayerPacketDispatcher sender, Packet packet)
         {
 
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
 
                 bool blEnabled = true;
 
-                if (bool.TryParse(packet.Words[1], out blEnabled) == true)
+                if (bool.TryParse(packet.Words[1], out blEnabled))
                 {
 
-                    if (blEnabled == false)
+                    if (!blEnabled)
                     {
                         sender.SendResponse(packet, LayerClient.ResponseOk);
 
@@ -479,7 +479,7 @@ namespace PRoCon.Core.Remote.Layer
                     else if (packet.Words.Count >= 3)
                     {
 
-                        if (this.Layer.Clients.Any(client => client.Value.ProconEventsUid == packet.Words[2]) == false)
+                        if (!this.Layer.Clients.Any(client => client.Value.ProconEventsUid == packet.Words[2]))
                         {
                             sender.SendResponse(packet, LayerClient.ResponseOk);
 
@@ -516,7 +516,7 @@ namespace PRoCon.Core.Remote.Layer
         private void DispatchProconVarsRequest(ILayerPacketDispatcher sender, Packet packet)
         {
 
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
 
                 if (packet.Words.Count == 2)
@@ -526,7 +526,7 @@ namespace PRoCon.Core.Remote.Layer
                 else if (packet.Words.Count > 2)
                 {
 
-                    if (this.Privileges.CanIssueLimitedProconCommands == true)
+                    if (this.Privileges.CanIssueLimitedProconCommands)
                     {
 
                         this.Client.Variables.SetVariable(packet.Words[1], packet.Words[2]);
@@ -552,7 +552,7 @@ namespace PRoCon.Core.Remote.Layer
         private void DispatchProconPrivilegesRequest(ILayerPacketDispatcher sender, Packet packet)
         {
 
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
                 sender.SendResponse(packet, LayerClient.ResponseOk, this.Privileges.PrivilegesFlags.ToString(CultureInfo.InvariantCulture));
             }
@@ -564,7 +564,7 @@ namespace PRoCon.Core.Remote.Layer
 
         private void DispatchProconCompressionRequest(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
 
                 bool enableCompress = false;
@@ -588,9 +588,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void DispatchProconExecRequest(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanIssueAllProconCommands == true)
+                if (this.Privileges.CanIssueAllProconCommands)
                 {
                     sender.SendResponse(packet, LayerClient.ResponseOk);
 
@@ -612,9 +612,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void DispatchProconAccountListAccountsRequest(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanIssueLimitedProconCommands == true)
+                if (this.Privileges.CanIssueLimitedProconCommands)
                 {
 
                     List<String> lstAccounts = new List<String> {
@@ -623,7 +623,7 @@ namespace PRoCon.Core.Remote.Layer
 
                     foreach (String strAccountName in this.Application.AccountsList.ListAccountNames())
                     {
-                        if (this.Layer.AccountPrivileges.Contains(strAccountName) == true)
+                        if (this.Layer.AccountPrivileges.Contains(strAccountName))
                         {
                             lstAccounts.Add(strAccountName);
                             lstAccounts.Add(this.Layer.AccountPrivileges[strAccountName].Privileges.PrivilegesFlags.ToString(CultureInfo.InvariantCulture));
@@ -645,7 +645,7 @@ namespace PRoCon.Core.Remote.Layer
 
         private void DispatchProconAccountListLoggedInRequest(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.Privileges.CanIssueLimitedProconCommands == true)
+            if (this.Privileges.CanIssueLimitedProconCommands)
             {
 
                 List<String> lstLoggedInAccounts = this.Layer.GetLoggedInAccountUsernamesWithUids((packet.Words.Count >= 2 && String.CompareOrdinal(packet.Words[1], "uids") == 0));
@@ -663,12 +663,12 @@ namespace PRoCon.Core.Remote.Layer
 
         private void DispatchProconAccountCreateRequest(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanIssueLimitedProconCommands == true)
+                if (this.Privileges.CanIssueLimitedProconCommands)
                 {
 
-                    if (this.Application.AccountsList.Contains(packet.Words[1]) == false)
+                    if (!this.Application.AccountsList.Contains(packet.Words[1]))
                     {
                         if (packet.Words[2].Length > 0)
                         {
@@ -699,14 +699,14 @@ namespace PRoCon.Core.Remote.Layer
 
         private void DispatchProconAccountDeleteRequest(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanIssueLimitedProconCommands == true)
+                if (this.Privileges.CanIssueLimitedProconCommands)
                 {
                     if (packet.Words.Count >= 2)
                     {
 
-                        if (this.Application.AccountsList.Contains(packet.Words[1]) == true)
+                        if (this.Application.AccountsList.Contains(packet.Words[1]))
                         {
                             sender.SendResponse(packet, LayerClient.ResponseOk);
 
@@ -736,15 +736,15 @@ namespace PRoCon.Core.Remote.Layer
 
         private void DispatchProconAccountSetPasswordRequest(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanIssueLimitedProconCommands == true)
+                if (this.Privileges.CanIssueLimitedProconCommands)
                 {
 
                     if (packet.Words.Count >= 3 && packet.Words[2].Length > 0)
                     {
 
-                        if (this.Application.AccountsList.Contains(packet.Words[1]) == true)
+                        if (this.Application.AccountsList.Contains(packet.Words[1]))
                         {
                             sender.SendResponse(packet, LayerClient.ResponseOk);
 
@@ -778,11 +778,11 @@ namespace PRoCon.Core.Remote.Layer
         private void DispatchProconBattlemapDeleteZoneRequest(ILayerPacketDispatcher sender, Packet packet)
         {
 
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanEditMapZones == true)
+                if (this.Privileges.CanEditMapZones)
                 {
-                    if (this.Client.MapGeometry.MapZones.Contains(packet.Words[1]) == true)
+                    if (this.Client.MapGeometry.MapZones.Contains(packet.Words[1]))
                     {
                         this.Client.MapGeometry.MapZones.Remove(packet.Words[1]);
                     }
@@ -802,9 +802,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void DispatchProconBattlemapCreateZoneRequest(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanEditMapZones == true)
+                if (this.Privileges.CanEditMapZones)
                 {
 
                     if (packet.Words.Count >= 3)
@@ -812,7 +812,7 @@ namespace PRoCon.Core.Remote.Layer
 
                         int iPoints = 0;
 
-                        if (int.TryParse(packet.Words[2], out iPoints) == true)
+                        if (int.TryParse(packet.Words[2], out iPoints))
                         {
 
                             Point3D[] points = new Point3D[iPoints];
@@ -845,15 +845,15 @@ namespace PRoCon.Core.Remote.Layer
 
         private void DispatchProconBattlemapModifyZoneTagsRequest(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanEditMapZones == true)
+                if (this.Privileges.CanEditMapZones)
                 {
 
                     if (packet.Words.Count >= 3)
                     {
 
-                        if (this.Client.MapGeometry.MapZones.Contains(packet.Words[1]) == true)
+                        if (this.Client.MapGeometry.MapZones.Contains(packet.Words[1]))
                         {
                             this.Client.MapGeometry.MapZones[packet.Words[1]].Tags.FromString(packet.Words[2]);
                         }
@@ -879,9 +879,9 @@ namespace PRoCon.Core.Remote.Layer
         private void DispatchProconBattlemapModifyZonePointsRequest(ILayerPacketDispatcher sender, Packet packet)
         {
 
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanEditMapZones == true)
+                if (this.Privileges.CanEditMapZones)
                 {
 
                     if (packet.Words.Count >= 3)
@@ -889,7 +889,7 @@ namespace PRoCon.Core.Remote.Layer
 
                         int iPoints = 0;
 
-                        if (int.TryParse(packet.Words[2], out iPoints) == true)
+                        if (int.TryParse(packet.Words[2], out iPoints))
                         {
 
                             Point3D[] points = new Point3D[iPoints];
@@ -899,7 +899,7 @@ namespace PRoCon.Core.Remote.Layer
                                 points[i] = new Point3D(packet.Words[2 + i * 3 + 1], packet.Words[2 + i * 3 + 2], packet.Words[2 + i * 3 + 3]);
                             }
 
-                            if (this.Client.MapGeometry.MapZones.Contains(packet.Words[1]) == true)
+                            if (this.Client.MapGeometry.MapZones.Contains(packet.Words[1]))
                             {
                                 this.Client.MapGeometry.MapZones.ModifyMapZonePoints(packet.Words[1], points);
                             }
@@ -926,7 +926,7 @@ namespace PRoCon.Core.Remote.Layer
         private void DispatchProconBattlemapListZonesRequest(ILayerPacketDispatcher sender, Packet packet)
         {
 
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
 
                 List<String> listPacket = new List<String> {
@@ -958,9 +958,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void DispatchProconLayerSetPrivilegesRequest(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanIssueLimitedProconCommands == true)
+                if (this.Privileges.CanIssueLimitedProconCommands)
                 {
 
                     UInt32 ui32Privileges = 0;
@@ -968,7 +968,7 @@ namespace PRoCon.Core.Remote.Layer
                     if (packet.Words.Count >= 3 && UInt32.TryParse(packet.Words[2], out ui32Privileges) == true)
                     {
 
-                        if (this.Application.AccountsList.Contains(packet.Words[1]) == true)
+                        if (this.Application.AccountsList.Contains(packet.Words[1]))
                         {
 
                             CPrivileges sprvPrivs = new CPrivileges();
@@ -1005,9 +1005,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void DispatchProconPluginListLoadedRequest(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanIssueLimitedProconPluginCommands == true)
+                if (this.Privileges.CanIssueLimitedProconPluginCommands)
                 {
 
                     if (packet.Words.Count == 1)
@@ -1036,9 +1036,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void DispatchProconPluginListEnabledRequest(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanIssueLimitedProconPluginCommands == true)
+                if (this.Privileges.CanIssueLimitedProconPluginCommands)
                 {
                     List<String> lstEnabledPlugins = this.Client.PluginsManager.Plugins.EnabledClassNames;
                     lstEnabledPlugins.Insert(0, LayerClient.ResponseOk);
@@ -1058,9 +1058,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void DispatchProconPluginEnableRequest(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanIssueLimitedProconPluginCommands == true)
+                if (this.Privileges.CanIssueLimitedProconPluginCommands)
                 {
                     bool blEnabled = false;
 
@@ -1068,7 +1068,7 @@ namespace PRoCon.Core.Remote.Layer
                     {
                         sender.SendResponse(packet, LayerClient.ResponseOk);
 
-                        if (blEnabled == true)
+                        if (blEnabled)
                         {
                             this.Client.PluginsManager.EnablePlugin(packet.Words[1]);
                         }
@@ -1095,9 +1095,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void DispatchProconPluginSetVariableRequest(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanIssueLimitedProconPluginCommands == true)
+                if (this.Privileges.CanIssueLimitedProconPluginCommands)
                 {
 
                     if (packet.Words.Count >= 4)
@@ -1129,7 +1129,7 @@ namespace PRoCon.Core.Remote.Layer
 
         private void DispatchProconAdminSayRequest(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
 
                 if (packet.Words.Count >= 4)
@@ -1162,7 +1162,7 @@ namespace PRoCon.Core.Remote.Layer
 
         private void DispatchProconAdminYellRequest(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
 
                 if (packet.Words.Count >= 5)
@@ -1198,7 +1198,7 @@ namespace PRoCon.Core.Remote.Layer
 
         private void DispatchProconPlayerSyncPlayTimesRequest(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
                 List<String> lstPlayerJoinTimes = new List<String> {
                     LayerClient.ResponseOk
@@ -1225,7 +1225,7 @@ namespace PRoCon.Core.Remote.Layer
 
             if (packet.Words.Count >= 1)
             {
-                if (this.RequestDelegates.ContainsKey(packet.Words[0]) == true)
+                if (this.RequestDelegates.ContainsKey(packet.Words[0]))
                 {
                     this.RequestDelegates[packet.Words[0]](sender, packet);
                 }
@@ -1248,19 +1248,19 @@ namespace PRoCon.Core.Remote.Layer
         private void PacketDispatcher_RequestLoginHashedPassword(ILayerPacketDispatcher sender, Packet packet, String hashedPassword)
         {
 
-            if (this.Application.AccountsList.Contains(this.Username) == false)
+            if (!this.Application.AccountsList.Contains(this.Username))
             {
                 sender.SendResponse(packet, LayerClient.ResponseInvalidUsername);
             }
             else
             {
-                if (this.AuthenticateHashedAccount(this.Username, hashedPassword) == true)
+                if (this.AuthenticateHashedAccount(this.Username, hashedPassword))
                 {
 
                     this.Privileges = this.GetAccountPrivileges(this.Username);
                     this.Privileges.SetLowestPrivileges(this.Client.Privileges);
 
-                    if (this.Privileges.CanLogin == true)
+                    if (this.Privileges.CanLogin)
                     {
                         this.IsLoggedIn = true;
                         sender.SendResponse(packet, LayerClient.ResponseOk);
@@ -1286,14 +1286,14 @@ namespace PRoCon.Core.Remote.Layer
         private void PacketDispatcher_RequestLoginPlainText(ILayerPacketDispatcher sender, Packet packet, String password)
         {
 
-            if (this.Application.AccountsList.Contains(this.Username) == false)
+            if (!this.Application.AccountsList.Contains(this.Username))
             {
                 sender.SendResponse(packet, LayerClient.ResponseInvalidUsername);
             }
             else
             {
 
-                if (this.AuthenticatePlaintextAccount(this.Username, password) == true)
+                if (this.AuthenticatePlaintextAccount(this.Username, password))
                 {
 
                     this.IsLoggedIn = true;
@@ -1346,7 +1346,7 @@ namespace PRoCon.Core.Remote.Layer
 
         private void PacketDispatcher_RequestEventsEnabled(ILayerPacketDispatcher sender, Packet packet, bool eventsEnabled)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
                 sender.SendResponse(packet, LayerClient.ResponseOk);
 
@@ -1366,9 +1366,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void PacketDispatcher_RequestPacketAdminShutdown(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanShutdownServer == true)
+                if (this.Privileges.CanShutdownServer)
                 {
                     this.Client.SendProconLayerPacket(this, packet);
                 }
@@ -1389,7 +1389,7 @@ namespace PRoCon.Core.Remote.Layer
 
         private void PacketDispatcher_RequestPacketSecureSafeListedRecieved(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
                 this.Client.SendProconLayerPacket(this, packet);
             }
@@ -1412,7 +1412,7 @@ namespace PRoCon.Core.Remote.Layer
 
         private void PacketDispatcher_RequestPacketPunkbusterRecieved(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
 
                 if (packet.Words.Count >= 2)
@@ -1420,7 +1420,7 @@ namespace PRoCon.Core.Remote.Layer
 
                     bool blCommandProcessed = false;
 
-                    if (this.Privileges.CannotIssuePunkbusterCommands == true)
+                    if (this.Privileges.CannotIssuePunkbusterCommands)
                     {
                         sender.SendResponse(packet, LayerClient.ResponseInsufficientPrivileges);
 
@@ -1455,11 +1455,11 @@ namespace PRoCon.Core.Remote.Layer
                                 int iBanLength = 0;
 
                                 // NOTE* Punkbuster uses minutes not seconds.
-                                if (int.TryParse(mtcMatch.Groups["pb_sv_kick_time"].Value, out iBanLength) == true)
+                                if (int.TryParse(mtcMatch.Groups["pb_sv_kick_time"].Value, out iBanLength))
                                 {
 
                                     // If they cannot punish players at all..
-                                    if (this.Privileges.CannotPunishPlayers == true)
+                                    if (this.Privileges.CannotPunishPlayers)
                                     {
                                         sender.SendResponse(packet, LayerClient.ResponseInsufficientPrivileges);
                                         blCommandProcessed = true;
@@ -1490,7 +1490,7 @@ namespace PRoCon.Core.Remote.Layer
                     }
 
                     // Was not denied above, send it on to the PacketDispatcher server.
-                    if (blCommandProcessed == false)
+                    if (!blCommandProcessed)
                     {
                         this.Client.SendProconLayerPacket(this, packet);
                     }
@@ -1508,9 +1508,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void PacketDispatcher_RequestPacketUseMapFunctionRecieved(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanUseMapFunctions == true)
+                if (this.Privileges.CanUseMapFunctions)
                 {
                     this.Client.SendProconLayerPacket(this, packet);
                 }
@@ -1527,9 +1527,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void PacketDispatcher_RequestPacketAlterMaplistRecieved(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanEditMapList == true)
+                if (this.Privileges.CanEditMapList)
                 {
                     this.Client.SendProconLayerPacket(this, packet);
                 }
@@ -1546,9 +1546,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void PacketDispatcher_RequestPacketAdminPlayerMoveRecieved(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanMovePlayers == true)
+                if (this.Privileges.CanMovePlayers)
                 {
                     this.Client.SendProconLayerPacket(this, packet);
                 }
@@ -1565,9 +1565,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void PacketDispatcher_RequestPacketAdminPlayerKillRecieved(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanKillPlayers == true)
+                if (this.Privileges.CanKillPlayers)
                 {
                     this.Client.SendProconLayerPacket(this, packet);
                 }
@@ -1584,9 +1584,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void PacketDispatcher_RequestPacketAdminKickPlayerRecieved(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanKickPlayers == true)
+                if (this.Privileges.CanKickPlayers)
                 {
                     this.Client.SendProconLayerPacket(this, packet);
                 }
@@ -1603,7 +1603,7 @@ namespace PRoCon.Core.Remote.Layer
 
         private void PacketDispatcher_RequestBanListAddRecieved(ILayerPacketDispatcher sender, Packet packet, CBanInfo newBan)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
 
                 if (newBan.BanLength.Subset == TimeoutSubset.TimeoutSubsetType.Permanent && this.Privileges.CanPermanentlyBanPlayers == true)
@@ -1643,9 +1643,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void PacketDispatcher_RequestPacketAlterBanListRecieved(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanEditBanList == true)
+                if (this.Privileges.CanEditBanList)
                 {
                     this.Client.SendProconLayerPacket(this, packet);
                 }
@@ -1662,9 +1662,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void PacketDispatcher_RequestPacketAlterTextMonderationListRecieved(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanEditTextChatModerationList == true)
+                if (this.Privileges.CanEditTextChatModerationList)
                 {
                     this.Client.SendProconLayerPacket(this, packet);
                 }
@@ -1681,9 +1681,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void PacketDispatcher_RequestPacketAlterReservedSlotsListRecieved(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanEditReservedSlotsList == true)
+                if (this.Privileges.CanEditReservedSlotsList)
                 {
                     this.Client.SendProconLayerPacket(this, packet);
                 }
@@ -1700,9 +1700,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void PacketDispatcher_RequestPacketVarsRecieved(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanAlterServerSettings == true)
+                if (this.Privileges.CanAlterServerSettings)
                 {
                     this.Client.SendProconLayerPacket(this, packet);
                 }
@@ -1725,9 +1725,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void PacketDispatcher_RequestPacketSquadLeaderRecieved(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanMovePlayers == true)
+                if (this.Privileges.CanMovePlayers)
                 {
                     this.Client.SendProconLayerPacket(this, packet);
                 }
@@ -1744,9 +1744,9 @@ namespace PRoCon.Core.Remote.Layer
 
         private void PacketDispatcher_RequestPacketSquadIsPrivateReceived(ILayerPacketDispatcher sender, Packet packet)
         {
-            if (this.IsLoggedIn == true)
+            if (this.IsLoggedIn)
             {
-                if (this.Privileges.CanMovePlayers == true)
+                if (this.Privileges.CanMovePlayers)
                 {
                     this.Client.SendProconLayerPacket(this, packet);
                 }
@@ -1772,12 +1772,12 @@ namespace PRoCon.Core.Remote.Layer
 
             String strReturnPassword = String.Empty;
 
-            if (this.Application.AccountsList.Contains(strUsername) == true)
+            if (this.Application.AccountsList.Contains(strUsername))
             {
                 strReturnPassword = this.Application.AccountsList[strUsername].Password;
             }
 
-            if (String.IsNullOrEmpty(strUsername) == true)
+            if (String.IsNullOrEmpty(strUsername))
             {
                 strReturnPassword = this.Client.Variables.GetVariable("GUEST_PASSWORD", "");
             }
@@ -1793,7 +1793,7 @@ namespace PRoCon.Core.Remote.Layer
                 PrivilegesFlags = 0
             };
 
-            if (this.Layer.AccountPrivileges.Contains(username) == true)
+            if (this.Layer.AccountPrivileges.Contains(username))
             {
                 privileges = this.Layer.AccountPrivileges[username].Privileges;
             }
@@ -1891,7 +1891,7 @@ namespace PRoCon.Core.Remote.Layer
                 plugins.Add(spDetails.Author);
                 plugins.Add(spDetails.Website);
                 plugins.Add(spDetails.Version);
-                plugins.Add(this.GzipCompression == true ? Packet.Compress(spDetails.Description) : spDetails.Description);
+                plugins.Add(this.GzipCompression? Packet.Compress(spDetails.Description) : spDetails.Description);
                 plugins.Add(spDetails.DisplayPluginVariables.Count.ToString(CultureInfo.InvariantCulture));
 
                 foreach (CPluginVariable cpvVariable in spDetails.DisplayPluginVariables)
