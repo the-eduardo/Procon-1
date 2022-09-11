@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -171,7 +171,7 @@ namespace PRoCon.Controls
         {
             this.pnlRconAccess.Enabled = this.chkAllowConnectionLogin.Checked;
 
-            if (this.pnlRconAccess.Enabled == false)
+            if (!this.pnlRconAccess.Enabled)
             {
                 this.rdoNoProconAccess.Checked = true;
             }

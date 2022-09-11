@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -74,7 +74,7 @@ namespace PRoCon.Core.AutoUpdates
 
         public void CheckVersion()
         {
-            if (Application.BlockUpdateChecks == false)
+            if (!Application.BlockUpdateChecks)
             {
                 if (CheckingUpdates != null)
                 {
@@ -103,7 +103,7 @@ namespace PRoCon.Core.AutoUpdates
 
             try
             {
-                if (Directory.Exists(strLocalizationFolder) == false)
+                if (!Directory.Exists(strLocalizationFolder))
                 {
                     Directory.CreateDirectory(strLocalizationFolder);
                 }
@@ -138,7 +138,7 @@ namespace PRoCon.Core.AutoUpdates
 
             try
             {
-                if (Directory.Exists(strGameConfigFolder) == false)
+                if (!Directory.Exists(strGameConfigFolder))
                 {
                     Directory.CreateDirectory(strGameConfigFolder);
                 }
@@ -149,7 +149,7 @@ namespace PRoCon.Core.AutoUpdates
                 }
 
                 // GameConfigs require Procon restart
-                if (GameConfigHint == false)
+                if (!GameConfigHint)
                 {
                     GameConfigInfo();
                 }
@@ -172,7 +172,7 @@ namespace PRoCon.Core.AutoUpdates
         {
             var sbStringifyHash = new StringBuilder();
 
-            if (File.Exists(strFileName) == true)
+            if (File.Exists(strFileName))
             {
                 MD5 md5Hasher = MD5.Create();
 
@@ -214,7 +214,7 @@ namespace PRoCon.Core.AutoUpdates
 
                 try
                 {
-                    if (Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Updates")) == true)
+                    if (Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Updates")))
                     {
                         AssemblyName proconAssemblyName = AssemblyName.GetAssemblyName(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Updates"), "PRoCon.exe"));
 
@@ -229,7 +229,7 @@ namespace PRoCon.Core.AutoUpdates
                 {
                 }
 
-                if (blContinueFileDownload == true)
+                if (blContinueFileDownload)
                 {
                     if (new Version(versionData[0]).CompareTo(Assembly.GetExecutingAssembly().GetName().Version) > 0)
                     {
@@ -279,7 +279,7 @@ namespace PRoCon.Core.AutoUpdates
                             {
                                 try
                                 {
-                                    if (File.Exists(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Localization"), lstExtensibilityVersion[2])) == true)
+                                    if (File.Exists(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Localization"), lstExtensibilityVersion[2])))
                                     {
                                         if (System.String.Compare(lstExtensibilityVersion[1], MD5File(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Localization"), lstExtensibilityVersion[2])), System.StringComparison.OrdinalIgnoreCase) != 0)
                                         {
@@ -305,7 +305,7 @@ namespace PRoCon.Core.AutoUpdates
                             {
                                 try
                                 {
-                                    if (File.Exists(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs"), lstExtensibilityVersion[2])) == true)
+                                    if (File.Exists(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs"), lstExtensibilityVersion[2])))
                                     {
                                         if (System.String.Compare(lstExtensibilityVersion[1], MD5File(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs"), lstExtensibilityVersion[2])), System.StringComparison.OrdinalIgnoreCase) != 0)
                                         {
@@ -343,7 +343,7 @@ namespace PRoCon.Core.AutoUpdates
 
                 try
                 {
-                    if (Directory.Exists(strUpdatesFolder) == false)
+                    if (!Directory.Exists(strUpdatesFolder))
                     {
                         Directory.CreateDirectory(strUpdatesFolder);
                     }
@@ -378,7 +378,7 @@ namespace PRoCon.Core.AutoUpdates
 
         private void DownloadedUnzippedComplete()
         {
-            if (Application.OptionsSettings.AutoApplyUpdates == true)
+            if (Application.OptionsSettings.AutoApplyUpdates)
             {
                 BeginUpdateProcess(Application);
             }
@@ -472,16 +472,16 @@ namespace PRoCon.Core.AutoUpdates
 
             string strUpdatesFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Updates");
 
-            if (Directory.Exists(strUpdatesFolder) == true)
+            if (Directory.Exists(strUpdatesFolder))
             {
                 AssemblyName proconUpdaterAssemblyName = null;
                 AssemblyName proconUpdaterUpdatesDirAssemblyName = null;
 
-                if (File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PRoConUpdater.exe")) == true)
+                if (File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PRoConUpdater.exe")))
                 {
                     proconUpdaterAssemblyName = AssemblyName.GetAssemblyName(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PRoConUpdater.exe"));
                 }
-                if (File.Exists(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Updates"), "PRoConUpdater.exe")) == true)
+                if (File.Exists(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Updates"), "PRoConUpdater.exe")))
                 {
                     proconUpdaterUpdatesDirAssemblyName = AssemblyName.GetAssemblyName(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Updates"), "PRoConUpdater.exe"));
                 }

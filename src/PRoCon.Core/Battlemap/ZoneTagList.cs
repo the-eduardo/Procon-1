@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -81,7 +81,7 @@ namespace PRoCon.Core.Battlemap
             string removeKey = String.Empty;
             foreach (string zoneTag in this)
             {
-                if ((isRemoved = (System.String.Compare(zoneTag, item, System.StringComparison.OrdinalIgnoreCase) == 0)) == true)
+                if ((isRemoved = (System.String.Compare(zoneTag, item, System.StringComparison.OrdinalIgnoreCase) == 0)))
                 {
                     removeKey = zoneTag;
                     break;
@@ -99,7 +99,7 @@ namespace PRoCon.Core.Battlemap
 
             foreach (string zoneTag in this)
             {
-                if ((isListed = (System.String.Compare(zoneTag, item, System.StringComparison.OrdinalIgnoreCase) == 0)) == true)
+                if ((isListed = (System.String.Compare(zoneTag, item, System.StringComparison.OrdinalIgnoreCase) == 0)))
                 {
                     break;
                 }
@@ -134,7 +134,7 @@ namespace PRoCon.Core.Battlemap
 
             foreach (string zoneTag in new List<string>(this))
             {
-                if (hasLoopedOnce == true)
+                if (hasLoopedOnce)
                 {
                     returnString += "; ";
                 }

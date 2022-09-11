@@ -1,4 +1,4 @@
-﻿using Ionic.Zip;
+using Ionic.Zip;
 using System;
 using System.IO;
 using System.Security.Cryptography;
@@ -78,7 +78,7 @@ namespace PRoCon.Core.AutoUpdates
 
                 try
                 {
-                    if (Directory.Exists(updatesFolder) == false)
+                    if (!Directory.Exists(updatesFolder))
                     {
                         Directory.CreateDirectory(updatesFolder);
                     }

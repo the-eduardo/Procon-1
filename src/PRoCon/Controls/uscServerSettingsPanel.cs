@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -210,7 +210,7 @@ namespace PRoCon.Controls
 
                 foreach (uscServerSettings page in this.cboSelectedSettingsPanel.Items)
                 {
-                    if (this.pnlSettingsPanels.Controls.Contains(page) == false)
+                    if (!this.pnlSettingsPanels.Controls.Contains(page))
                     {
                         this.pnlSettingsPanels.Controls.Add(page);
                         page.Dock = DockStyle.Fill;

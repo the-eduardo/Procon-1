@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -181,7 +181,7 @@ namespace PRoCon.Core
 
         private void RequestTimeoutCallback(object objState, bool blTimedOut)
         {
-            if (blTimedOut == true)
+            if (blTimedOut)
             {
                 CDownloadFile cdfParent = (CDownloadFile)objState;
                 if (cdfParent != null)
@@ -275,7 +275,7 @@ namespace PRoCon.Core
 
         private void ReadTimeoutCallback(object objState, bool blTimedOut)
         {
-            if (blTimedOut == true)
+            if (blTimedOut)
             {
                 CDownloadFile cdfParent = (CDownloadFile)objState;
                 if (cdfParent != null && cdfParent.m_stmResponseStream != null)
@@ -297,7 +297,7 @@ namespace PRoCon.Core
         {
             CDownloadFile cdfParent = (CDownloadFile)ar.AsyncState;
 
-            if (cdfParent.m_blFileDownloading == true)
+            if (cdfParent.m_blFileDownloading)
             {
                 try
                 {
@@ -361,7 +361,7 @@ namespace PRoCon.Core
 
             CDownloadFile cdfParent = ((CDownloadFile)obj);
 
-            if (((CDownloadFile)obj).FileDownloading == true)
+            if (((CDownloadFile)obj).FileDownloading)
             {
 
                 a_iKiBytesPerTick[iTickCount] = cdfParent.m_iReadBytes - iPreviousTickReadBytes;

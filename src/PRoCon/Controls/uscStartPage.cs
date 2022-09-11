@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -220,7 +220,7 @@ namespace PRoCon.Controls
                             this.webBrowser1.Document.InvokeScript("fnSetLocalization", new object[] { "pStartPage-lblConnectionsSummary", this._language.GetDefaultLocalized(String.Format("{0} of {1} slots used", playerCount, playerSlotsTotal), "pStartPage-lblConnectionsSummary", playerCount, playerSlotsTotal) });
                         }
 
-                        if (this._isDocumentReady == true)
+                        if (this._isDocumentReady)
                         {
                             // Convert to JSON the connectionsArray using Newtonsoft.Json
                             string json = JsonConvert.SerializeObject(connectionsArray);
@@ -299,7 +299,7 @@ namespace PRoCon.Controls
         public void HREF(string url)
         {
             // ReSharper restore InconsistentNaming
-            if (Regex.Match(url, @"http(s)?\:\/\/.*").Success == false)
+            if (!Regex.Match(url, @"http(s)?\:\/\/.*").Success)
             {
                 url = String.Format("http://{0}", url);
             }
@@ -331,7 +331,7 @@ namespace PRoCon.Controls
 
             ushort parsedPort = 0;
 
-            if (ushort.TryParse(port, out parsedPort) == true)
+            if (ushort.TryParse(port, out parsedPort))
             {
                 PRoConClient newConnection = this._proconApplication.AddConnection(hostName, parsedPort, username, password);
 
@@ -385,7 +385,7 @@ namespace PRoCon.Controls
             string startPagePath = Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Media"), "UI");
 
             this._isDocumentReady = false;
-            if (File.Exists(Path.Combine(startPagePath, "startPage.temp")) == true)
+            if (File.Exists(Path.Combine(startPagePath, "startPage.temp")))
             {
                 this._startPageTemplates = new CLocalization(Path.Combine(startPagePath, "startPage.temp"), "startPage.temp");
             }

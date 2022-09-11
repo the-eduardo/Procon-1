@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -90,14 +90,14 @@ namespace PRoCon.Core.Battlemap
             {
                 strUid = String.Format("{0}{1}", mapFileName, random.Next());
                 strUid = Convert.ToBase64String(Encoding.ASCII.GetBytes(strUid));
-            } while (Contains(strUid) == true);
+            } while (Contains(strUid));
 
             Add(new MapZoneDrawing(strUid, mapFileName, "", points, true));
         }
 
         public void ModifyMapZonePoints(string strUid, Point3D[] points)
         {
-            if (Contains(strUid) == true)
+            if (Contains(strUid))
             {
                 // this[strUid].LevelFileName = mapFileName;
                 this[strUid].ZonePolygon = points;

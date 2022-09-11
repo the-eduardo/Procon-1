@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -309,7 +309,7 @@ namespace PRoCon.Controls
                     this.uscLogin.Hide();
                 }
 
-                if (this.m_prcConnection.IsPRoConConnection == true)
+                if (this.m_prcConnection.IsPRoConConnection)
                 {
                     this.m_prcConnection_ProconPrivileges(this.m_prcConnection, this.m_prcConnection.Privileges);
                 }
@@ -423,7 +423,7 @@ namespace PRoCon.Controls
 
         public void SetTabIndexes(Stack<string> stkTabIndexes)
         {
-            if (tbcClientTabs.TabPages.ContainsKey(stkTabIndexes.Peek()) == true)
+            if (tbcClientTabs.TabPages.ContainsKey(stkTabIndexes.Peek()))
             {
                 this.tbcClientTabs.SelectedTab = tbcClientTabs.TabPages[stkTabIndexes.Pop()];
             }
@@ -791,13 +791,13 @@ namespace PRoCon.Controls
                     this.tbcClientTabs.TabPages.Remove(this.m_tabParentLayerControl);
                 }
 
-                if (this.m_praApplication.OptionsSettings.LayerHideLocalPlugins == true)
+                if (this.m_praApplication.OptionsSettings.LayerHideLocalPlugins)
                 {
                     this.tbcClientTabs.TabPages.Remove(this.tabPlugins);
                     // this.tabPlugins.Hide();
                 }
 
-                if (this.m_praApplication.OptionsSettings.LayerHideLocalAccounts == true)
+                if (this.m_praApplication.OptionsSettings.LayerHideLocalAccounts)
                 {
                     this.tbcClientTabs.TabPages.Remove(this.tabAccounts);
                     // this.tabAccounts.Hide();
@@ -846,7 +846,7 @@ namespace PRoCon.Controls
 
             bool blBeginSuccess = false;
 
-            if (this.m_cpPrivileges.CanMovePlayers == true)
+            if (this.m_cpPrivileges.CanMovePlayers)
             {
                 //this.m_uscServerPlayerTree.BeginDragDrop(this);
                 this.uscPlayers.BeginDragDrop();
@@ -906,7 +906,7 @@ namespace PRoCon.Controls
             {
                 this.m_blUpdatingPlugins = true;
 
-                if (this.uscPlugins.LoadedPlugins.ContainsKey(strClassName) == true)
+                if (this.uscPlugins.LoadedPlugins.ContainsKey(strClassName))
                 {
                     this.uscPlugins.LoadedPlugins[strClassName].Checked = false;
                 }
@@ -921,7 +921,7 @@ namespace PRoCon.Controls
             {
                 this.m_blUpdatingPlugins = true;
 
-                if (this.uscPlugins.LoadedPlugins.ContainsKey(strClassName) == true)
+                if (this.uscPlugins.LoadedPlugins.ContainsKey(strClassName))
                 {
                     this.uscPlugins.LoadedPlugins[strClassName].Checked = true;
                 }
@@ -933,10 +933,10 @@ namespace PRoCon.Controls
         private void uscPlugins_PluginEnabled(string strClassName, bool blEnabled)
         {
 
-            if (this.m_blUpdatingPlugins == false)
+            if (!this.m_blUpdatingPlugins)
             {
 
-                if (blEnabled == true)
+                if (blEnabled)
                 {
                     this.m_prcConnection.PluginsManager.EnablePlugin(strClassName);
                 }
@@ -1036,7 +1036,7 @@ namespace PRoCon.Controls
         {
             if (this.m_prcConnection != null && this.m_prcConnection.Game != null)
             {
-                if (this.m_praApplication.OptionsSettings.ShowCfmMsgRoundRestartNext == true)
+                if (this.m_praApplication.OptionsSettings.ShowCfmMsgRoundRestartNext)
                 {
                     DialogResult cfmRestartRound = MessageBox.Show(this.m_clocLanguage.GetLocalized("uscServerConnection.MessageBox.RestartRound"), "PRoCon Frostbite", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (cfmRestartRound == DialogResult.No)
@@ -1059,7 +1059,7 @@ namespace PRoCon.Controls
         {
             if (this.m_prcConnection != null && this.m_prcConnection.Game != null)
             {
-                if (this.m_praApplication.OptionsSettings.ShowCfmMsgRoundRestartNext == true)
+                if (this.m_praApplication.OptionsSettings.ShowCfmMsgRoundRestartNext)
                 {
                     DialogResult cfmRestartLevel = MessageBox.Show(this.m_clocLanguage.GetLocalized("uscServerConnection.MessageBox.NextRound"), "PRoCon Frostbite", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (cfmRestartLevel == DialogResult.No)
@@ -1099,7 +1099,7 @@ namespace PRoCon.Controls
                         this.lblRoundTime.Text = uscPlayerPunishPanel.SecondsToText((UInt32)(this.m_prcConnection.CurrentServerInfo.RoundTime++), this.ma_timeDescriptionsShort);
                     }
 
-                    if ((this.lblServerUptime.Visible = (this.m_prcConnection.CurrentServerInfo.ServerUptime >= 0) == true))
+                    if ((this.lblServerUptime.Visible = (this.m_prcConnection.CurrentServerInfo.ServerUptime >= 0)))
                     {
                         string uptimeText = uscPlayerPunishPanel.SecondsToText((UInt32)(this.m_prcConnection.CurrentServerInfo.ServerUptime++), this.ma_timeDescriptionsShort);
                         this.lblServerUptime.Text = this.m_clocLanguage.GetDefaultLocalized("Uptime: " + uptimeText, "uscServerConnection.lblServerUptime", uptimeText);

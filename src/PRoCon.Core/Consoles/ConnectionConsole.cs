@@ -1,4 +1,4 @@
-﻿using PRoCon.Core.Logging;
+using PRoCon.Core.Logging;
 using PRoCon.Core.Remote;
 using System;
 using System.Collections.Generic;
@@ -201,15 +201,15 @@ namespace PRoCon.Core.Consoles
 
         private void Connection_PacketCacheIntercept(FrostbiteConnection sender, Packet request, Packet response)
         {
-            if (LogDebugDetails == true)
+            if (LogDebugDetails)
             {
-                if (request.OriginatedFromServer == false)
+                if (!request.OriginatedFromServer)
                 {
                     Write(GetDebugPacket("^7Cache", "^4", response, request));
                 }
                 else
                 {
-                    if (LogEventsConnection == true)
+                    if (LogEventsConnection)
                     {
                         Write(GetDebugPacket("^7Cache", "^4", response, request));
                     }
@@ -225,13 +225,13 @@ namespace PRoCon.Core.Consoles
             {
                 if (LogDebugDetails == true && cpRequestPacket != null)
                 {
-                    if (cpRequestPacket.OriginatedFromServer == false)
+                    if (!cpRequestPacket.OriginatedFromServer)
                     {
                         Write(GetDebugPacket("^6Client", "^4", packetBeforeDispatch, cpRequestPacket));
                     }
                     else
                     {
-                        if (LogEventsConnection == true)
+                        if (LogEventsConnection)
                         {
                             Write(GetDebugPacket("^8Server", "^4", packetBeforeDispatch, cpRequestPacket));
                         }
@@ -248,7 +248,7 @@ namespace PRoCon.Core.Consoles
             // ELSE IF it's an event initiated by the server (OnJoin, OnLeave, OnChat etc)
             else if (packetBeforeDispatch.OriginatedFromServer == true && packetBeforeDispatch.IsResponse == false)
             {
-                if (LogDebugDetails == true)
+                if (LogDebugDetails)
                 {
                     if (cpRequestPacket != null && cpRequestPacket.OriginatedFromServer == false)
                     {
@@ -256,7 +256,7 @@ namespace PRoCon.Core.Consoles
                     }
                     else
                     {
-                        if (LogEventsConnection == true)
+                        if (LogEventsConnection)
                         {
                             Write(GetDebugPacket("^8Server", "^4", packetBeforeDispatch, null));
                         }
@@ -316,15 +316,15 @@ namespace PRoCon.Core.Consoles
 
         protected void m_prcClient_PacketSent(FrostbiteConnection sender, bool isHandled, Packet packetBeforeDispatch)
         {
-            if (LogDebugDetails == true)
+            if (LogDebugDetails)
             {
-                if (packetBeforeDispatch.OriginatedFromServer == false)
+                if (!packetBeforeDispatch.OriginatedFromServer)
                 {
                     Write(GetDebugPacket("^6Client", "^2", packetBeforeDispatch, null));
                 }
                 else
                 {
-                    if (LogEventsConnection == true)
+                    if (LogEventsConnection)
                     {
                         Write(GetDebugPacket("^8Server", "^2", packetBeforeDispatch, null));
                     }
@@ -343,7 +343,7 @@ namespace PRoCon.Core.Consoles
 
         protected void m_prcClient_PacketDequeued(FrostbiteConnection sender, Packet cpPacket, int iThreadId)
         {
-            if (LogDebugDetails == true)
+            if (LogDebugDetails)
             {
                 Write(GetDebugPacket("^7Dequeued", "^2", cpPacket, null));
             }
@@ -351,7 +351,7 @@ namespace PRoCon.Core.Consoles
 
         protected void m_prcClient_PacketQueued(FrostbiteConnection sender, Packet cpPacket, int iThreadId)
         {
-            if (LogDebugDetails == true)
+            if (LogDebugDetails)
             {
                 Write(GetDebugPacket("^7Queued", "^2", cpPacket, null));
             }
@@ -383,7 +383,7 @@ namespace PRoCon.Core.Consoles
 
         protected static string GetRequestResponseColour(Packet packet)
         {
-            return packet.IsResponse == true ? "^2response^0" : "^1request^0";
+            return packet.IsResponse? "^2response^0" : "^1request^0";
         }
 
         public void Write(string strFormat, params object[] arguments)
