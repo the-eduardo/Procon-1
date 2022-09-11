@@ -974,7 +974,7 @@ namespace PRoCon.Core.Plugin
                         // files containing a dot (.) will be treated as additional partial classes/files, the main file does not contain any dots
                         // Example: MyPlugin.cs => Main file, so the file name equals the class name
                         //			MyPlugin.Additional.cs => additional file(s)
-                        if (className.Contains("."))
+                        if (className.Contains('.'))
                         {
                             continue;
                         }
