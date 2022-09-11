@@ -129,10 +129,10 @@ namespace PRoCon.Controls.Battlemap.MapTimeline
 
             this.TimelineButtons = new List<MapObject>();
 
-            GraphicsPath gpButtonPath = new GraphicsPath();
+            GraphicsPath gpButtonPath = new();
             gpButtonPath.AddLines(new Point[] { new Point(0, 6), new Point(6, 12), new Point(6, 6), new Point(12, 12), new Point(12, 0), new Point(6, 6), new Point(6, 0), new Point(0, 6) });
             gpButtonPath.CloseFigure();
-            MapTimelineControlButton mtbButton = new MapTimelineControlButton(gpButtonPath, MapTimelineControlButtonType.Rewind);
+            MapTimelineControlButton mtbButton = new(gpButtonPath, MapTimelineControlButtonType.Rewind);
             mtbButton.TimelineControlButtonClicked += new MapTimelineControlButton.TimelineControlButtonClickedHandler(mtbButton_TimelineControlButtonClicked);
             this.TimelineButtons.Add(mtbButton);
 
@@ -264,7 +264,7 @@ namespace PRoCon.Controls.Battlemap.MapTimeline
 
         public void Draw(Graphics g, PointF pntDrawOffset, Point pntMouseLocation, MouseButtons mbButtons, Dictionary<Kill, KillDisplayDetails> dicKills, List<BattlemapRoundChange> lstRounds, KillDisplayColours colours, Dictionary<int, Color> teamColours)
         {
-            GraphicsPath gpTimelineOutline = new GraphicsPath();
+            GraphicsPath gpTimelineOutline = new();
 
             gpTimelineOutline.AddLines(new Point[] { new Point(5, 0), new Point(0, 5), new Point(0, 15), new Point((int)g.ClipBounds.Width - 280, 15), new Point((int)g.ClipBounds.Width - 280, 5), new Point((int)g.ClipBounds.Width - 275, 0) });
             //gpTimelineOutline.AddLine(new Point(this.m_mtsSeek.SeekerPosition, 15), new Point((int)g.ClipBounds.Width - 280, 15));
@@ -281,16 +281,16 @@ namespace PRoCon.Controls.Battlemap.MapTimeline
 
             bool blRoundChanged = false;
 
-            MapTextBlock timeList = new MapTextBlock();
+            MapTextBlock timeList = new();
 
             foreach (BattlemapRoundChange RoundChange in new List<BattlemapRoundChange>(lstRounds))
             {
                 float flOffsetXs = (this.HotSpot.Width - 5.0F) - ((float)((DateTime.Now.Ticks - RoundChange.ChangeTime.Ticks) / TimeSpan.TicksPerSecond) / 3600.0F) * (this.HotSpot.Width - 5.0F);
-                RectangleF recChangePosition = new RectangleF(flOffsetXs + this.m_pntDrawOffset.X - 2.0F, this.m_pntDrawOffset.Y, 4.0F, 20.0F);
+                RectangleF recChangePosition = new(flOffsetXs + this.m_pntDrawOffset.X - 2.0F, this.m_pntDrawOffset.Y, 4.0F, 20.0F);
 
                 if (flOffsetXs >= 0.0F)
                 {
-                    GraphicsPath gpChangeTime = new GraphicsPath();
+                    GraphicsPath gpChangeTime = new();
                     gpChangeTime.AddLine(new PointF(flOffsetXs, 5), new PointF(flOffsetXs, 12));
                     gpChangeTime.Widen(this.m_pOneWidth);
 
@@ -314,11 +314,11 @@ namespace PRoCon.Controls.Battlemap.MapTimeline
             {
 
                 float flOffsetXs = (this.HotSpot.Width - 5.0F) - ((float)((DateTime.Now.Ticks - kvpKill.Key.TimeOfDeath.Ticks) / TimeSpan.TicksPerSecond) / 3600.0F) * (this.HotSpot.Width - 5.0F);
-                RectangleF recKillPosition = new RectangleF(flOffsetXs + this.m_pntDrawOffset.X - 2.0F, this.m_pntDrawOffset.Y, 4.0F, 20.0F);
+                RectangleF recKillPosition = new(flOffsetXs + this.m_pntDrawOffset.X - 2.0F, this.m_pntDrawOffset.Y, 4.0F, 20.0F);
 
                 if (recKillPosition.Contains(new PointF(pntMouseLocation.X + 5.0F, pntMouseLocation.Y)))
                 {
-                    GraphicsPath gpKillTime = new GraphicsPath();
+                    GraphicsPath gpKillTime = new();
                     gpKillTime.AddLine(new PointF(flOffsetXs, 10), new PointF(flOffsetXs, 12));
                     gpKillTime.Widen(this.m_pOneWidth);
 
@@ -366,7 +366,7 @@ namespace PRoCon.Controls.Battlemap.MapTimeline
 
                 RectangleF recText = timeList.GetBounds();
 
-                PointF timeListOffset = new PointF(pntDrawOffset.X + flMouseOffsetX - recText.Width / 2.0F, pntDrawOffset.Y - recText.Height);
+                PointF timeListOffset = new(pntDrawOffset.X + flMouseOffsetX - recText.Width / 2.0F, pntDrawOffset.Y - recText.Height);
 
                 if (timeListOffset.X + recText.Width > g.ClipBounds.Width)
                 {
@@ -454,7 +454,7 @@ namespace PRoCon.Controls.Battlemap.MapTimeline
                 iTimelineOffsetX += 20;
             }
 
-            GraphicsPath gpPlaySpeed = new GraphicsPath();
+            GraphicsPath gpPlaySpeed = new();
             string strPlaySpeedText = String.Empty;
 
             if (this.SelectedButtonType == MapTimelineControlButtonType.Pause)

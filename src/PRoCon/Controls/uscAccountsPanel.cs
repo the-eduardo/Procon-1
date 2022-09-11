@@ -299,12 +299,8 @@ namespace PRoCon.Controls
             if (!this.lsvLayerAccounts.Items.ContainsKey(item.Name))
             {
 
-                ListViewItem lviNewAccount = new ListViewItem(item.Name)
-                {
-                    Name = item.Name,
-                    Tag = item.Password,
-                    ImageKey = @"status_offline.png"
-                };
+                ListViewItem lviNewAccount = new(item.Name)
+{Name = item.Name, Tag = item.Password, ImageKey = @"status_offline.png"};
 
                 ListViewItem.ListViewSubItem lsviNewSubitem = new ListViewItem.ListViewSubItem
                 {

@@ -326,7 +326,7 @@ namespace PRoCon.Controls.ServerSettings.BFHL
 
             this.lblSettingsTkCountExplanation.Text = this.Language.GetLocalized("uscServerSettingsPanel.lblSettingsTkCountExplanation", this.numSettingsTeamkillCountLimit.Value.ToString());
 
-            StringBuilder valueExplanation = new StringBuilder();
+            StringBuilder valueExplanation = new();
             valueExplanation.AppendLine(this.Language.GetLocalized("uscServerSettingsPanel.lblSettingsTkValueExplanation.Minimums", burstSecond.ToString("0.0"), minimumRate.ToString("0.00")));
             //valueExplanation.AppendLine(this.m_clocLanguage.GetLocalized("uscServerSettingsPanel.lblSettingsTkValueExplanation.MinimumRateMinute", minimumRate.ToString("0.00")));
             valueExplanation.AppendLine(this.Language.GetLocalized("uscServerSettingsPanel.lblSettingsTkValueExplanation.ForgivenSingle", forgivenSeconds.ToString("0.0")));

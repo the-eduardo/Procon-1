@@ -67,7 +67,7 @@ namespace PRoCon.Controls
         private RectangleF m_recDestination;
 
         // Font
-        private FontFamily family = new FontFamily("Arial");
+        private FontFamily family = new("Arial");
         private int fontStyle = (int)FontStyle.Regular;
         private int emSize = 12;
         private StringFormat format = StringFormat.GenericDefault;
@@ -314,8 +314,8 @@ namespace PRoCon.Controls
             }
         }
 
-        private readonly Pen m_pOneWidth = new Pen(Brushes.Black, 1.0F);
-        private readonly Pen m_pTwoWidth = new Pen(Brushes.Black, 2.0F);
+        private readonly Pen m_pOneWidth = new(Brushes.Black, 1.0F);
+        private readonly Pen m_pTwoWidth = new(Brushes.Black, 2.0F);
 
         private Dictionary<int, Color> m_dicTeamColours = new Dictionary<int, Color>() { { 0, Color.WhiteSmoke }, { 1, Color.RoyalBlue }, { 2, Color.OrangeRed }, { 3, Color.YellowGreen }, { 4, Color.LightSeaGreen } };
 
@@ -370,8 +370,8 @@ namespace PRoCon.Controls
 
         private void DrawCalibrationGrid(Graphics g)
         {
-            Pen calibrationAxis = new Pen(Brushes.Purple, 0.5F);
-            Pen calibrationGrid = new Pen(Brushes.Purple, 0.2F);
+            Pen calibrationAxis = new(Brushes.Purple, 0.5F);
+            Pen calibrationGrid = new(Brushes.Purple, 0.2F);
 
             g.DrawLine(calibrationAxis, new Point(0, 0), new Point(0, 500));
             g.DrawLine(calibrationAxis, new Point(0, 0), new Point(500, 0));
@@ -429,7 +429,7 @@ namespace PRoCon.Controls
 
                 Matrix mOriginal = g.Transform;
 
-                Matrix m = new Matrix();
+                Matrix m = new();
 
                 m.Scale(this.ZoomFactor, this.ZoomFactor);
                 m.Translate(-m_pntOrigin.X, -m_pntOrigin.Y);
@@ -466,7 +466,7 @@ namespace PRoCon.Controls
                         this.DrawCalibrationGrid(g);
                     }
 
-                    Pen calibrationOutline = new Pen(Brushes.Pink, 1.0F);
+                    Pen calibrationOutline = new(Brushes.Pink, 1.0F);
 
                     foreach (Kill kKill in this.CalibrationMarkers)
                     {
@@ -538,7 +538,7 @@ namespace PRoCon.Controls
             if (kMouseOveredKill != null && kddDisplayDetails != null)
             {
 
-                KillDisplayPopup kdp = new KillDisplayPopup();
+                KillDisplayPopup kdp = new();
 
                 string strDamageType = String.Empty;
                 if (!this.m_clocLanguage.TryGetLocalized(out strDamageType, "global.Weapons." + kMouseOveredKill.DamageType.ToLower()))
@@ -553,10 +553,10 @@ namespace PRoCon.Controls
         private void DrawBwShape(Graphics g, GraphicsPath gp, float flOpacity)
         {
 
-            Pen pen = new Pen(Color.FromArgb((int)(255.0F * flOpacity), Color.Black), 4);
+            Pen pen = new(Color.FromArgb((int)(255.0F * flOpacity), Color.Black), 4);
             pen.LineJoin = LineJoin.Round;
             g.DrawPath(pen, gp);
-            SolidBrush brush = new SolidBrush(Color.FromArgb((int)(255.0F * flOpacity), Color.White));
+            SolidBrush brush = new(Color.FromArgb((int)(255.0F * flOpacity), Color.White));
             g.FillPath(brush, gp);
 
             brush.Dispose();
@@ -566,10 +566,10 @@ namespace PRoCon.Controls
 
         protected void DrawBwShape(Graphics g, GraphicsPath gp, float flOpacity, float flOutlineWidth, Color clBackground, Color clForecolour)
         {
-            Pen pen = new Pen(Color.FromArgb((int)(255.0F * flOpacity), clBackground), flOutlineWidth);
+            Pen pen = new(Color.FromArgb((int)(255.0F * flOpacity), clBackground), flOutlineWidth);
             pen.LineJoin = LineJoin.Round;
             g.DrawPath(pen, gp);
-            SolidBrush brush = new SolidBrush(Color.FromArgb((int)(255.0F * flOpacity), clForecolour));
+            SolidBrush brush = new(Color.FromArgb((int)(255.0F * flOpacity), clForecolour));
             g.FillPath(brush, gp);
 
             brush.Dispose();
@@ -586,7 +586,7 @@ namespace PRoCon.Controls
             int emSize = 12;
             StringFormat format = StringFormat.GenericDefault;
             */
-            GraphicsPath gpCoordinates = new GraphicsPath();
+            GraphicsPath gpCoordinates = new();
 
             Point pntCoords = this.ClientPointToGame(this.PointToClient(Cursor.Position));
 
@@ -617,13 +617,13 @@ namespace PRoCon.Controls
                     double dblMetresDistance = Math.Sqrt(dx * dx + dy * dy);
                     //double dblMetresDistance = dblPixelDistance / dblMetrePixels;
 
-                    GraphicsPath gpMeasuringResultsLine = new GraphicsPath();
+                    GraphicsPath gpMeasuringResultsLine = new();
                     gpMeasuringResultsLine.AddLine(this.m_pntStart, this.m_pntEnd);
                     gpMeasuringResultsLine.Widen(this.m_pOneWidth);
                     this.DrawBwShape(g, gpMeasuringResultsLine, 1.0F);
                     gpMeasuringResultsLine.Dispose();
 
-                    GraphicsPath gpMeasuringResults = new GraphicsPath();
+                    GraphicsPath gpMeasuringResults = new();
                     gpMeasuringResults.AddString(String.Format("{0:0.0} m\n{1:0.0} yd", dblMetresDistance, dblMetresDistance * 1.0936133D), this.family, this.fontStyle, this.emSize, new PointF(this.m_pntEnd.X, this.m_pntEnd.Y - 25), this.format);
                     this.DrawBwShape(g, gpMeasuringResults, 1.0F);
                     gpMeasuringResults.Dispose();
@@ -644,8 +644,8 @@ namespace PRoCon.Controls
                 int emSize = 12;
                 StringFormat format = StringFormat.GenericDefault;
                 */
-                GraphicsPath gpScale = new GraphicsPath();
-                GraphicsPath gpScaleUnits = new GraphicsPath();
+                GraphicsPath gpScale = new();
+                GraphicsPath gpScaleUnits = new();
 
                 gpScale.AddLine(new Point(10, (int)g.ClipBounds.Height - 50), new Point(10, (int)g.ClipBounds.Height - 30));
                 gpScale.AddLine(new Point(10, (int)g.ClipBounds.Height - 40), new Point(200, (int)g.ClipBounds.Height - 40));
@@ -669,8 +669,8 @@ namespace PRoCon.Controls
                     if (iOffset >= 15 && 10 + iOffset <= 200)
                     {
 
-                        GraphicsPath gpScaleMarkerLine = new GraphicsPath();
-                        GraphicsPath gpScaleMarker = new GraphicsPath();
+                        GraphicsPath gpScaleMarkerLine = new();
+                        GraphicsPath gpScaleMarker = new();
 
                         gpScaleMarker.AddString(String.Format("{0:0}", dblMetres), this.family, this.fontStyle, this.emSize, new Point(4 + iOffset, (int)g.ClipBounds.Height - 60), this.format);
                         gpScaleMarkerLine.AddLine(new Point(10 + iOffset, (int)g.ClipBounds.Height - 45), new Point(10 + iOffset, (int)g.ClipBounds.Height - 40));
@@ -690,8 +690,8 @@ namespace PRoCon.Controls
                     if (iOffset >= 15 && 10 + iOffset <= 200)
                     {
 
-                        GraphicsPath gpScaleMarkerLine = new GraphicsPath();
-                        GraphicsPath gpScaleMarker = new GraphicsPath();
+                        GraphicsPath gpScaleMarkerLine = new();
+                        GraphicsPath gpScaleMarker = new();
 
                         gpScaleMarker.AddString(String.Format("{0:0}", dblMetres), this.family, this.fontStyle, this.emSize, new Point(4 + iOffset, (int)g.ClipBounds.Height - 32), this.format);
                         gpScaleMarkerLine.AddLine(new Point(10 + iOffset, (int)g.ClipBounds.Height - 35), new Point(10 + iOffset, (int)g.ClipBounds.Height - 40));
@@ -729,8 +729,8 @@ namespace PRoCon.Controls
             double adjext = Math.Cos(angle) * 14.4F;
             double oppext = Math.Sin(angle) * 14.4F;
 
-            PointF pntStart = new PointF((float)kKill.KillerLocation.X + (float)oppext, (float)kKill.KillerLocation.Y + (float)adjext);
-            PointF pntEnd = new PointF((float)kKill.VictimLocation.X - (float)oppext, (float)kKill.VictimLocation.Y - (float)adjext);
+            PointF pntStart = new((float)kKill.KillerLocation.X + (float)oppext, (float)kKill.KillerLocation.Y + (float)adjext);
+            PointF pntEnd = new((float)kKill.VictimLocation.X - (float)oppext, (float)kKill.VictimLocation.Y - (float)adjext);
 
             if (colours == KillDisplayColours.EnemyColours)
             {
@@ -752,14 +752,14 @@ namespace PRoCon.Controls
         private void DrawKillCircles(Graphics g, Kill kKill, KillDisplayDetails kddKillDetails)
         {
 
-            PointF pntLineStart = new PointF((float)kKill.KillerLocation.X, (float)kKill.KillerLocation.Y);
-            PointF pntLineEnd = new PointF((float)kKill.VictimLocation.X, (float)kKill.VictimLocation.Y);
-            PointF pntLineHalfway = new PointF(pntLineStart.X - (pntLineStart.X - pntLineEnd.X) / 2, pntLineStart.Y - (pntLineStart.Y - pntLineEnd.Y) / 2 - 3);
-            PointF pntLineHalfway2 = new PointF(pntLineStart.X - (pntLineStart.X - pntLineEnd.X) / 2, pntLineStart.Y - (pntLineStart.Y - pntLineEnd.Y) / 2 - 4);
+            PointF pntLineStart = new((float)kKill.KillerLocation.X, (float)kKill.KillerLocation.Y);
+            PointF pntLineEnd = new((float)kKill.VictimLocation.X, (float)kKill.VictimLocation.Y);
+            PointF pntLineHalfway = new(pntLineStart.X - (pntLineStart.X - pntLineEnd.X) / 2, pntLineStart.Y - (pntLineStart.Y - pntLineEnd.Y) / 2 - 3);
+            PointF pntLineHalfway2 = new(pntLineStart.X - (pntLineStart.X - pntLineEnd.X) / 2, pntLineStart.Y - (pntLineStart.Y - pntLineEnd.Y) / 2 - 4);
 
             LinearGradientBrush killBrush = this.GetKillColour(this.KillColours, kKill, kddKillDetails);
 
-            GraphicsPath gpKillCircles = new GraphicsPath();
+            GraphicsPath gpKillCircles = new();
             gpKillCircles.AddEllipse(new Rectangle(kKill.KillerLocation.X - this.ErrorRadius, kKill.KillerLocation.Y - this.ErrorRadius, this.ErrorRadius * 2, this.ErrorRadius * 2));
             gpKillCircles.AddEllipse(new Rectangle(kKill.VictimLocation.X - this.ErrorRadius, kKill.VictimLocation.Y - this.ErrorRadius, this.ErrorRadius * 2, this.ErrorRadius * 2));
             gpKillCircles.FillMode = FillMode.Winding;
@@ -773,14 +773,14 @@ namespace PRoCon.Controls
 
             GraphicsPath gpKillOutline = (GraphicsPath)gpKill.Clone();
             //GraphicsPath gpKillOutline = new GraphicsPath(gpKill.PathPoints, gpKill.PathTypes);
-            Matrix gpKillMatrix = new Matrix();
+            Matrix gpKillMatrix = new();
             gpKillOutline.Widen(this.m_pTwoWidth, gpKillMatrix, 0.01F);
 
-            Region reKillOutline = new Region(gpKillOutline);
+            Region reKillOutline = new(gpKillOutline);
             reKillOutline.Exclude(gpKill);
             reKillOutline.Exclude(gpKillCircles);
 
-            Region reKill = new Region(gpKill);
+            Region reKill = new(gpKill);
             reKill.Union(gpKillCircles);
 
             //Region reKillDropshadow = new Region(gpKill);
@@ -817,16 +817,16 @@ namespace PRoCon.Controls
 
                 if (imgDeathIcon != null)
                 {
-                    ColorMatrix colormatrix = new ColorMatrix();
+                    ColorMatrix colormatrix = new();
                     colormatrix.Matrix00 = 1.0F;
                     colormatrix.Matrix11 = 1.0F;
                     colormatrix.Matrix22 = 1.0F;
                     colormatrix.Matrix33 = kddKillDetails.Opacity;
                     colormatrix.Matrix44 = 1.0F;
-                    ImageAttributes imgattr = new ImageAttributes();
+                    ImageAttributes imgattr = new();
                     imgattr.SetColorMatrix(colormatrix);
 
-                    Rectangle destRect = new Rectangle((int)pntLineEnd.X - 12, (int)pntLineEnd.Y - 12, 24, 24);
+                    Rectangle destRect = new((int)pntLineEnd.X - 12, (int)pntLineEnd.Y - 12, 24, 24);
                     g.DrawImage(imgDeathIcon, destRect, 0, 0, imgDeathIcon.Width, imgDeathIcon.Height, GraphicsUnit.Pixel, imgattr);
 
                     imgattr.Dispose();
@@ -847,7 +847,7 @@ namespace PRoCon.Controls
 
         private void DrawText(Graphics g, string strText, Point pntLocation, int iSize, float flOpacity)
         {
-            GraphicsPath gpKillerName = new GraphicsPath();
+            GraphicsPath gpKillerName = new();
             gpKillerName.AddString(strText, this.family, this.fontStyle, iSize, new PointF(pntLocation.X, pntLocation.Y), this.format);
             this.DrawBwShape(g, gpKillerName, flOpacity);
             gpKillerName.Dispose();
@@ -859,17 +859,17 @@ namespace PRoCon.Controls
 
         private void DrawMapText(Graphics g, string strText, Point3D pntLocation, int iSize, float flOpacity)
         {
-            GraphicsPath gpKillerName = new GraphicsPath();
+            GraphicsPath gpKillerName = new();
 
             float textZoom = this.ZoomFactor * ((this.LoadedMapImagePack.MapScale.X + this.LoadedMapImagePack.MapScale.Y) / 2.0F);
 
-            Font fontText = new Font("Arial", Math.Max(Math.Min(iSize / textZoom, iSize), 1.0F), FontStyle.Regular);
+            Font fontText = new("Arial", Math.Max(Math.Min(iSize / textZoom, iSize), 1.0F), FontStyle.Regular);
             SizeF sText = g.MeasureString(strText, fontText);
 
             float outlineWidth = Math.Min(4.0F / textZoom, 4.0F);
             gpKillerName.AddString(strText, fontText.FontFamily, (int)fontText.Style, fontText.Size, new PointF((float)pntLocation.X, (float)pntLocation.Y), StringFormat.GenericDefault);
 
-            Matrix m = new Matrix();
+            Matrix m = new();
             m.RotateAt(-this.LoadedMapImagePack.MapRotation, new PointF((float)pntLocation.X, (float)pntLocation.Y));
             m.Translate(gpKillerName.GetBounds().Width / -2.0F + outlineWidth / -2.0F, gpKillerName.GetBounds().Height / -2.0F + outlineWidth / -2.0F);
             gpKillerName.Transform(m);
@@ -941,7 +941,7 @@ namespace PRoCon.Controls
 
         private Point ClientPointToZoom(Point pntClient)
         {
-            Point pntReturn = new Point(pntClient.X, pntClient.Y);
+            Point pntReturn = new(pntClient.X, pntClient.Y);
 
             pntReturn.X = (int)(this.m_pntOrigin.X + (float)pntReturn.X / this.ZoomFactor);
             pntReturn.Y = (int)(this.m_pntOrigin.Y + (float)pntReturn.Y / this.ZoomFactor);
@@ -955,7 +955,7 @@ namespace PRoCon.Controls
 
             if (this.LoadedMapImagePack != null)
             {
-                Matrix m = new Matrix();
+                Matrix m = new();
 
                 pntReturn[0].X = (int)((float)pntReturn[0].X - this.LoadedMapImagePack.MapOrigin.X);
                 pntReturn[0].Y = (int)((float)pntReturn[0].Y - this.LoadedMapImagePack.MapOrigin.Y);
@@ -1379,7 +1379,7 @@ namespace PRoCon.Controls
 
             if (!this.MapZoneControls.ContainsKey(zone.UID))
             {
-                MapZoneControl newZone = new MapZoneControl(zone);
+                MapZoneControl newZone = new(zone);
 
                 newZone.MapZoneSelected += new MapZoneControl.MapZoneHandler(newZone_MapZoneSelected);
                 newZone.MapZoneModified += new MapZoneControl.MapZoneHandler(newZone_MapZoneModified);

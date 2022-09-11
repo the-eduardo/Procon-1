@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -46,7 +46,7 @@ namespace PRoCon.Controls.Battlemap
         public MapTextBlockString(string text, Color textColor, bool newLine)
         {
 
-            GraphicsPath gpText = new GraphicsPath();
+            GraphicsPath gpText = new();
             gpText.AddString(text, new FontFamily("Arial"), 0, 12.0F, new Point(0, 0), StringFormat.GenericTypographic);
             //gpText.Widen(this.m_pOneWidth);
             this.ObjectPath = gpText;

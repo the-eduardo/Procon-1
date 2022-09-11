@@ -305,7 +305,7 @@ namespace PRoCon.Controls.ServerSettings
 
                     // Full update
 
-                    StringBuilder rewriteConfig = new StringBuilder();
+                    StringBuilder rewriteConfig = new();
 
                     rewriteConfig.Append(this.HeaderText);
                     //this.txtConfig.Text = this.HeaderText;

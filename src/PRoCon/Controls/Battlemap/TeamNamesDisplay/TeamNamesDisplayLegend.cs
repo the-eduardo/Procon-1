@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -82,7 +82,7 @@ namespace PRoCon.Controls.Battlemap.TeamNamesDisplay
             for (int i = 0; i < this.TeamNamesText.Strings.Count; i++)
             {
                 //foreach (MapTextBlockString teamName in this.TeamNamesText.Strings) {
-                GraphicsPath gpTeamColour = new GraphicsPath();
+                GraphicsPath gpTeamColour = new();
 
                 gpTeamColour.AddRectangle(new RectangleF(0.0F, i * (blockBounds.Height / this.TeamNamesText.Strings.Count) + (this.TeamNamesText.VerticalSpacing / 2.0F), 10.0F, 10.0F));
 

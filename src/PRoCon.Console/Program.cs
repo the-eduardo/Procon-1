@@ -84,32 +84,30 @@ namespace PRoCon.Console
                     if (PROCON_GAMESERVER_IP != "")
                     {
                         // Run a background thread to keep checking if the connection is still alive, otherwise close application.
-                        Thread t = new Thread(new ThreadStart(delegate
-                        {
-                            Int32.TryParse(System.Environment.GetEnvironmentVariable("PROCON_GAMESERVER_PORT"), out int PROCON_GAMESERVER_PORT);
-
-                            while (true)
-                            {
-                                Thread.Sleep(5000);
-
-                                // Check if port is alive using the ip PROCON_GAMESERVER_IP and port PROCON_GAMESERVER_PORT
-                                using (TcpClient tcpClient = new TcpClient())
-                                {
-                                    try
-                                    {
-                                        tcpClient.Connect(PROCON_GAMESERVER_IP, PROCON_GAMESERVER_PORT);
-                                    }
-                                    catch (Exception)
-                                    {
-                                        System.Console.WriteLine("[PRoCon] Connection lost, exiting.");
-                                        application.Shutdown();
-                                        // Exit the application
-                                        Environment.Exit(0);
-                                        break;
-                                    }
-                                }
-                            }
-                        }));
+                        Thread t = new(new ThreadStart(delegate
+{
+    Int32.TryParse(System.Environment.GetEnvironmentVariable("PROCON_GAMESERVER_PORT"), out int PROCON_GAMESERVER_PORT);
+    while (true)
+    {
+        Thread.Sleep(5000);
+        // Check if port is alive using the ip PROCON_GAMESERVER_IP and port PROCON_GAMESERVER_PORT
+        using (TcpClient tcpClient = new TcpClient())
+        {
+            try
+            {
+                tcpClient.Connect(PROCON_GAMESERVER_IP, PROCON_GAMESERVER_PORT);
+            }
+            catch (Exception)
+            {
+                System.Console.WriteLine("[PRoCon] Connection lost, exiting.");
+                application.Shutdown();
+                // Exit the application
+                Environment.Exit(0);
+                break;
+            }
+        }
+    }
+}));
                         
                         t.Start();
                     }

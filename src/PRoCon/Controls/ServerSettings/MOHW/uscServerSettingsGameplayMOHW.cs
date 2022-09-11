@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 //using System.Collections.Generic;
 using System.Collections;
 using System.Windows.Forms;
@@ -97,7 +97,7 @@ namespace PRoCon.Controls.ServerSettings.MOHW
             this.lblSettingsPlaylist.Text = this.Language.GetDefaultLocalized("Playlist Presets", "uscServerSettingsPanel.lblSettingsPlaylist");
             this.lnkSettingsPlaylist.Text = this.Language.GetDefaultLocalized("Apply", "uscServerSettingsPanel.lnkSettingsPlaylist");
 
-            ArrayList Playlist = new ArrayList();
+            ArrayList Playlist = new();
             Playlist.Add(new PlaylistMOHW(this.Language.GetDefaultLocalized("BombSquadPL", "uscServerSettingsPanel.cboSettingsPlaylist.BombSquadPL"), PlaylistMOHWType.BombSquadPL.ToString()));
             Playlist.Add(new PlaylistMOHW(this.Language.GetDefaultLocalized("CombatMissionPL", "uscServerSettingsPanel.cboSettingsPlaylist.CombatMissionPL"), PlaylistMOHWType.CombatMissionPL.ToString()));
             Playlist.Add(new PlaylistMOHW(this.Language.GetDefaultLocalized("CustomPL", "uscServerSettingsPanel.cboSettingsPlaylist.CustomPL"), PlaylistMOHWType.CustomPL.ToString()));

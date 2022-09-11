@@ -119,7 +119,7 @@ namespace PRoCon.Controls.ServerSettings.BF4
             this.lblGameplayPresets.Visible = false;
             this.btnGameplayPresets.Visible = false;
 
-            ArrayList UnlockModes = new ArrayList();
+            ArrayList UnlockModes = new();
             UnlockModes.Add(new UnlockMode(this.Language.GetLocalized("uscServerSettingsPanel.cboSettingsUnlockMode.None"), UnlockModeType.none.ToString()));
             UnlockModes.Add(new UnlockMode(this.Language.GetLocalized("uscServerSettingsPanel.cboSettingsUnlockMode.All"), UnlockModeType.all.ToString()));
             UnlockModes.Add(new UnlockMode(this.Language.GetLocalized("uscServerSettingsPanel.cboSettingsUnlockMode.Common"), UnlockModeType.common.ToString()));
@@ -133,7 +133,7 @@ namespace PRoCon.Controls.ServerSettings.BF4
             this.lnkSettingsBF4preset.Text = this.Language.GetDefaultLocalized("Apply", "uscServerSettingsPanel.lnkSettingsBF4preset");
             this.chkSettingsBF4presetLock.Text = this.Language.GetDefaultLocalized("Lock preset related values", "uscServerSettingsPanel.chkSettingsBF4presetLock");
 
-            ArrayList BF4preset = new ArrayList();
+            ArrayList BF4preset = new();
             BF4preset.Add(new UnlockMode(this.Language.GetDefaultLocalized("Normal", "uscServerSettingsPanel.cboSettingsBF4preset.Normal"), BF4presetType.NORMAL.ToString()));
             BF4preset.Add(new UnlockMode(this.Language.GetDefaultLocalized("Classic", "uscServerSettingsPanel.cboSettingsBF4preset.Classic"), BF4presetType.CLASSIC.ToString()));
             BF4preset.Add(new UnlockMode(this.Language.GetDefaultLocalized("Hardcore", "uscServerSettingsPanel.cboSettingsBF4preset.Hardcore"), BF4presetType.HARDCORE.ToString()));
@@ -148,7 +148,7 @@ namespace PRoCon.Controls.ServerSettings.BF4
             this.lblSettingsGunMasterWeaponsPreset.Text = this.Language.GetDefaultLocalized(this.lblSettingsGunMasterWeaponsPreset.Text, "uscServerSettingsPanel.lblSettingsGunMasterWeaponsPreset");
             this.lnkSettingsGunMasterWeaponsPreset.Text = this.Language.GetDefaultLocalized(this.lnkSettingsGunMasterWeaponsPreset.Text, "uscServerSettingsPanel.lnkSettingsGunMasterWeaponsPreset");
 
-            ArrayList GunMasterWeaponsPresets = new ArrayList();
+            ArrayList GunMasterWeaponsPresets = new();
             GunMasterWeaponsPresets.Add(new GunMasterWeaponsPreset(this.Language.GetDefaultLocalized("Standard", "uscServerSettingsPanel.cboSettingsGunMasterWeaponsPreset.Standard"), ((int)BF4GunMasterWeaponsPresetType.standard).ToString()));
             GunMasterWeaponsPresets.Add(new GunMasterWeaponsPreset(this.Language.GetDefaultLocalized("Classic", "uscServerSettingsPanel.cboSettingsGunMasterWeaponsPreset.Classic"), ((int)BF4GunMasterWeaponsPresetType.classic).ToString()));
             GunMasterWeaponsPresets.Add(new GunMasterWeaponsPreset(this.Language.GetDefaultLocalized("Pistols", "uscServerSettingsPanel.cboSettingsGunMasterWeaponsPreset.Secondary"), ((int)BF4GunMasterWeaponsPresetType.pistols).ToString()));

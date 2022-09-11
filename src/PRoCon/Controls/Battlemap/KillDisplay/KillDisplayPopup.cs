@@ -36,10 +36,10 @@ namespace PRoCon.Controls.Battlemap.KillDisplay
             //string killerName = kMouseOveredKill.Killer.ClanTag.Length > 0 ? String.Format("[{0}] {1}", kMouseOveredKill.Killer.ClanTag, kMouseOveredKill.Killer.SoldierName) : kMouseOveredKill.Killer.SoldierName;
             //string victimName = kMouseOveredKill.Victim.ClanTag.Length > 0 ? String.Format("[{0}] {1}", kMouseOveredKill.Victim.ClanTag, kMouseOveredKill.Victim.SoldierName) : kMouseOveredKill.Victim.SoldierName;
 
-            GraphicsPath gpBackground = new GraphicsPath();
+            GraphicsPath gpBackground = new();
             RectangleF recBackground;
 
-            MapTextBlock textBlock = new MapTextBlock();
+            MapTextBlock textBlock = new();
 
             Color killerColour = Color.White;
             Color victimColour = Color.White;

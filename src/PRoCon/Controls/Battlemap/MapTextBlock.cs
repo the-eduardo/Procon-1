@@ -38,7 +38,7 @@ namespace PRoCon.Controls.Battlemap
         public void Draw(Graphics g, PointF pntDrawOffset, Point pntMouseLocation, MouseButtons mbButtons)
         {
 
-            PointF BlockStringDrawOffset = new PointF(pntDrawOffset.X, pntDrawOffset.Y);
+            PointF BlockStringDrawOffset = new(pntDrawOffset.X, pntDrawOffset.Y);
 
             foreach (MapTextBlockString blockString in this.Strings)
             {
@@ -60,7 +60,7 @@ namespace PRoCon.Controls.Battlemap
         public RectangleF GetBounds()
         {
 
-            RectangleF returnRec = new RectangleF();
+            RectangleF returnRec = new();
 
             float lineWidth = 0.0F;
             float totalHeight = 0.0F;

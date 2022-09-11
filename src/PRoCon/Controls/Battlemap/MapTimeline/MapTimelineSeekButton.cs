@@ -59,7 +59,7 @@ namespace PRoCon.Controls.Battlemap.MapTimeline
 
         public GraphicsPath GetRoundRect(float x, float y, float width, float height, float radius)
         {
-            GraphicsPath gp = new GraphicsPath();
+            GraphicsPath gp = new();
 
             //gp.AddLine(x + radius, y, x + width - (radius * 2), y); // Line
             gp.AddArc(x + width - (radius * 2), y, radius * 2, radius * 2, 270, 90); // Corner
@@ -77,7 +77,7 @@ namespace PRoCon.Controls.Battlemap.MapTimeline
         public new void Draw(Graphics g, PointF pntDrawOffset, Point pntMouseLocation, MouseButtons mbButtons)
         {
 
-            GraphicsPath gpSeekPosition = new GraphicsPath();
+            GraphicsPath gpSeekPosition = new();
             gpSeekPosition.AddLine(new PointF(6.0F, 2), new PointF(this.SeekerBounds.Width - this.SeekerPosition * (this.SeekerBounds.Width - 15) - 5, 2));
             gpSeekPosition.Widen(this.m_pOneWidth);
             this.DrawBwShape(g, gpSeekPosition, this.ButtonOpacity, 4.0F, Color.Black, ControlPaint.LightLight(Color.LightSeaGreen));
@@ -150,7 +150,7 @@ namespace PRoCon.Controls.Battlemap.MapTimeline
         {
             TimeSpan tsSpan = DateTime.Now.AddHours(Math.Abs(this.SeekerPosition - 1.0F)) - DateTime.Now;
 
-            GraphicsPath gpSeekTime = new GraphicsPath();
+            GraphicsPath gpSeekTime = new();
             string strText = String.Empty;
             Color clForecolor = Color.White;
 
