@@ -270,9 +270,9 @@ namespace PRoCon.Core.Remote
         {
 
             byte[] buffer = Encoding.UTF8.GetBytes(text);
-            MemoryStream ms = new MemoryStream();
+            MemoryStream ms = new();
 
-            using (GZipStream zip = new GZipStream(ms, CompressionMode.Compress, true))
+            using (GZipStream zip = new(ms, CompressionMode.Compress, true))
             {
                 zip.Write(buffer, 0, buffer.Length);
             }
@@ -298,7 +298,7 @@ namespace PRoCon.Core.Remote
 
             byte[] gzBuffer = Convert.FromBase64String(compressedText);
 
-            using (MemoryStream ms = new MemoryStream())
+            using (MemoryStream ms = new())
             {
 
                 int msgLength = BitConverter.ToInt32(gzBuffer, 0);
@@ -307,7 +307,7 @@ namespace PRoCon.Core.Remote
                 byte[] buffer = new byte[msgLength];
 
                 ms.Position = 0;
-                using (GZipStream zip = new GZipStream(ms, CompressionMode.Decompress))
+                using (GZipStream zip = new(ms, CompressionMode.Decompress))
                 {
                     zip.Read(buffer, 0, buffer.Length);
                 }

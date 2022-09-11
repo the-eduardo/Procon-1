@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using PRoCon.Core.Remote;
 using System;
 using System.Collections;
@@ -11,7 +11,7 @@ namespace PRoCon.Core.ProxyChecker
 {
     public static class ProconProxyChecker
     {
-        public static Hashtable IPDB = new Hashtable();
+        public static Hashtable IPDB = new();
 
         // Create a async task to make a web request to the API. Pass an IP address to the API.
         // The API URL is: https://api.myrcon.net/proxycheck/

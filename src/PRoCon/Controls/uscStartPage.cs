@@ -98,26 +98,8 @@ namespace PRoCon.Controls
 
                 this.webBrowser1.Document.InvokeScript("fnSetVariableLocalization", new object[] { "m_pStartPage_lblDeleteConnection", clocLanguage.GetDefaultLocalized("Are you sure you want <br/>to delete this connection?", "m_pStartPage_lblDeleteConnection") });
 
-                ArrayList tableHeaders = new ArrayList {
-                    "",
-                    clocLanguage.GetDefaultLocalized("UID", "pStartPage-tblPackages-thUid"),
-                    clocLanguage.GetDefaultLocalized("Type", "pStartPage-tblPackages-thType"),
-                    clocLanguage.GetDefaultLocalized("Name", "pStartPage-tblPackages-thName"),
-                    clocLanguage.GetDefaultLocalized("Version", "pStartPage-tblPackages-thVersion"),
-                    clocLanguage.GetDefaultLocalized("Last Update", "pStartPage-tblPackages-thLastUpdate"),
-                    clocLanguage.GetDefaultLocalized("Status", "pStartPage-tblPackages-thStatus"),
-                    clocLanguage.GetDefaultLocalized("Downloads", "pStartPage-tblPackages-thDownloads"),
-                    "",
-                    clocLanguage.GetDefaultLocalized("Discuss/Feedback", "pStartPage-tblPackages-thDiscussFeedback"),
-                    clocLanguage.GetDefaultLocalized("Author", "pStartPage-tblPackages-thAuthor"),
-                    "",
-                    "",
-                    clocLanguage.GetDefaultLocalized("Description", "pStartPage-tblPackages-thDescription"),
-                    "",
-                    "",
-                    clocLanguage.GetDefaultLocalized("Layer Install Status", "pStartPage-tblPackages-thLayerInstallStatus"),
-                    clocLanguage.GetDefaultLocalized("Install Package", "pStartPage-tblPackages-thInstallPackage")
-                };
+                ArrayList tableHeaders = new()
+{"", clocLanguage.GetDefaultLocalized("UID", "pStartPage-tblPackages-thUid"), clocLanguage.GetDefaultLocalized("Type", "pStartPage-tblPackages-thType"), clocLanguage.GetDefaultLocalized("Name", "pStartPage-tblPackages-thName"), clocLanguage.GetDefaultLocalized("Version", "pStartPage-tblPackages-thVersion"), clocLanguage.GetDefaultLocalized("Last Update", "pStartPage-tblPackages-thLastUpdate"), clocLanguage.GetDefaultLocalized("Status", "pStartPage-tblPackages-thStatus"), clocLanguage.GetDefaultLocalized("Downloads", "pStartPage-tblPackages-thDownloads"), "", clocLanguage.GetDefaultLocalized("Discuss/Feedback", "pStartPage-tblPackages-thDiscussFeedback"), clocLanguage.GetDefaultLocalized("Author", "pStartPage-tblPackages-thAuthor"), "", "", clocLanguage.GetDefaultLocalized("Description", "pStartPage-tblPackages-thDescription"), "", "", clocLanguage.GetDefaultLocalized("Layer Install Status", "pStartPage-tblPackages-thLayerInstallStatus"), clocLanguage.GetDefaultLocalized("Install Package", "pStartPage-tblPackages-thInstallPackage")};
 
                 this.webBrowser1.Document.InvokeScript("fnSetTableHeadersLocalization", new object[] { "pStartPage-tblPackages", JSON.JsonEncode(tableHeaders) });
             }
@@ -127,7 +109,7 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                ArrayList connectionsArray = new ArrayList();
+                ArrayList connectionsArray = new();
 
                 int playerCount = 0, playerSlotsTotal = 0;
 
@@ -136,7 +118,7 @@ namespace PRoCon.Controls
                     foreach (PRoConClient client in this._proconApplication.Connections)
                     {
 
-                        Hashtable connectionHtml = new Hashtable();
+                        Hashtable connectionHtml = new();
 
                         string replacedTemplate = String.Empty;
 
@@ -549,7 +531,7 @@ namespace PRoCon.Controls
         {
             try
             {
-                ArrayList promotionsList = new ArrayList();
+                ArrayList promotionsList = new();
 
                 if (rssDocument != null)
                 {
@@ -565,11 +547,8 @@ namespace PRoCon.Controls
                                 XmlNode link = node.SelectSingleNode("link");
                                 XmlNode name = node.SelectSingleNode("name");
 
-                                Hashtable promotion = new Hashtable {
-                                    {"image", image != null ? image.InnerText : "" },
-                                    {"link", link != null ? link.InnerText : "" },
-                                    {"name", name != null ? name.InnerText : "" }
-                                };
+                                Hashtable promotion = new()
+{{"image", image != null ? image.InnerText : ""}, {"link", link != null ? link.InnerText : ""}, {"name", name != null ? name.InnerText : ""}};
                                 promotionsList.Add(promotion);
                             }
                         }

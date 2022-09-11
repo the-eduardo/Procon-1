@@ -416,7 +416,7 @@ namespace PRoCon.Forms
 
         void TrustedHostsWebsitesPorts_ItemAdded(int iIndex, PRoCon.Core.Options.TrustedHostWebsitePort item)
         {
-            ListViewItem lviNewDomainHost = new ListViewItem(item.HostWebsite);
+            ListViewItem lviNewDomainHost = new(item.HostWebsite);
             lviNewDomainHost.Tag = item;
 
             lviNewDomainHost.SubItems.Add(new ListViewItem.ListViewSubItem(lviNewDomainHost, item.Port.ToString()));
@@ -761,7 +761,7 @@ namespace PRoCon.Forms
         {
 
             //CDownloadFile portTest = new CDownloadFile("http://www.phogue.net/procon/testport.php?port=" + this.txtHttpServerStartPort.Text);
-            CDownloadFile portTest = new CDownloadFile("https://repo.myrcon.com/procon1/testport.php?port=" + this.txtHttpServerStartPort.Text);
+            CDownloadFile portTest = new("https://repo.myrcon.com/procon1/testport.php?port=" + this.txtHttpServerStartPort.Text);
             portTest.DownloadComplete += new CDownloadFile.DownloadFileEventDelegate(portTest_DownloadComplete);
             portTest.DownloadError += new CDownloadFile.DownloadFileEventDelegate(portTest_DownloadError);
 
@@ -979,7 +979,7 @@ namespace PRoCon.Forms
 
         private void StatsLinkNameUrl_ItemAdded(int iIndex, PRoCon.Core.Options.StatsLinkNameUrl item)
         {
-            ListViewItem lsiStatsLinksList = new ListViewItem(item.LinkName);
+            ListViewItem lsiStatsLinksList = new(item.LinkName);
             lsiStatsLinksList.Tag = item;
 
             lsiStatsLinksList.SubItems.Add(new ListViewItem.ListViewSubItem(lsiStatsLinksList, item.LinkUrl));
@@ -1007,7 +1007,7 @@ namespace PRoCon.Forms
         public static bool IsValidUrl(string strUrl)
         {
             //Regex rx = new Regex(@"^http(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?$");
-            Regex rx = new Regex(@"^http(s)?://([\w-%]+\.)+[\w-%]+(/[\w-+#.:/?%&=]*)?$");
+            Regex rx = new(@"^http(s)?://([\w-%]+\.)+[\w-%]+(/[\w-+#.:/?%&=]*)?$");
             return rx.IsMatch(strUrl);
         }
 

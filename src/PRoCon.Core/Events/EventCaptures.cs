@@ -567,7 +567,7 @@ namespace PRoCon.Core.Events
                     strEventText = this.m_prcClient.Language.GetLocalized("uscEvents.lsvEvents." + ceEvent.ToString(), a_strMessageParams);
                 }
 
-                CapturedEvent newCapture = new CapturedEvent(etType, ceEvent, strEventText, dtLoggedTime, this.m_prcClient.InstigatingAccountName);
+                CapturedEvent newCapture = new(etType, ceEvent, strEventText, dtLoggedTime, this.m_prcClient.InstigatingAccountName);
 
                 this.ProcessEvent(newCapture);
             }

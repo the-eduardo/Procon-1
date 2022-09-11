@@ -225,7 +225,7 @@ namespace PRoCon.Core.Remote.Layer
         {
             if (request.Words.Count >= 4)
             {
-                CBanInfo newBan = new CBanInfo(request.Words[1], request.Words[2], new TimeoutSubset(request.Words.GetRange(3, TimeoutSubset.RequiredLength(request.Words[3]))), request.Words.Count >= (4 + TimeoutSubset.RequiredLength(request.Words[3])) ? request.Words[(3 + TimeoutSubset.RequiredLength(request.Words[3]))] : "");
+                CBanInfo newBan = new(request.Words[1], request.Words[2], new TimeoutSubset(request.Words.GetRange(3, TimeoutSubset.RequiredLength(request.Words[3]))), request.Words.Count >= (4 + TimeoutSubset.RequiredLength(request.Words[3])) ? request.Words[(3 + TimeoutSubset.RequiredLength(request.Words[3]))] : "");
 
                 var handler = this.RequestBanListAddRecieved;
                 if (handler != null)

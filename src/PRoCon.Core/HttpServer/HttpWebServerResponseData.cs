@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -84,7 +84,7 @@ namespace PRoCon.Core.HttpServer
         public override string ToString()
         {
 
-            StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new();
 
             builder.AppendFormat("HTTP/{0} {1}\r\n", this.HttpVersion, this.StatusCode);
 

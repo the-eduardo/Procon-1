@@ -333,7 +333,7 @@ table.nostyle td,table.nostyle th,table.nostyle tr.even td,table.nostyle tr:hove
                 if ((lviPlugin = IsLoadedPlugin(strClassName)) == null)
                 {
 
-                    ListViewItem lviNewItem = new ListViewItem(spdDetails.Name);
+                    ListViewItem lviNewItem = new(spdDetails.Name);
                     lviNewItem.Tag = spdDetails;
                     lviNewItem.Name = strClassName;
                     lviNewItem.ImageKey = "plugin_disabled.png";
@@ -551,7 +551,7 @@ table.nostyle td,table.nostyle th,table.nostyle tr.even td,table.nostyle tr:hove
                             case "multiline":
                                 if (!this.m_cscPluginVariables.ContainsKey(cpvVariable.Name))
                                 {
-                                    CustomProperty cptNewProperty = new CustomProperty(strVariableName, strCategoryName, strClassName, CPluginVariable.Decode(cpvVariable.Value), typeof(String), blVariableReadOnly, true);
+                                    CustomProperty cptNewProperty = new(strVariableName, strCategoryName, strClassName, CPluginVariable.Decode(cpvVariable.Value), typeof(String), blVariableReadOnly, true);
 
                                     cptNewProperty.Attributes = new AttributeCollection(new EditorAttribute(typeof(System.ComponentModel.Design.MultilineStringEditor), typeof(System.Drawing.Design.UITypeEditor)), new TypeConverterAttribute(typeof(System.ComponentModel.Design.MultilineStringEditor)));
                                     this.m_cscPluginVariables.Add(cptNewProperty);

@@ -143,7 +143,7 @@ namespace MaxMind
         /// <remarks>The file will be closed when this class is disposed.</remarks>
         public GeoIPCountry(string filename)
         {
-            FileStream fs = new FileStream(filename, FileMode.Open);
+            FileStream fs = new(filename, FileMode.Open);
             _geodata = (Stream)fs;
             _close = true;
         }

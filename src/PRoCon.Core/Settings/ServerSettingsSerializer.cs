@@ -1,4 +1,4 @@
-﻿namespace PRoCon.Core.Settings
+namespace PRoCon.Core.Settings
 {
     using System.IO;
     using System.Xml.Serialization;
@@ -11,7 +11,7 @@
     /// </summary>
     public class ServerSettingsSerializer
     {
-        private XmlSerializer serializer = new XmlSerializer(typeof(ServerSettings));
+        private XmlSerializer serializer = new(typeof(ServerSettings));
 
         public byte[] Serialize(ServerSettings settings)
         {

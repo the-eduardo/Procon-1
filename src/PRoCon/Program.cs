@@ -80,7 +80,7 @@ namespace PRoCon
 
                             if (isBasicConsole)
                             {
-                                BasicConsole basicWindow = new BasicConsole();
+                                BasicConsole basicWindow = new();
                                 basicWindow.WindowLoaded += new BasicConsole.WindowLoadedHandler(procon_WindowLoaded);
 
                                 Application.Run(basicWindow);
@@ -88,7 +88,7 @@ namespace PRoCon
                             }
                             else
                             {
-                                frmMain mainWindow = new frmMain(args);
+                                frmMain mainWindow = new(args);
                                 mainWindow.WindowLoaded += new frmMain.WindowLoadedHandler(procon_WindowLoaded);
                                 Application.Run(mainWindow);
                             }

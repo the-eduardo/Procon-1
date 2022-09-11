@@ -601,7 +601,7 @@ namespace PRoCon.Controls
 
                     this.OnSettingResponse("procon.account.create", true);
 
-                    ListViewItem lviNewAccount = new ListViewItem(accountName);
+                    ListViewItem lviNewAccount = new(accountName);
                     lviNewAccount.Name = accountName;
                     lviNewAccount.ImageKey = "status_offline.png";
 

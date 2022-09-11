@@ -149,7 +149,7 @@ namespace PRoCon.Controls
             i |= (1 & Convert.ToUInt32(this.chkEditTextModerationList.Checked)) << 20;
             i |= (1 & Convert.ToUInt32(this.chkCanShutdownServer.Checked)) << 21;
 
-            CPrivileges spUpdatedPrivileges = new CPrivileges();
+            CPrivileges spUpdatedPrivileges = new();
             spUpdatedPrivileges.PrivilegesFlags = i;
 
             // TO DO: Event Privileges set ()

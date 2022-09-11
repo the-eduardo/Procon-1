@@ -772,7 +772,7 @@ namespace PRoCon.Core.Plugin
                     List<SyntaxTree> syntaxTrees = new List<SyntaxTree> { CSharpSyntaxTree.ParseText(fullPluginSource, parseOptions, pluginFile.FullName, Encoding.UTF8) };
 
                     // get all related partial source files and add them to the list too
-                    DirectoryInfo pluginsDirectoryInfo = new DirectoryInfo(PluginBaseDirectory);
+                    DirectoryInfo pluginsDirectoryInfo = new(PluginBaseDirectory);
                     foreach (FileInfo partialPluginFile in pluginsDirectoryInfo.GetFiles(pluginClassName + ".*.cs"))
                     {
                         string partialPluginSource = File.ReadAllText(partialPluginFile.FullName);

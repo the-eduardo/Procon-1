@@ -431,7 +431,7 @@ namespace PRoCon.Controls
 
         private CMap GetMap(string strFileName)
         {
-            CMap returnMap = new CMap(String.Empty, strFileName, String.Empty, strFileName, 0);
+            CMap returnMap = new(String.Empty, strFileName, String.Empty, strFileName, 0);
 
             foreach (CMap map in this.m_prcClient.MapListPool)
             {
@@ -805,7 +805,7 @@ namespace PRoCon.Controls
         {
             if (String.Compare(item.Name, "ZONE_TAG_LIST", true) == 0)
             {
-                ZoneTagList tags = new ZoneTagList(item.Value);
+                ZoneTagList tags = new(item.Value);
 
                 this.cboTagList.Items.Clear();
 
@@ -858,7 +858,7 @@ namespace PRoCon.Controls
         private void btnAddTag_Click(object sender, EventArgs e)
         {
 
-            ZoneTagList tags = new ZoneTagList(this.txtTagList.Text);
+            ZoneTagList tags = new(this.txtTagList.Text);
 
             if (this.cboTagList.SelectedItem != null && tags.Contains((string)this.cboTagList.SelectedItem) == false)
             {

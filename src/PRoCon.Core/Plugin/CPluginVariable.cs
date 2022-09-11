@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -221,7 +221,7 @@ namespace PRoCon.Core
         public static string EncodeStringArray(string[] a_strValue)
         {
 
-            StringBuilder encodedString = new StringBuilder();
+            StringBuilder encodedString = new();
 
             for (int i = 0; i < a_strValue.Length; i++)
             {

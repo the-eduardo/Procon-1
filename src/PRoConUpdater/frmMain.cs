@@ -166,10 +166,10 @@ namespace PRoConUpdater
 
                 string zipFileName = String.Format("{0}_to_{1}_backup.zip", currentFv.FileVersion, updatedFv.FileVersion);
 
-                using (ZipFile zip = new ZipFile())
+                using (ZipFile zip = new())
                 {
 
-                    DirectoryInfo configsDirectory = new DirectoryInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs"));
+                    DirectoryInfo configsDirectory = new(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs"));
                     FileInfo[] configFiles = configsDirectory.GetFiles("*.cfg");
 
                     foreach (FileInfo config in configFiles)
@@ -300,7 +300,7 @@ namespace PRoConUpdater
             if (File.Exists("PRoConUpdater.xml"))
             {
 
-                XmlDocument doc = new XmlDocument();
+                XmlDocument doc = new();
                 doc.Load("PRoConUpdater.xml");
 
                 XmlNodeList OptionsList = doc.GetElementsByTagName("options");

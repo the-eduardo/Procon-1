@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -59,7 +59,7 @@ namespace PRoCon.Core.Plugin
         /// <param name="path">The path to the plugin cache file.</param>
         public static PluginCache Load(String path)
         {
-            PluginCache cache = new PluginCache();
+            PluginCache cache = new();
 
             XElement root = XDocument.Load(path).Root;
 
@@ -92,19 +92,7 @@ namespace PRoCon.Core.Plugin
 
         public void Save(String path)
         {
-            XDocument pluginCacheDocument = new XDocument(
-                new XElement("PluginCache",
-                    new XElement("Entries",
-                        this.Entries.Select(item => new XElement("PluginCacheEntry",
-                            new XElement("ClassName", item.ClassName),
-                            new XElement("DestinationPath", item.DestinationPath),
-                            new XElement("Hash", item.Hash),
-                            new XElement("SourcePath", item.SourcePath),
-                            new XElement("Stamp", item.Stamp)
-                        )).Cast<Object>().ToArray()
-                    )
-                )
-            );
+            XDocument pluginCacheDocument = new(new XElement("PluginCache", new XElement("Entries", this.Entries.Select(item => new XElement("PluginCacheEntry", new XElement("ClassName", item.ClassName), new XElement("DestinationPath", item.DestinationPath), new XElement("Hash", item.Hash), new XElement("SourcePath", item.SourcePath), new XElement("Stamp", item.Stamp))).Cast<Object>().ToArray())));
 
             pluginCacheDocument.Add();
 

@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -72,13 +72,13 @@ namespace PRoCon
         public string ToJsonString()
         {
 
-            Hashtable connections = new Hashtable();
+            Hashtable connections = new();
 
-            ArrayList connectionList = new ArrayList();
+            ArrayList connectionList = new();
             foreach (PRoConClient client in this)
             {
 
-                Hashtable connection = new Hashtable();
+                Hashtable connection = new();
 
                 connection.Add("host_name_port", client.HostNamePort);
                 connection.Add("connected", (bool)(client.State == ConnectionState.Connected));
