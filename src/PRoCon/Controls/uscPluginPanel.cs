@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -379,7 +379,7 @@ table.nostyle td,table.nostyle th,table.nostyle tr.even td,table.nostyle tr:hove
             try
             {
 
-                if (this.m_dicGeneratedEnums.ContainsKey(enumName) == false)
+                if (!this.m_dicGeneratedEnums.ContainsKey(enumName))
                 {
 
                     EnumBuilder enumBuilder = m_modBuilder.DefineEnum(enumName, TypeAttributes.Public, typeof(System.Int32));
@@ -432,13 +432,13 @@ table.nostyle td,table.nostyle th,table.nostyle tr.even td,table.nostyle tr:hove
 
                     Enum generatedEnum = null;
                     Match isGeneratedEnum;
-                    if ((isGeneratedEnum = Regex.Match(cpvVariable.Type, @"enum.(?<enumname>.*?)\((?<literals>.*)\)")).Success == true)
+                    if ((isGeneratedEnum = Regex.Match(cpvVariable.Type, @"enum.(?<enumname>.*?)\((?<literals>.*)\)")).Success)
                     {
                         if ((generatedEnum = this.GenerateEnum(isGeneratedEnum.Groups["enumname"].Value, isGeneratedEnum.Groups["literals"].Value.Split('|'))) != null)
                         {
                             string variableValue = cpvVariable.Value;
 
-                            if (Enum.IsDefined(generatedEnum.GetType(), variableValue) == false)
+                            if (!Enum.IsDefined(generatedEnum.GetType(), variableValue))
                             {
                                 string[] a_Names = Enum.GetNames(generatedEnum.GetType());
 
@@ -448,9 +448,9 @@ table.nostyle td,table.nostyle th,table.nostyle tr.even td,table.nostyle tr:hove
                                 }
                             }
 
-                            if (Enum.IsDefined(generatedEnum.GetType(), variableValue) == true)
+                            if (Enum.IsDefined(generatedEnum.GetType(), variableValue))
                             {
-                                if (this.m_cscPluginVariables.ContainsKey(cpvVariable.Name) == false)
+                                if (!this.m_cscPluginVariables.ContainsKey(cpvVariable.Name))
                                 {
                                     this.m_cscPluginVariables.Add(new CustomProperty(strVariableName, strCategoryName, strClassName, Enum.Parse(generatedEnum.GetType(), variableValue), generatedEnum.GetType(), blVariableReadOnly, true));
                                 }
@@ -470,9 +470,9 @@ table.nostyle td,table.nostyle th,table.nostyle tr.even td,table.nostyle tr:hove
                         {
                             case "bool":
                                 bool blTryBool;
-                                if (bool.TryParse(cpvVariable.Value, out blTryBool) == true)
+                                if (bool.TryParse(cpvVariable.Value, out blTryBool))
                                 {
-                                    if (this.m_cscPluginVariables.ContainsKey(cpvVariable.Name) == false)
+                                    if (!this.m_cscPluginVariables.ContainsKey(cpvVariable.Name))
                                     {
                                         this.m_cscPluginVariables.Add(new CustomProperty(strVariableName, strCategoryName, strClassName, blTryBool, typeof(bool), blVariableReadOnly, true));
                                     }
@@ -483,10 +483,10 @@ table.nostyle td,table.nostyle th,table.nostyle tr.even td,table.nostyle tr:hove
                                 }
                                 break;
                             case "onoff":
-                                if (Enum.IsDefined(typeof(enumBoolOnOff), cpvVariable.Value) == true)
+                                if (Enum.IsDefined(typeof(enumBoolOnOff), cpvVariable.Value))
                                 {
 
-                                    if (this.m_cscPluginVariables.ContainsKey(cpvVariable.Name) == false)
+                                    if (!this.m_cscPluginVariables.ContainsKey(cpvVariable.Name))
                                     {
                                         this.m_cscPluginVariables.Add(new CustomProperty(strVariableName, strCategoryName, strClassName, Enum.Parse(typeof(enumBoolOnOff), cpvVariable.Value), typeof(enumBoolOnOff), blVariableReadOnly, true));
                                     }
@@ -497,9 +497,9 @@ table.nostyle td,table.nostyle th,table.nostyle tr.even td,table.nostyle tr:hove
                                 }
                                 break;
                             case "yesno":
-                                if (Enum.IsDefined(typeof(enumBoolYesNo), cpvVariable.Value) == true)
+                                if (Enum.IsDefined(typeof(enumBoolYesNo), cpvVariable.Value))
                                 {
-                                    if (this.m_cscPluginVariables.ContainsKey(cpvVariable.Name) == false)
+                                    if (!this.m_cscPluginVariables.ContainsKey(cpvVariable.Name))
                                     {
                                         this.m_cscPluginVariables.Add(new CustomProperty(strVariableName, strCategoryName, strClassName, Enum.Parse(typeof(enumBoolYesNo), cpvVariable.Value), typeof(enumBoolYesNo), blVariableReadOnly, true));
                                     }
@@ -511,9 +511,9 @@ table.nostyle td,table.nostyle th,table.nostyle tr.even td,table.nostyle tr:hove
                                 break;
                             case "int":
                                 int iTryInt;
-                                if (int.TryParse(cpvVariable.Value, out iTryInt) == true)
+                                if (int.TryParse(cpvVariable.Value, out iTryInt))
                                 {
-                                    if (this.m_cscPluginVariables.ContainsKey(cpvVariable.Name) == false)
+                                    if (!this.m_cscPluginVariables.ContainsKey(cpvVariable.Name))
                                     {
                                         this.m_cscPluginVariables.Add(new CustomProperty(strVariableName, strCategoryName, strClassName, iTryInt, typeof(int), blVariableReadOnly, true));
                                     }
@@ -525,9 +525,9 @@ table.nostyle td,table.nostyle th,table.nostyle tr.even td,table.nostyle tr:hove
                                 break;
                             case "double":
                                 double dblTryDouble;
-                                if (double.TryParse(cpvVariable.Value, out dblTryDouble) == true)
+                                if (double.TryParse(cpvVariable.Value, out dblTryDouble))
                                 {
-                                    if (this.m_cscPluginVariables.ContainsKey(cpvVariable.Name) == false)
+                                    if (!this.m_cscPluginVariables.ContainsKey(cpvVariable.Name))
                                     {
                                         this.m_cscPluginVariables.Add(new CustomProperty(strVariableName, strCategoryName, strClassName, dblTryDouble, typeof(double), blVariableReadOnly, true));
                                     }
@@ -538,7 +538,7 @@ table.nostyle td,table.nostyle th,table.nostyle tr.even td,table.nostyle tr:hove
                                 }
                                 break;
                             case "string":
-                                if (this.m_cscPluginVariables.ContainsKey(cpvVariable.Name) == false)
+                                if (!this.m_cscPluginVariables.ContainsKey(cpvVariable.Name))
                                 {
                                     this.m_cscPluginVariables.Add(new CustomProperty(strVariableName, strCategoryName, strClassName, CPluginVariable.Decode(cpvVariable.Value), typeof(String), blVariableReadOnly, true));
                                 }
@@ -549,7 +549,7 @@ table.nostyle td,table.nostyle th,table.nostyle tr.even td,table.nostyle tr:hove
                                 }
                                 break;
                             case "multiline":
-                                if (this.m_cscPluginVariables.ContainsKey(cpvVariable.Name) == false)
+                                if (!this.m_cscPluginVariables.ContainsKey(cpvVariable.Name))
                                 {
                                     CustomProperty cptNewProperty = new CustomProperty(strVariableName, strCategoryName, strClassName, CPluginVariable.Decode(cpvVariable.Value), typeof(String), blVariableReadOnly, true);
 
@@ -562,7 +562,7 @@ table.nostyle td,table.nostyle th,table.nostyle tr.even td,table.nostyle tr:hove
                                 }
                                 break;
                             case "stringarray":
-                                if (this.m_cscPluginVariables.ContainsKey(cpvVariable.Name) == false)
+                                if (!this.m_cscPluginVariables.ContainsKey(cpvVariable.Name))
                                 {
                                     this.m_cscPluginVariables.Add(new CustomProperty(strVariableName, strCategoryName, strClassName, CPluginVariable.DecodeStringArray(cpvVariable.Value), typeof(string[]), blVariableReadOnly, true));
 
@@ -587,7 +587,7 @@ table.nostyle td,table.nostyle th,table.nostyle tr.even td,table.nostyle tr:hove
         private void ppgScriptSettings_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
 
-            if (this.m_cscPluginVariables.ContainsKey(e.ChangedItem.Label) == true)
+            if (this.m_cscPluginVariables.ContainsKey(e.ChangedItem.Label))
             {
 
                 string strValue = e.ChangedItem.Value.ToString();
@@ -613,7 +613,7 @@ table.nostyle td,table.nostyle th,table.nostyle tr.even td,table.nostyle tr:hove
                 //this.lsvLoadedPlugins_SelectedIndexChanged(this, null);
                 this.RefreshSelectedPlugin();
 
-                if (this.m_cscPluginVariables.ContainsKey(e.ChangedItem.Label) == true)
+                if (this.m_cscPluginVariables.ContainsKey(e.ChangedItem.Label))
                 {
 
                     PluginDetails spdUpdatedDetails = this.GetPluginDetails(this.m_cscPluginVariables[e.ChangedItem.Label].ClassName);
@@ -752,7 +752,7 @@ table.nostyle td,table.nostyle th,table.nostyle tr.even td,table.nostyle tr:hove
         {
             if (e.Item.Tag != null && this.m_blSupressDisabledEvent == false)
             {
-                if (e.Item.Checked == true)
+                if (e.Item.Checked)
                 {
 
                     if (this.PluginEnabled != null)

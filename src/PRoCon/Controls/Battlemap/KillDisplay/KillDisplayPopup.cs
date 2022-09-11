@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -82,7 +82,7 @@ namespace PRoCon.Controls.Battlemap.KillDisplay
             textBlock.Strings.Add(new MapTextBlockString(String.Format("Weapon: {0}", strLocalizedDamageType), Color.WhiteSmoke, true));
             textBlock.Strings.Add(new MapTextBlockString(String.Format("Distance: {0:0.0} m, {1:0.0} yd", kMouseOveredKill.Distance, kMouseOveredKill.Distance * 1.0936133D), Color.WhiteSmoke, true));
 
-            if (kMouseOveredKill.Headshot == true)
+            if (kMouseOveredKill.Headshot)
             {
                 textBlock.Strings.Add(new MapTextBlockString("... HEADSHOT ...", killerColour, true));
             }

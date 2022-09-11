@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -103,7 +103,7 @@ namespace PRoCon.Controls.ServerSettings.BF4
         private void Tab_BF4preset(FrostbiteClient sender, string mode, bool locked)
         {
             bool enabled = true;
-            if (locked == true) { enabled = false; }
+            if (locked) { enabled = false; }
 
             this.lnkSettingsTeamkillCountLimit.Enabled = enabled;
             this.lnkSettingsTeamkillCountLimit.IsAccessible = enabled;
@@ -144,7 +144,7 @@ namespace PRoCon.Controls.ServerSettings.BF4
 
                 if (this.IgnoreEvents == false && this.AsyncSettingControls["vars.teamkillcountforkick 0"].IgnoreEvent == false)
                 {
-                    if (this.chkSettingsTeamkillCountLimit.Checked == true)
+                    if (this.chkSettingsTeamkillCountLimit.Checked)
                     {
                         this.WaitForSettingResponse("vars.teamkillcountforkick 0", !this.chkSettingsTeamkillCountLimit.Checked);
                         this.Client.Game.SendSetVarsTeamKillCountForKickPacket(0);
@@ -199,7 +199,7 @@ namespace PRoCon.Controls.ServerSettings.BF4
 
                 if (this.IgnoreEvents == false && this.AsyncSettingControls["vars.teamKillKickForBan 0"].IgnoreEvent == false)
                 {
-                    if (this.chkSettingsTeamkillKickForBan.Checked == true)
+                    if (this.chkSettingsTeamkillKickForBan.Checked)
                     {
                         this.WaitForSettingResponse("vars.teamKillKickForBan 0", !this.chkSettingsTeamkillKickForBan.Checked);
                         this.Client.Game.SendSetVarsTeamKillKickForBanPacket(0);
@@ -253,7 +253,7 @@ namespace PRoCon.Controls.ServerSettings.BF4
 
                 if (this.IgnoreEvents == false && this.AsyncSettingControls["vars.teamkillvalueforkick 0"].IgnoreEvent == false)
                 {
-                    if (this.chkSettingsTeamkillValueLimit.Checked == true)
+                    if (this.chkSettingsTeamkillValueLimit.Checked)
                     {
                         this.WaitForSettingResponse("vars.teamkillvalueforkick 0", !this.chkSettingsTeamkillValueLimit.Checked);
 

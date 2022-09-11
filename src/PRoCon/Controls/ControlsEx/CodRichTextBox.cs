@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -85,7 +85,7 @@ namespace PRoCon.Controls.ControlsEx
 
             string caretNumber = variable.Replace("TEXT_COLOUR_", "^");
 
-            if (this.ChatTextColours.ContainsKey(caretNumber) == true)
+            if (this.ChatTextColours.ContainsKey(caretNumber))
             {
                 this.ChatTextColours[caretNumber] = Color.FromName(value);
             }
@@ -192,7 +192,7 @@ namespace PRoCon.Controls.ControlsEx
                 this.AppendTextBuffer = "";
             }
 
-            if (String.IsNullOrEmpty(text) == false)
+            if (!String.IsNullOrEmpty(text))
             {
                 this.InvokeIfRequired(() =>
                 {
@@ -238,7 +238,7 @@ namespace PRoCon.Controls.ControlsEx
                                     text = text.Substring(0, i) + text.Substring(i + 2);
                                     appendedTextLength -= 2;
 
-                                    if (this.ChatTextColours.ContainsKey(colourCode) == true)
+                                    if (this.ChatTextColours.ContainsKey(colourCode))
                                     {
                                         change.Colour = this.ChatTextColours[colourCode];
                                     }

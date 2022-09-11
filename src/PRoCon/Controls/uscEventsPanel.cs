@@ -257,7 +257,7 @@ namespace PRoCon.Controls
 
             this.lsvEvents.Sort();
 
-            if (this.m_prcClient.EventsLogging.ScrollingEnabled == true)
+            if (this.m_prcClient.EventsLogging.ScrollingEnabled)
             {
                 newEventItem.EnsureVisible();
             }
@@ -294,7 +294,7 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.lsvCapturedEvents.Items.ContainsKey(item.ToString()) == true)
+                if (this.lsvCapturedEvents.Items.ContainsKey(item.ToString()))
                 {
                     this.lsvCapturedEvents.Items.Remove(this.lsvCapturedEvents.Items[item.ToString()]);
                 }
@@ -308,7 +308,7 @@ namespace PRoCon.Controls
                 if (this.m_frmMain != null)
                 {
 
-                    if (isVisible == true)
+                    if (isVisible)
                     {
                         this.lnkShowHide.Text = this.lnkShowHide.Text = this.m_clocLanguage.GetLocalized("uscEvents.lnkShowHide.Hide", null);
                         this.picOpenCloseCaptures.Image = this.m_frmMain.iglIcons.Images["arrow_right.png"];
@@ -364,7 +364,7 @@ namespace PRoCon.Controls
 
             if (this.m_prcClient != null)
             {
-                if (this.m_prcClient.EventsLogging.CapturedEvents.Contains((CapturableEvents)Enum.Parse(typeof(CapturableEvents), (string)cboEvents.SelectedItem)) == false)
+                if (!this.m_prcClient.EventsLogging.CapturedEvents.Contains((CapturableEvents)Enum.Parse(typeof(CapturableEvents), (string)cboEvents.SelectedItem)))
                 {
                     this.btnAddCapture.Enabled = true;
                 }
@@ -407,7 +407,7 @@ namespace PRoCon.Controls
                         this.lsvCapturedEvents.SelectedIndices.Add(Math.Min(iCurrentIndex, this.lsvCapturedEvents.Items.Count - 1));
                     }
 
-                    if (this.lsvCapturedEvents.Items.ContainsKey((string)cboEvents.SelectedItem) == false)
+                    if (!this.lsvCapturedEvents.Items.ContainsKey((string)cboEvents.SelectedItem))
                     {
                         this.btnAddCapture.Enabled = true;
                     }

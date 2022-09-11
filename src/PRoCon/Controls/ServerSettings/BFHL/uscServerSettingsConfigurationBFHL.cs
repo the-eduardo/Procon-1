@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -410,7 +410,7 @@ namespace PRoCon.Controls.ServerSettings.BFHL
         {
             this.pnlSettingsSetidleKickLimit.Enabled = !this.chkSettingsNoIdleKickLimit.Checked;
             // for BF4 86400s are max and this is not disabled, so it has to be visulized in a propper way
-            if (this.chkSettingsNoIdleKickLimit.Checked == true)
+            if (this.chkSettingsNoIdleKickLimit.Checked)
             {
                 this.numSettingsIdleKickLimit.Value = 86400;
             }
@@ -421,14 +421,14 @@ namespace PRoCon.Controls.ServerSettings.BFHL
 
             if (this.IgnoreEvents == false && this.AsyncSettingControls["vars.idletimeout 86400"].IgnoreEvent == false)
             {
-                if (this.chkSettingsNoIdleKickLimit.Checked == true)
+                if (this.chkSettingsNoIdleKickLimit.Checked)
                 {
                     this.WaitForSettingResponse("vars.idletimeout 86400", !this.chkSettingsNoIdleKickLimit.Checked);
 
                     this.Client.Game.SendSetVarsIdleTimeoutPacket(86400);
                     //this.SendCommand("vars.idleTimeout", "0");
                 }
-                if (this.chkSettingsNoIdleKickLimit.Checked == false)
+                if (!this.chkSettingsNoIdleKickLimit.Checked)
                 {
                     this.WaitForSettingResponse("vars.idletimeout 300", this.chkSettingsNoIdleKickLimit.Checked);
 
@@ -476,13 +476,13 @@ namespace PRoCon.Controls.ServerSettings.BFHL
 
             if (this.IgnoreEvents == false && this.AsyncSettingControls["vars.idlebanrounds 0"].IgnoreEvent == false)
             {
-                if (this.chkSettingsNoIdleBanRoundsLimit.Checked == true)
+                if (this.chkSettingsNoIdleBanRoundsLimit.Checked)
                 {
                     this.WaitForSettingResponse("vars.idlebanrounds 0", !this.chkSettingsNoIdleBanRoundsLimit.Checked);
 
                     this.Client.Game.SendSetVarsIdleBanRoundsPacket(0);
                 }
-                if (this.chkSettingsNoIdleBanRoundsLimit.Checked == false)
+                if (!this.chkSettingsNoIdleBanRoundsLimit.Checked)
                 {
                     this.WaitForSettingResponse("vars.idlebanrounds 2", this.chkSettingsNoIdleBanRoundsLimit.Checked);
 

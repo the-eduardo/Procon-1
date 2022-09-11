@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -176,7 +176,7 @@ namespace PRoCon.Controls
 
         public void SetTabIndexes(Stack<string> stkTabIndexes)
         {
-            if (tbcConsoles.TabPages.ContainsKey(stkTabIndexes.Peek()) == true)
+            if (tbcConsoles.TabPages.ContainsKey(stkTabIndexes.Peek()))
             {
                 this.tbcConsoles.SelectedTab = tbcConsoles.TabPages[stkTabIndexes.Pop()];
             }
@@ -184,7 +184,7 @@ namespace PRoCon.Controls
 
         private void Console_WriteConsole(DateTime dtLoggedTime, string strLoggedText)
         {
-            if (this.chkEnableOutput.Checked == true)
+            if (this.chkEnableOutput.Checked)
             {
                 this.rtbConsoleBox.AppendText(String.Format("[{0}] {1}{2}", dtLoggedTime.ToString("HH:mm:ss"), strLoggedText, "\n"));
             }
@@ -192,9 +192,9 @@ namespace PRoCon.Controls
 
         private void rtbConsoleBox_Flushed(object sender, EventArgs args)
         {
-            if (this.rtbConsoleBox.Focused == false)
+            if (!this.rtbConsoleBox.Focused)
             {
-                if (this.m_prcClient.Console.ConScrolling == true)
+                if (this.m_prcClient.Console.ConScrolling)
                 {
                     this.rtbConsoleBox.ScrollToCaret();
                 }
@@ -205,7 +205,7 @@ namespace PRoCon.Controls
 
         private void PunkbusterConsole_WriteConsole(DateTime dtLoggedTime, string strLoggedText)
         {
-            if (this.chkEnablePunkbusterOutput.Checked == true)
+            if (this.chkEnablePunkbusterOutput.Checked)
             {
                 this.rtbPunkbusterBox.AppendText(String.Format("{0}{1}", strLoggedText, "\n"));
             }
@@ -213,9 +213,9 @@ namespace PRoCon.Controls
 
         private void rtbPunkbusterBox_Flushed(object sender, EventArgs args)
         {
-            if (this.rtbPunkbusterBox.Focused == false)
+            if (!this.rtbPunkbusterBox.Focused)
             {
-                if (this.m_prcClient.Console.PBScrolling == true)
+                if (this.m_prcClient.Console.PBScrolling)
                 {
                     this.rtbPunkbusterBox.ScrollToCaret();
                 }

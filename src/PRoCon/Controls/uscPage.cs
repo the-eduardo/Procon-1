@@ -1,4 +1,4 @@
-﻿using PRoCon.Core;
+using PRoCon.Core;
 using PRoCon.Core.Remote;
 using System;
 using System.Collections.Generic;
@@ -99,7 +99,7 @@ namespace PRoCon.Controls
         protected void WaitForSettingResponse(string strResponseCommand, object objOriginalValue)
         {
 
-            if (this.AsyncSettingControls.ContainsKey(strResponseCommand) == true)
+            if (this.AsyncSettingControls.ContainsKey(strResponseCommand))
             {
                 this.AsyncSettingControls[strResponseCommand].m_objOriginalValue = objOriginalValue;
 
@@ -130,7 +130,7 @@ namespace PRoCon.Controls
         protected void WaitForSettingResponse(string strResponseCommand)
         {
 
-            if (this.AsyncSettingControls.ContainsKey(strResponseCommand) == true)
+            if (this.AsyncSettingControls.ContainsKey(strResponseCommand))
             {
                 //this.m_dicAsyncSettingControls[strResponseCommand].m_objOriginalValue = String.Empty;
                 this.AsyncSettingControls[strResponseCommand].m_picStatus.Image = this.SettingLoading;
@@ -155,10 +155,10 @@ namespace PRoCon.Controls
         public void OnSettingResponse(string strResponseCommand, bool blSuccess)
         {
 
-            if (this.AsyncSettingControls.ContainsKey(strResponseCommand) == true)
+            if (this.AsyncSettingControls.ContainsKey(strResponseCommand))
             {
 
-                if (this.AsyncSettingControls[strResponseCommand].m_blReEnableControls == true)
+                if (this.AsyncSettingControls[strResponseCommand].m_blReEnableControls)
                 {
                     foreach (Control ctrlEnable in this.AsyncSettingControls[strResponseCommand].ma_ctrlEnabledInputs)
                     {
@@ -175,7 +175,7 @@ namespace PRoCon.Controls
 
                 this.AsyncSettingControls[strResponseCommand].IgnoreEvent = true;
 
-                if (blSuccess == true)
+                if (blSuccess)
                 {
                     this.AsyncSettingControls[strResponseCommand].m_picStatus.Image = this.SettingSuccess;
                     this.AsyncSettingControls[strResponseCommand].m_iTimeout = AsyncStyleSetting.INT_ANIMATEDSETTING_SHOWRESULT_TICKS;
@@ -198,7 +198,7 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.AsyncSettingControls.ContainsKey(strResponseCommand) == true)
+                if (this.AsyncSettingControls.ContainsKey(strResponseCommand))
                 {
 
                     foreach (Control ctrlEnable in this.AsyncSettingControls[strResponseCommand].ma_ctrlEnabledInputs)
@@ -219,7 +219,7 @@ namespace PRoCon.Controls
 
                     this.AsyncSettingControls[strResponseCommand].IgnoreEvent = true;
 
-                    if (blSuccess == true)
+                    if (blSuccess)
                     {
                         this.SetControlValue(this.AsyncSettingControls[strResponseCommand].m_ctrlResponseTarget, objValue);
                         this.AsyncSettingControls[strResponseCommand].m_picStatus.Image = this.SettingSuccess;
@@ -286,7 +286,7 @@ namespace PRoCon.Controls
                     {
                         kvpAsyncSetting.Value.m_picStatus.Image = null;
 
-                        if (kvpAsyncSetting.Value.m_blReEnableControls == true)
+                        if (kvpAsyncSetting.Value.m_blReEnableControls)
                         {
                             foreach (Control ctrlEnable in kvpAsyncSetting.Value.ma_ctrlEnabledInputs)
                             {

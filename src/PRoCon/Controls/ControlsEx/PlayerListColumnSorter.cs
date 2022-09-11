@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -45,11 +45,11 @@ namespace PRoCon.Controls.ControlsEx
         {
             ListViewItem listviewX = (ListViewItem)x, listviewY = (ListViewItem)y;
 
-            if (this.TotalsAveragesChecker.IsMatch(listviewY.Name) == true)
+            if (this.TotalsAveragesChecker.IsMatch(listviewY.Name))
             {
                 return -1;
             }
-            else if (this.TotalsAveragesChecker.IsMatch(listviewX.Name) == true)
+            else if (this.TotalsAveragesChecker.IsMatch(listviewX.Name))
             {
                 return 1;
             }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 //using System.Collections.Generic;
 using System.Collections;
 using System.Windows.Forms;
@@ -152,7 +152,7 @@ namespace PRoCon.Controls.ServerSettings.VU
             }
 
             // override RoundStart minimum in case server is unranked
-            if (this.Client.CurrentServerInfo.Ranked == false)
+            if (!this.Client.CurrentServerInfo.Ranked)
             {
                 this.numSettingsRoundStartPlayerCount.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             }

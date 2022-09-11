@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -212,7 +212,7 @@ namespace PRoCon.Controls.Battlemap
             {
                 this.m_isMouseDown = false;
 
-                if (this.IsMouseOver == true)
+                if (this.IsMouseOver)
                 {
                     this.MouseClicked(g);
                 }

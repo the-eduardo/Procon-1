@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -82,7 +82,7 @@ namespace PRoCon.Controls.Battlemap.MapTimeline
             gpSeekPosition.Widen(this.m_pOneWidth);
             this.DrawBwShape(g, gpSeekPosition, this.ButtonOpacity, 4.0F, Color.Black, ControlPaint.LightLight(Color.LightSeaGreen));
 
-            if (this.m_isMouseDown == true)
+            if (this.m_isMouseDown)
             {
 
                 if (pntMouseLocation.X < pntDrawOffset.X)
@@ -139,7 +139,7 @@ namespace PRoCon.Controls.Battlemap.MapTimeline
 
         protected override void NormalPaint(Graphics g)
         {
-            if (this.m_isMouseDown == true)
+            if (this.m_isMouseDown)
             {
                 this.DrawBwShape(g, this.ButtonOpacity, 8.0F, Color.Black, Color.White);
                 this.DrawTime(g);

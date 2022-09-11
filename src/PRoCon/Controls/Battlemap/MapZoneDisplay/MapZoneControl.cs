@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -75,7 +75,7 @@ namespace PRoCon.Controls.Battlemap.MapZoneDisplay
 
                 foreach (MapZonePointControl zonePoint in this.lstPoints)
                 {
-                    if ((isMouseSelected = zonePoint.IsPointSelected) == true)
+                    if ((isMouseSelected = zonePoint.IsPointSelected))
                     {
                         break;
                     }
@@ -93,7 +93,7 @@ namespace PRoCon.Controls.Battlemap.MapZoneDisplay
 
                 foreach (MapZonePointControl zonePoint in this.lstPoints)
                 {
-                    if ((isMouseOvered = zonePoint.IsMouseOver) == true)
+                    if ((isMouseOvered = zonePoint.IsMouseOver))
                     {
                         break;
                     }
@@ -254,7 +254,7 @@ namespace PRoCon.Controls.Battlemap.MapZoneDisplay
                     }
                     else
                     {
-                        if (this.IsMapZonePointSelected == false)
+                        if (!this.IsMapZonePointSelected)
                         {
                             zonePoint.Draw(g, pntDrawOffset, pntMouseLocation, mbButtons);
                         }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 //using System.Collections.Generic;
 using System.Collections;
 using System.Windows.Forms;
@@ -182,7 +182,7 @@ namespace PRoCon.Controls.ServerSettings.BF4
             }
 
             // override RoundStart minimum in case server is unranked
-            if (this.Client.CurrentServerInfo.Ranked == false)
+            if (!this.Client.CurrentServerInfo.Ranked)
             {
                 this.numSettingsRoundStartPlayerCount.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             }
@@ -570,7 +570,7 @@ namespace PRoCon.Controls.ServerSettings.BF4
 
                     this.Client.Game.SendSetVarsPresetPacket(this.cboSettingsBF4preset.SelectedValue.ToString(), this.chkSettingsBF4presetLock.Checked);
 
-                    if (this.chkSettingsBF4presetLock.Checked == true)
+                    if (this.chkSettingsBF4presetLock.Checked)
                     {
                         this.Client.Game.FetchStartupVariables();
                     }

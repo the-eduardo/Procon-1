@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -146,7 +146,7 @@ namespace PRoCon.Controls.Battlemap.MapImagePacks
 
             Image returnIcon = null;
 
-            if (this.m_dicLoadedIcons.ContainsKey(strImageKey) == true)
+            if (this.m_dicLoadedIcons.ContainsKey(strImageKey))
             {
                 returnIcon = this.m_dicLoadedIcons[strImageKey];
             }
@@ -166,7 +166,7 @@ namespace PRoCon.Controls.Battlemap.MapImagePacks
             Image imgReturn = null;
 
             string strImagePath = Path.Combine(this.MapImagePackPath, MapImagePackDataFile.GetLocalized(String.Format("{0}.{1}", strImageKey, type)));
-            if (File.Exists(strImagePath) == true)
+            if (File.Exists(strImagePath))
             {
                 imgReturn = new Bitmap(strImagePath);
             }
@@ -204,11 +204,11 @@ namespace PRoCon.Controls.Battlemap.MapImagePacks
             bool.TryParse(this.MapImagePackDataFile.GetLocalized("file.readonly"), out isReadonly);
             int.TryParse(this.MapImagePackDataFile.GetLocalized(String.Format("{0}.Translate.X", strMapFileName.ToLower())), NumberStyles.Integer, CultureInfo.InvariantCulture.NumberFormat, out iOriginX);
             int.TryParse(this.MapImagePackDataFile.GetLocalized(String.Format("{0}.Translate.Y", strMapFileName.ToLower())), NumberStyles.Integer, CultureInfo.InvariantCulture.NumberFormat, out iOriginY);
-            if (float.TryParse(this.MapImagePackDataFile.GetLocalized(String.Format("{0}.ScaleX", strMapFileName.ToLower())), NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out flScaleX) == false)
+            if (!float.TryParse(this.MapImagePackDataFile.GetLocalized(String.Format("{0}.ScaleX", strMapFileName.ToLower())), NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out flScaleX))
             {
                 flScaleX = 1.0F;
             }
-            if (float.TryParse(this.MapImagePackDataFile.GetLocalized(String.Format("{0}.ScaleY", strMapFileName.ToLower())), NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out flScaleY) == false)
+            if (!float.TryParse(this.MapImagePackDataFile.GetLocalized(String.Format("{0}.ScaleY", strMapFileName.ToLower())), NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out flScaleY))
             {
                 flScaleY = 1.0F;
             }
@@ -219,7 +219,7 @@ namespace PRoCon.Controls.Battlemap.MapImagePacks
 
             float.TryParse(this.MapImagePackDataFile.GetLocalized(String.Format("{0}.Rotation", strMapFileName.ToLower())), NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out flRotation);
 
-            if (int.TryParse(this.MapImagePackDataFile.GetLocalized(String.Format("{0}.PixelResolution", strMapFileName.ToLower())), NumberStyles.Integer, CultureInfo.InvariantCulture.NumberFormat, out pixelResolution) == true)
+            if (int.TryParse(this.MapImagePackDataFile.GetLocalized(String.Format("{0}.PixelResolution", strMapFileName.ToLower())), NumberStyles.Integer, CultureInfo.InvariantCulture.NumberFormat, out pixelResolution))
             {
                 this.MapPixelResolution = pixelResolution;
             }
@@ -250,7 +250,7 @@ namespace PRoCon.Controls.Battlemap.MapImagePacks
 
             this.UnloadMapImage();
 
-            if (loadImage == true)
+            if (loadImage)
             {
                 this.MapImage = this.LoadImage(strMapFileName.ToLower(), "Image");
 
@@ -324,7 +324,7 @@ namespace PRoCon.Controls.Battlemap.MapImagePacks
 
             if (this.MapImagePackDataFile != null)
             {
-                if (this.MapImagePackDataFile.LocalizedExists("file.name") == true)
+                if (this.MapImagePackDataFile.LocalizedExists("file.name"))
                 {
                     strText = this.MapImagePackDataFile.GetLocalized("file.name");
                 }

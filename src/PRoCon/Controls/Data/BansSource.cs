@@ -1,4 +1,4 @@
-﻿using PRoCon.Core;
+using PRoCon.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,7 +94,7 @@ namespace PRoCon.Controls.Data
         /// </summary>
         protected void RefreshFilter()
         {
-            if (String.IsNullOrEmpty(this.Filter) == false)
+            if (!String.IsNullOrEmpty(this.Filter))
             {
                 var filter = this.Filter.ToLower();
 
@@ -146,7 +146,7 @@ namespace PRoCon.Controls.Data
 
             if (cast != null)
             {
-                if (this.Items.Any(ban => ban.SoldierName == cast.SoldierName && ban.IpAddress == cast.IpAddress && ban.Guid == cast.Guid) == false)
+                if (!this.Items.Any(ban => ban.SoldierName == cast.SoldierName && ban.IpAddress == cast.IpAddress && ban.Guid == cast.Guid))
                 {
                     this.Items.Add(item as CBanInfo);
 
@@ -159,7 +159,7 @@ namespace PRoCon.Controls.Data
 
         public void Append<T>(T item)
         {
-            if (this.AppendItem(item) == true)
+            if (this.AppendItem(item))
             {
                 this.RefreshFilter();
                 this.OnChange();
@@ -196,7 +196,7 @@ namespace PRoCon.Controls.Data
 
         public void Remove<T>(T item)
         {
-            if (this.RemoveItem(item) == true)
+            if (this.RemoveItem(item))
             {
                 this.RefreshFilter();
                 this.OnChange();

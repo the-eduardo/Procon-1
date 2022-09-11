@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -273,14 +273,14 @@ namespace PRoCon.Controls.ServerSettings
 
             if (this.IgnoreEvents == false && this.AsyncSettingControls["vars.idletimeout 0"].IgnoreEvent == false)
             {
-                if (this.chkSettingsNoIdleKickLimit.Checked == true)
+                if (this.chkSettingsNoIdleKickLimit.Checked)
                 {
                     this.WaitForSettingResponse("vars.idletimeout 0", !this.chkSettingsNoIdleKickLimit.Checked);
 
                     this.Client.Game.SendSetVarsIdleTimeoutPacket(0);
                     //this.SendCommand("vars.idleTimeout", "0");
                 }
-                if (this.chkSettingsNoIdleKickLimit.Checked == false)
+                if (!this.chkSettingsNoIdleKickLimit.Checked)
                 {
                     this.WaitForSettingResponse("vars.idletimeout 300", this.chkSettingsNoIdleKickLimit.Checked);
 

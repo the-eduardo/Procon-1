@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 
 namespace PRoCon.Controls.ServerSettings.BFBC2
@@ -259,7 +259,7 @@ namespace PRoCon.Controls.ServerSettings.BFBC2
 
                 if (this.IgnoreEvents == false && this.AsyncSettingControls["vars.ranklimit -1"].IgnoreEvent == false)
                 {
-                    if (chkSettingsNoRankLimit.Checked == true)
+                    if (chkSettingsNoRankLimit.Checked)
                     {
                         this.WaitForSettingResponse("vars.ranklimit -1", !this.chkSettingsNoRankLimit.Checked);
 

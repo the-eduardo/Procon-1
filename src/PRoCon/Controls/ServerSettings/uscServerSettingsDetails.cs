@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -105,7 +105,7 @@ namespace PRoCon.Controls.ServerSettings
                 if (String.Compare(this.m_strPreviousSuccessBannerURL, url) != 0)
                 {
 
-                    if (String.IsNullOrEmpty(url) == false)
+                    if (!String.IsNullOrEmpty(url))
                     {
                         this.DownloadBannerURL(url);
                     }
@@ -126,7 +126,7 @@ namespace PRoCon.Controls.ServerSettings
                 if (String.Compare(this.m_strPreviousSuccessBannerURL, strSuccessBannerURL) != 0)
                 {
 
-                    if (String.IsNullOrEmpty(strSuccessBannerURL) == false)
+                    if (!String.IsNullOrEmpty(strSuccessBannerURL))
                     {
                         this.DownloadBannerURL(strSuccessBannerURL);
                     }
@@ -145,7 +145,7 @@ namespace PRoCon.Controls.ServerSettings
             if (this.Client != null && this.Client.Game != null)
             {
                 // TO DO: More error reporting about the image.
-                if (String.IsNullOrEmpty(this.txtSettingsBannerURL.Text) == false)
+                if (!String.IsNullOrEmpty(this.txtSettingsBannerURL.Text))
                 {
                     this.DownloadBannerURL(this.txtSettingsBannerURL.Text);
                 }

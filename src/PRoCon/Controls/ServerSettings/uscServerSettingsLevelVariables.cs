@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -156,11 +156,11 @@ namespace PRoCon.Controls.ServerSettings
             LevelVariableContextType contextType = LevelVariableContextType.None;
             string contextTarget = String.Empty;
 
-            if (this.rdoSettingsLevelContextAll.Checked == true)
+            if (this.rdoSettingsLevelContextAll.Checked)
             {
                 contextType = LevelVariableContextType.All;
             }
-            else if (this.rdoSettingsLevelContextGamemode.Checked == true)
+            else if (this.rdoSettingsLevelContextGamemode.Checked)
             {
                 contextType = LevelVariableContextType.GameMode;
                 if (this.cboSettingsGamemodes.SelectedItem != null)
@@ -168,7 +168,7 @@ namespace PRoCon.Controls.ServerSettings
                     contextTarget = ((CMap)this.cboSettingsGamemodes.SelectedItem).PlayList;
                 }
             }
-            else if (this.rdoSettingsLevelContextLevel.Checked == true)
+            else if (this.rdoSettingsLevelContextLevel.Checked)
             {
                 contextType = LevelVariableContextType.Level;
 
@@ -241,7 +241,7 @@ namespace PRoCon.Controls.ServerSettings
 
         private void rdoSettingsLevelContextAll_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.rdoSettingsLevelContextAll.Checked == true)
+            if (this.rdoSettingsLevelContextAll.Checked)
             {
                 this.rdoSettingsLevelContextAll.Font = new Font(this.Font, FontStyle.Bold);
 
@@ -255,7 +255,7 @@ namespace PRoCon.Controls.ServerSettings
 
         private void rdoSettingsLevelContextGamemode_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.rdoSettingsLevelContextGamemode.Checked == true)
+            if (this.rdoSettingsLevelContextGamemode.Checked)
             {
                 this.rdoSettingsLevelContextGamemode.Font = new Font(this.Font, FontStyle.Bold);
 
@@ -271,7 +271,7 @@ namespace PRoCon.Controls.ServerSettings
 
         private void rdoSettingsLevelContextLevel_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.rdoSettingsLevelContextLevel.Checked == true)
+            if (this.rdoSettingsLevelContextLevel.Checked)
             {
                 this.rdoSettingsLevelContextLevel.Font = new Font(this.Font, FontStyle.Bold);
 
@@ -344,7 +344,7 @@ namespace PRoCon.Controls.ServerSettings
 
                 this.OnSettingResponse(responseKey, value, true);
 
-                if (this.AsyncSettingControls.ContainsKey(responseKey) == true)
+                if (this.AsyncSettingControls.ContainsKey(responseKey))
                 {
                     foreach (Control enableControl in this.AsyncSettingControls[responseKey].ma_ctrlEnabledInputs)
                     {
@@ -388,7 +388,7 @@ namespace PRoCon.Controls.ServerSettings
         private void UpdateTotalEffects()
         {
 
-            if (this.lsvEvaluatedEffect.Items.ContainsKey("totalEvaluatedEffects") == true)
+            if (this.lsvEvaluatedEffect.Items.ContainsKey("totalEvaluatedEffects"))
             {
                 ListViewItem effectsItem = this.lsvEvaluatedEffect.Items["totalEvaluatedEffects"];
 
@@ -418,12 +418,12 @@ namespace PRoCon.Controls.ServerSettings
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.lsvEvaluatedEffect.Items.ContainsKey(lvRequestedContext.Context.ToString()) == true)
+                if (this.lsvEvaluatedEffect.Items.ContainsKey(lvRequestedContext.Context.ToString()))
                 {
                     ListViewItem item = this.lsvEvaluatedEffect.Items[lvRequestedContext.Context.ToString()];
                     foreach (LevelVariable variable in lstReturnedValues)
                     {
-                        if (item.SubItems.ContainsKey(variable.VariableName) == true)
+                        if (item.SubItems.ContainsKey(variable.VariableName))
                         {
                             item.SubItems[variable.VariableName].Text = variable.RawValue;
                         }
@@ -444,7 +444,7 @@ namespace PRoCon.Controls.ServerSettings
 
             ListViewItem newItem;
 
-            if (this.lsvEvaluatedEffect.Items.ContainsKey(name) == false)
+            if (!this.lsvEvaluatedEffect.Items.ContainsKey(name))
             {
 
                 newItem = new ListViewItem();
@@ -505,7 +505,7 @@ namespace PRoCon.Controls.ServerSettings
 
             ListViewItem newItem = this.CreateVariableEffectItem(lvRequestedContext.Context.ToString(), strFriendlyContextName, this.Font);
 
-            if (this.lsvEvaluatedEffect.Items.ContainsKey(newItem.Name) == false)
+            if (!this.lsvEvaluatedEffect.Items.ContainsKey(newItem.Name))
             {
                 this.lsvEvaluatedEffect.Items.Add(newItem);
             }
@@ -548,14 +548,14 @@ namespace PRoCon.Controls.ServerSettings
             {
                 LevelVariableContext selectedContext = this.GetSelectedContext();
 
-                if (this.isApplicableContext(lvRequestedContext) == true)
+                if (this.isApplicableContext(lvRequestedContext))
                 {
                     this.AddLevelVariablesToEffects(lvRequestedContext, lstReturnedValues);
 
                     if (lvRequestedContext.Context.CompareTo(selectedContext) == 0)
                     {
 
-                        if (this.lsvEvaluatedEffect.Items.ContainsKey("totalEvaluatedEffects") == false)
+                        if (!this.lsvEvaluatedEffect.Items.ContainsKey("totalEvaluatedEffects"))
                         {
                             this.lsvEvaluatedEffect.Items.Add(this.CreateVariableEffectItem("totalEvaluatedEffects", this.Language.GetLocalized("uscServerSettingsPanel.lsvEvaluatedEffect.items.totalEvaluatedEffects"), new Font(this.Font, FontStyle.Bold)));
                         }
@@ -635,7 +635,7 @@ namespace PRoCon.Controls.ServerSettings
             }
 
             // If the variable applies to our currently editing context.
-            if (this.isApplicableContext(lvRequestedContext) == true)
+            if (this.isApplicableContext(lvRequestedContext))
             {
                 this.SetLevelVariablesToEffects(lvRequestedContext, new List<LevelVariable>() { lvRequestedContext });
             }

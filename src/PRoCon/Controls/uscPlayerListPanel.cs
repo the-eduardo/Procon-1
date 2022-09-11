@@ -1,4 +1,4 @@
-﻿using PRoCon.Controls.Containers;
+using PRoCon.Controls.Containers;
 using PRoCon.Controls.ControlsEx;
 using PRoCon.Core;
 using PRoCon.Core.Options;
@@ -279,7 +279,7 @@ namespace PRoCon.Controls
             this.InvokeIfRequired(() =>
             {
                 this.Client.Game.ListPlayers += new FrostbiteClient.ListPlayersHandler(m_prcClient_ListPlayers);
-                if (this.Client.Game.GameType.Equals("BF3") == true)
+                if (this.Client.Game.GameType.Equals("BF3"))
                 {
                     this.Client.Game.PlayerPingedByAdmin += new FrostbiteClient.PlayerPingedByAdminHandler(Game_PlayerPingedByAdmin);
                     this.Client.ProconAdminPinging += new PRoConClient.ProconAdminPlayerPinged(Game_PlayerPingedByAdmin);
@@ -321,7 +321,7 @@ namespace PRoCon.Controls
 
                 this.m_prcClient_ListPlayers(this.Client.Game, new List<CPlayerInfo>(this.Client.PlayerList), new CPlayerSubset(CPlayerSubset.PlayerSubsetType.All));
 
-                if (sender.Game.HasSquads == false)
+                if (!sender.Game.HasSquads)
                 {
                     this.lsvTeamOnePlayers.Columns.Remove(this.colSquad1);
                     this.lsvTeamTwoPlayers.Columns.Remove(this.colSquad2);
@@ -360,12 +360,12 @@ namespace PRoCon.Controls
 
         private void Reasons_ItemRemoved(int iIndex, string item)
         {
-            if (this.kbpBfbcPunishPanel.Reasons.Contains(item) == true)
+            if (this.kbpBfbcPunishPanel.Reasons.Contains(item))
             {
                 this.kbpBfbcPunishPanel.Reasons.Remove(item);
             }
 
-            if (this.kbpPunkbusterPunishPanel.Reasons.Contains(item) == true)
+            if (this.kbpPunkbusterPunishPanel.Reasons.Contains(item))
             {
                 this.kbpPunkbusterPunishPanel.Reasons.Remove(item);
             }
@@ -652,7 +652,7 @@ namespace PRoCon.Controls
 
         private void SetTotalsZero(int teamId)
         {
-            if (this.Players.ContainsKey(String.Format("procon.playerlist.totals{0}", teamId)) == true)
+            if (this.Players.ContainsKey(String.Format("procon.playerlist.totals{0}", teamId)))
             {
                 var tag = this.Players[String.Format("procon.playerlist.totals{0}", teamId)].Tag as AdditionalPlayerInfo;
 
@@ -694,7 +694,7 @@ namespace PRoCon.Controls
 
         private void AddTotalsPlayerDetails(int iTeamID, AdditionalPlayerInfo player)
         {
-            if (this.Players.ContainsKey(String.Format("procon.playerlist.totals{0}", iTeamID)) == true)
+            if (this.Players.ContainsKey(String.Format("procon.playerlist.totals{0}", iTeamID)))
             {
                 var tag = this.Players[String.Format("procon.playerlist.totals{0}", iTeamID)].Tag as AdditionalPlayerInfo;
 
@@ -746,7 +746,7 @@ namespace PRoCon.Controls
 
         private void FinalizeTotalsAveragesPlayerDetails(int iTeamID)
         {
-            if (this.Players.ContainsKey(String.Format("procon.playerlist.totals{0}", iTeamID)) == true)
+            if (this.Players.ContainsKey(String.Format("procon.playerlist.totals{0}", iTeamID)))
             {
 
                 string proconPlayerListTotals = String.Format("procon.playerlist.totals{0}", iTeamID),
@@ -816,7 +816,7 @@ namespace PRoCon.Controls
                         int iPlayerTeamID = GetPlayerTeamID(kvpPlayer.Value);
                         bool isTotalsPlayer = this.ColumnSorter.TotalsAveragesChecker.IsMatch(kvpPlayer.Key);
 
-                        if (isTotalsPlayer == false)
+                        if (!isTotalsPlayer)
                         {
                             this.AddTotalsPlayerDetails(iPlayerTeamID, (AdditionalPlayerInfo)kvpPlayer.Value.Tag);
                         }
@@ -824,7 +824,7 @@ namespace PRoCon.Controls
                         if (isTotalsPlayer == false || this.GetTotalPlayersByTeamID(iPlayerTeamID) > 0)
                         {
 
-                            if (this.lsvTeamOnePlayers.Items.ContainsKey(kvpPlayer.Key) == false)
+                            if (!this.lsvTeamOnePlayers.Items.ContainsKey(kvpPlayer.Key))
                             {
                                 kvpPlayer.Value.Remove();
 
@@ -851,7 +851,7 @@ namespace PRoCon.Controls
                         int iTeamID = GetPlayerTeamID(kvpPlayer.Value);
                         bool isTotalsPlayer = this.ColumnSorter.TotalsAveragesChecker.IsMatch(kvpPlayer.Key); ;
 
-                        if (isTotalsPlayer == false)
+                        if (!isTotalsPlayer)
                         {
                             this.AddTotalsPlayerDetails(iTeamID, (AdditionalPlayerInfo)kvpPlayer.Value.Tag);
                         }
@@ -899,7 +899,7 @@ namespace PRoCon.Controls
                         int iTeamID = GetPlayerTeamID(kvpPlayer.Value);
                         bool isTotalsPlayer = this.ColumnSorter.TotalsAveragesChecker.IsMatch(kvpPlayer.Key);
 
-                        if (isTotalsPlayer == false)
+                        if (!isTotalsPlayer)
                         {
                             this.AddTotalsPlayerDetails(iTeamID, (AdditionalPlayerInfo)kvpPlayer.Value.Tag);
                         }
@@ -970,12 +970,12 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.Players.ContainsKey(playerName) == true)
+                if (this.Players.ContainsKey(playerName))
                 {
                     this.Players[playerName].Remove();
                     this.Players.Remove(playerName);
                 }
-                if (this.Pings.ContainsKey(playerName) == true)
+                if (this.Pings.ContainsKey(playerName))
                 {
                     this.Pings.Remove(playerName);
                 }
@@ -989,7 +989,7 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.Players.ContainsKey(playerName) == false)
+                if (!this.Players.ContainsKey(playerName))
                 {
                     this.Players.Add(playerName, this.CreatePlayer(new CPlayerInfo(playerName, String.Empty, 0, 0)));
 
@@ -1016,7 +1016,7 @@ namespace PRoCon.Controls
             {
                 this.PropogatingIndexChange = true;
 
-                if (this.Players.ContainsKey(soldierName) == true)
+                if (this.Players.ContainsKey(soldierName))
                 {
                     AdditionalPlayerInfo sapiAdditional;
 
@@ -1026,14 +1026,14 @@ namespace PRoCon.Controls
 
                         sapiAdditional.SpawnedInventory = spawnedInventory;
 
-                        if (this.Players.ContainsKey(soldierName) == true)
+                        if (this.Players.ContainsKey(soldierName))
                         {
                             this.Players[soldierName].SubItems["kit"].Text = this.Language.GetLocalized(String.Format("global.Kits.{0}", spawnedInventory.Kit.ToString()));
                         }
 
                         if (sapiAdditional.Punkbuster != null)
                         {
-                            if (this.Main.iglFlags.Images.ContainsKey(sapiAdditional.Punkbuster.PlayerCountryCode + ".png") == true)
+                            if (this.Main.iglFlags.Images.ContainsKey(sapiAdditional.Punkbuster.PlayerCountryCode + ".png"))
                             {
                                 this.Players[sapiAdditional.Punkbuster.SoldierName].ImageIndex = this.Main.iglFlags.Images.IndexOfKey(sapiAdditional.Punkbuster.PlayerCountryCode + ".png");
                             }
@@ -1057,7 +1057,7 @@ namespace PRoCon.Controls
             {
                 this.PropogatingIndexChange = true;
 
-                if (this.Players.ContainsKey(pbInfo.SoldierName) == true)
+                if (this.Players.ContainsKey(pbInfo.SoldierName))
                 {
 
                     AdditionalPlayerInfo sapiAdditional;
@@ -1106,7 +1106,7 @@ namespace PRoCon.Controls
                 {
                     foreach (CPlayerInfo cpiPlayer in lstPlayers)
                     {
-                        if (this.Players.ContainsKey(cpiPlayer.SoldierName) == true)
+                        if (this.Players.ContainsKey(cpiPlayer.SoldierName))
                         {
 
                             ListViewItem playerListItem = this.Players[cpiPlayer.SoldierName];
@@ -1122,7 +1122,7 @@ namespace PRoCon.Controls
                                 }
                                 else
                                 {
-                                    if (String.IsNullOrEmpty(playerListItem.SubItems["squad"].Text) != false)
+                                    if (String.IsNullOrEmpty(playerListItem.SubItems["squad"].Text))
                                     {
                                         playerListItem.SubItems["squad"].Text = String.Empty;
                                     }
@@ -1203,7 +1203,7 @@ namespace PRoCon.Controls
                                 }
                             }
 
-                            if (String.IsNullOrEmpty(cpiPlayer.GUID) == false)
+                            if (!String.IsNullOrEmpty(cpiPlayer.GUID))
                             {
                                 if (this.DeveloperUids.Contains(cpiPlayer.GUID.ToLowerInvariant()))
                                 {
@@ -1268,7 +1268,7 @@ namespace PRoCon.Controls
                             }
                         }
 
-                        if (blFoundPlayer == false)
+                        if (!blFoundPlayer)
                         {
                             this.Players[lstKeys[i]].Remove();
                             this.Players.Remove(lstKeys[i]);
@@ -1294,10 +1294,10 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.Players.ContainsKey(soldierName) == true)
+                if (this.Players.ContainsKey(soldierName))
                 {
 
-                    if (this.Pings.ContainsKey(soldierName) == true)
+                    if (this.Pings.ContainsKey(soldierName))
                     {
                         this.Pings[soldierName] = ping;
                     }
@@ -1313,10 +1313,10 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.Players.ContainsKey(soldierName) == true)
+                if (this.Players.ContainsKey(soldierName))
                 {
 
-                    if (this.Pings.ContainsKey(soldierName) == true)
+                    if (this.Pings.ContainsKey(soldierName))
                     {
                         this.Pings[soldierName] = ping;
                     }
@@ -1395,7 +1395,7 @@ namespace PRoCon.Controls
         private void ClearPunishmentPanel()
         {
 
-            if (this.PropogatingIndexChange == false)
+            if (!this.PropogatingIndexChange)
             {
 
                 this.kbpBfbcPunishPanel.SoldierName = String.Empty;
@@ -1501,7 +1501,7 @@ namespace PRoCon.Controls
             if (((PRoCon.Controls.ControlsEx.ListViewNF)sender).SelectedItems.Count > 0 && this.ColumnSorter.TotalsAveragesChecker.IsMatch(((PRoCon.Controls.ControlsEx.ListViewNF)sender).SelectedItems[0].Name) == false)
             {
 
-                if (this.PropogatingIndexChange == false)
+                if (!this.PropogatingIndexChange)
                 {
                     this.SelectPlayer(((PRoCon.Controls.ControlsEx.ListViewNF)sender).SelectedItems[0].Name);
                 }
@@ -1661,7 +1661,7 @@ namespace PRoCon.Controls
                 lock (this.PlayerDictionaryLocker)
                 {
 
-                    if (this.Players.ContainsKey(strSoldierName) == true)
+                    if (this.Players.ContainsKey(strSoldierName))
                     {
                         SetPlayerTeamID(this.Players[strSoldierName], iTeamID);
 
@@ -1682,7 +1682,7 @@ namespace PRoCon.Controls
             {
                 lock (this.PlayerDictionaryLocker)
                 {
-                    if (this.Players.ContainsKey(strSoldierName) == true)
+                    if (this.Players.ContainsKey(strSoldierName))
                     {
                         SetPlayerTeamID(this.Players[strSoldierName], iTeamID);
                         this.SetPlayerSquadID(this.Players[strSoldierName], iSquadID);
@@ -1789,8 +1789,8 @@ namespace PRoCon.Controls
             {
                 lock (this.PlayerDictionaryLocker)
                 {
-                    var killer = this.Players.ContainsKey(kill.Killer.SoldierName) == true ? this.Players[kill.Killer.SoldierName] : null;
-                    var victim = this.Players.ContainsKey(kill.Victim.SoldierName) == true ? this.Players[kill.Victim.SoldierName] : null;
+                    var killer = this.Players.ContainsKey(kill.Killer.SoldierName)? this.Players[kill.Killer.SoldierName] : null;
+                    var victim = this.Players.ContainsKey(kill.Victim.SoldierName)? this.Players[kill.Victim.SoldierName] : null;
 
                     // Don't award a kill for a suicide
                     if (killer != null && kill.IsSuicide == false)
@@ -2057,7 +2057,7 @@ namespace PRoCon.Controls
                 if (lviSelected != null && lviSelected.Tag != null && ((AdditionalPlayerInfo)lviSelected.Tag).Player != null && this.ColumnSorter.TotalsAveragesChecker.IsMatch(lviSelected.Name) == false)
                 {
 
-                    if (this.ConnectionPanel.BeginDragDrop() == true)
+                    if (this.ConnectionPanel.BeginDragDrop())
                     {
                         ((PRoCon.Controls.ControlsEx.ListViewNF)sender).DoDragDrop(((AdditionalPlayerInfo)lviSelected.Tag).Player, DragDropEffects.None | DragDropEffects.Move);
 
@@ -2191,7 +2191,7 @@ namespace PRoCon.Controls
         private void tmrKillDeathHighlight_Tick(object sender, EventArgs e)
         {
 
-            if (this.PlaceHoldersDrawn == false)
+            if (!this.PlaceHoldersDrawn)
             {
 
                 lock (this.PlayerDictionaryLocker)
@@ -2230,7 +2230,7 @@ namespace PRoCon.Controls
                         }
                     }
 
-                    if (isStillFadingKill == false)
+                    if (!isStillFadingKill)
                     {
                         this.tmrKillDeathHighlight.Enabled = false;
                     }
@@ -2255,7 +2255,7 @@ namespace PRoCon.Controls
                 }
                 else
                 {
-                    if (this.ColumnSorter.TotalsAveragesChecker.IsMatch(lviSelected.Name) == true)
+                    if (this.ColumnSorter.TotalsAveragesChecker.IsMatch(lviSelected.Name))
                     {
                         this.SelectNoPlayer();
                     }
@@ -2312,7 +2312,7 @@ namespace PRoCon.Controls
                         }
                     }
                     // uscPlayerListPanel.INT_NEUTRAL_TEAM
-                    if (this.Client.Game.HasSquads == true)
+                    if (this.Client.Game.HasSquads)
                     {
 
                         this.moveToSquadToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
@@ -2350,7 +2350,7 @@ namespace PRoCon.Controls
                     this.spectatorListToolStripMenuItem.Checked = this.Client.SpectatorList.Contains(player.SoldierName);
                     this.spectatorListToolStripMenuItem.Tag = player;
 
-                    if (this.Client.FullTextChatModerationList.Contains(player.SoldierName) == true)
+                    if (this.Client.FullTextChatModerationList.Contains(player.SoldierName))
                     {
 
                         TextChatModerationEntry entry = this.Client.FullTextChatModerationList[player.SoldierName];
@@ -2443,7 +2443,7 @@ namespace PRoCon.Controls
 
             if (this.reservedSlotToolStripMenuItem.Tag is CPlayerInfo)
             {
-                if (this.reservedSlotToolStripMenuItem.Checked == false)
+                if (!this.reservedSlotToolStripMenuItem.Checked)
                 {
                     this.Client.Game.SendReservedSlotsAddPlayerPacket(((CPlayerInfo)this.reservedSlotToolStripMenuItem.Tag).SoldierName);
                 }
@@ -2461,7 +2461,7 @@ namespace PRoCon.Controls
 
             if (this.spectatorListToolStripMenuItem.Tag is CPlayerInfo)
             {
-                if (this.spectatorListToolStripMenuItem.Checked == false)
+                if (!this.spectatorListToolStripMenuItem.Checked)
                 {
                     this.Client.Game.SendSpectatorListAddPlayerPacket(((CPlayerInfo)this.spectatorListToolStripMenuItem.Tag).SoldierName);
                 }
@@ -2568,12 +2568,12 @@ namespace PRoCon.Controls
                 }
                 else
                 {
-                    if (statsUrl.Contains("%player_name%") == true)
+                    if (statsUrl.Contains("%player_name%"))
                     {
                         statsUrlBuildError = "Missing information for player name replacement in url";
                     }
 
-                    if (statsUrl.Contains("%player_EAguid%") == true)
+                    if (statsUrl.Contains("%player_EAguid%"))
                     {
                         statsUrlBuildError = "Missing information for ea guid replacement in url";
                     }
@@ -2586,12 +2586,12 @@ namespace PRoCon.Controls
                 }
                 else
                 {
-                    if (statsUrl.Contains("%player_PBguid%") == true)
+                    if (statsUrl.Contains("%player_PBguid%"))
                     {
                         statsUrlBuildError = "Missing punkbuster information for player guid replacement in url";
                     }
 
-                    if (statsUrl.Contains("%player_IP%") == true)
+                    if (statsUrl.Contains("%player_IP%"))
                     {
                         statsUrlBuildError = "Missing punkbuster information for player ip replacement in url";
                     }
@@ -2663,7 +2663,7 @@ namespace PRoCon.Controls
         {
             if (this.cboEndRound.SelectedIndex > 0)
             {
-                if (Program.ProconApplication.OptionsSettings.ShowCfmMsgRoundRestartNext == true)
+                if (Program.ProconApplication.OptionsSettings.ShowCfmMsgRoundRestartNext)
                 { //End this round with {0} winning? this.m_clocLanguage.GetLocalized("uscPlayerListPanel.MessageBox.EndRound")
                     DialogResult cfmEndRound = MessageBox.Show(this.Language.GetLocalized("uscPlayerListPanel.MessageBox.EndRound", new String[] { this.cboEndRound.Text }),
                         @"PRoCon Frostbite", MessageBoxButtons.YesNo, MessageBoxIcon.Question);

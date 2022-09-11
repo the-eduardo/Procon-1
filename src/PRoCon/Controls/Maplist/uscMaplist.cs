@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -155,7 +155,7 @@ namespace PRoCon.Controls.Maplist
             if (this.m_client != null && this.m_client.Game != null)
             {
 
-                if (this.m_client.Game.HasOpenMaplist == false)
+                if (!this.m_client.Game.HasOpenMaplist)
                 {
 
                     CMap[] a_objItems = new CMap[this.cboMaplistPlaylists.Items.Count];
@@ -188,7 +188,7 @@ namespace PRoCon.Controls.Maplist
                     // Update the available maplist pool.
                     this.lsvMaplistPool.Items.Clear();
                     List<CMap> lstMapPool;
-                    if (this.m_client.Game.HasOpenMaplist == true)
+                    if (this.m_client.Game.HasOpenMaplist)
                     {
                         lstMapPool = new List<CMap>(this.m_client.MapListPool);
                     }
@@ -200,7 +200,7 @@ namespace PRoCon.Controls.Maplist
                     foreach (CMap map in lstMapPool)
                     {
 
-                        if (this.lsvMaplistPool.Items.ContainsKey(map.FileName.ToLower()) == false)
+                        if (!this.lsvMaplistPool.Items.ContainsKey(map.FileName.ToLower()))
                         {
                             ListViewItem mapPoolItem = new ListViewItem();
                             mapPoolItem.Tag = new MaplistEntry(map.PlayList, map.FileName, 0);
@@ -220,10 +220,10 @@ namespace PRoCon.Controls.Maplist
                         if (i == 0) { continue; }
                         if (!this.lsvMaplistPool.Items[i].Text.Equals(this.lsvMaplistPool.Items[i - 1].Text))
                         {
-                            if (blDoColor == true) { blDoColor = false; } else { blDoColor = true; }
+                            if (blDoColor) { blDoColor = false; } else { blDoColor = true; }
                         }
 
-                        if (blDoColor == true)
+                        if (blDoColor)
                         {
                             this.lsvMaplistPool.Items[i].BackColor = Color.FromArgb(233, 233, 233);
                         }
@@ -462,7 +462,7 @@ namespace PRoCon.Controls.Maplist
                 this.lsvMaplist.Columns[i].Width = -2;
             }
 
-            if (this.m_blSettingAppendingSingleMap == true)
+            if (this.m_blSettingAppendingSingleMap)
             {
                 this.OnSettingResponse("local.maplist.append", true);
             }
@@ -484,7 +484,7 @@ namespace PRoCon.Controls.Maplist
                     this.lsvMaplist.Items[this.m_iReselectShufflingMapIndex].Selected = true;
                 }
 
-                if (this.m_blSettingNewPlaylist == true)
+                if (this.m_blSettingNewPlaylist)
                 {
                     this.OnSettingResponse("local.playlist.change", true);
                 }

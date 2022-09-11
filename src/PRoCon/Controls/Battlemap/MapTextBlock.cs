@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -44,7 +44,7 @@ namespace PRoCon.Controls.Battlemap
             {
                 blockString.Draw(g, BlockStringDrawOffset, pntMouseLocation, mbButtons);
 
-                if (blockString.NewLine == true)
+                if (blockString.NewLine)
                 {
                     BlockStringDrawOffset.X = pntDrawOffset.X;
                     BlockStringDrawOffset.Y += blockString.HotSpot.Height + VerticalSpacing;
@@ -70,7 +70,7 @@ namespace PRoCon.Controls.Battlemap
 
                 lineWidth += blockString.HotSpot.Width + HorizontalSpacing;
 
-                if (blockString.NewLine == true)
+                if (blockString.NewLine)
                 {
                     returnRec.Width = Math.Max(returnRec.Width, lineWidth);
                     lineWidth = 0;

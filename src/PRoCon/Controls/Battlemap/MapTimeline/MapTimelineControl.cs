@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -82,7 +82,7 @@ namespace PRoCon.Controls.Battlemap.MapTimeline
 
                 foreach (MapTimelineControlButton mtbButton in this.TimelineButtons)
                 {
-                    if ((blMouseOverButton = mtbButton.IsMouseOver) == true)
+                    if ((blMouseOverButton = mtbButton.IsMouseOver))
                     {
                         break;
                     }
@@ -297,7 +297,7 @@ namespace PRoCon.Controls.Battlemap.MapTimeline
                     this.DrawBwShape(g, gpChangeTime, this.TimelineOpacity, 4.0F, Color.Black, Color.RoyalBlue);
                     gpChangeTime.Dispose();
 
-                    if (recChangePosition.Contains(new PointF(pntMouseLocation.X, pntMouseLocation.Y)) == true)
+                    if (recChangePosition.Contains(new PointF(pntMouseLocation.X, pntMouseLocation.Y)))
                     {
                         //strMouseOverKillList += String.Format("Round change {0}\r\n", RoundChange.Map.PublicLevelName);
 
@@ -316,7 +316,7 @@ namespace PRoCon.Controls.Battlemap.MapTimeline
                 float flOffsetXs = (this.HotSpot.Width - 5.0F) - ((float)((DateTime.Now.Ticks - kvpKill.Key.TimeOfDeath.Ticks) / TimeSpan.TicksPerSecond) / 3600.0F) * (this.HotSpot.Width - 5.0F);
                 RectangleF recKillPosition = new RectangleF(flOffsetXs + this.m_pntDrawOffset.X - 2.0F, this.m_pntDrawOffset.Y, 4.0F, 20.0F);
 
-                if (recKillPosition.Contains(new PointF(pntMouseLocation.X + 5.0F, pntMouseLocation.Y)) == true)
+                if (recKillPosition.Contains(new PointF(pntMouseLocation.X + 5.0F, pntMouseLocation.Y)))
                 {
                     GraphicsPath gpKillTime = new GraphicsPath();
                     gpKillTime.AddLine(new PointF(flOffsetXs, 10), new PointF(flOffsetXs, 12));
@@ -409,7 +409,7 @@ namespace PRoCon.Controls.Battlemap.MapTimeline
 
         protected override void MouseDown(Graphics g)
         {
-            if (base.IsMouseOver == true)
+            if (base.IsMouseOver)
             {
                 this.MouseOver(g);
             }
@@ -433,7 +433,7 @@ namespace PRoCon.Controls.Battlemap.MapTimeline
 
         protected override void NormalPaint(Graphics g)
         {
-            if (this.IsSeekerSelected == true)
+            if (this.IsSeekerSelected)
             {
                 this.m_dtMouseLeftFadeout = DateTime.Now;
             }
