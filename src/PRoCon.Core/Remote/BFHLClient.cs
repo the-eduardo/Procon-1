@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PRoCon.Core.Remote
 {
@@ -57,7 +57,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendSetVarsCommander(bool enabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hacker", Packet.Bltos(enabled));
             }
@@ -65,7 +65,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsCommander()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hacker");
             }

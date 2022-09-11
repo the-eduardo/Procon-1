@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -113,7 +113,7 @@ namespace PRoCon.Core.Plugin
                 this.PublicMethodNames = this.GetType().GetMethods().Select(method => method.Name).Distinct().ToList();
             }
 
-            if (this.PublicMethodNames.Contains(methodName) == true)
+            if (this.PublicMethodNames.Contains(methodName))
             {
                 try
                 {
@@ -134,7 +134,7 @@ namespace PRoCon.Core.Plugin
 
             if (_tryGetLocalizedDelegate != null)
             {
-                if (_tryGetLocalizedDelegate(languageCode, out strReturn, variable, arguements) == false)
+                if (!_tryGetLocalizedDelegate(languageCode, out strReturn, variable, arguements))
                 {
                     strReturn = defaultText;
                 }
@@ -370,7 +370,7 @@ namespace PRoCon.Core.Plugin
 
             foreach (string tag in tags)
             {
-                if (tagsList.Contains(tag) == true)
+                if (tagsList.Contains(tag))
                 {
                     tagsList.Remove(tag);
                 }
@@ -386,7 +386,7 @@ namespace PRoCon.Core.Plugin
             var tagsList = new ZoneTagList(tagList);
             foreach (string tag in tags)
             {
-                if (tagsList.Contains(tag) == false)
+                if (!tagsList.Contains(tag))
                 {
                     tagsList.Add(tag);
                 }
@@ -406,7 +406,7 @@ namespace PRoCon.Core.Plugin
             {
                 localizedName = GetLocalized(weapon.Name, String.Format("global.Weapons.{0}", weapon.Name.ToLower()));
 
-                if (WeaponDictionaryByLocalizedName.ContainsKey(localizedName) == false)
+                if (!WeaponDictionaryByLocalizedName.ContainsKey(localizedName))
                 {
                     WeaponDictionaryByLocalizedName.Add(localizedName, weapon);
                 }
@@ -419,7 +419,7 @@ namespace PRoCon.Core.Plugin
             {
                 localizedName = GetLocalized(specialization.Name, String.Format("global.Specialization.{0}", specialization.Name.ToLower()));
 
-                if (SpecializationDictionaryByLocalizedName.ContainsKey(localizedName) == false)
+                if (!SpecializationDictionaryByLocalizedName.ContainsKey(localizedName))
                 {
                     SpecializationDictionaryByLocalizedName.Add(localizedName, specialization);
                 }
@@ -441,7 +441,7 @@ namespace PRoCon.Core.Plugin
             {
                 if (damageType == DamageTypes.None || (damageType & weapon.Value.Damage) == weapon.Value.Damage)
                 {
-                    if (returnWeaponList.Contains(weapon.Key) == false)
+                    if (!returnWeaponList.Contains(weapon.Key))
                     {
                         returnWeaponList.Add(weapon.Key);
                     }
@@ -467,7 +467,7 @@ namespace PRoCon.Core.Plugin
         {
             Weapon returnWeapon = null;
 
-            if (WeaponDictionaryByLocalizedName.ContainsKey(localizedName) == true)
+            if (WeaponDictionaryByLocalizedName.ContainsKey(localizedName))
             {
                 returnWeapon = WeaponDictionaryByLocalizedName[localizedName];
             }
@@ -489,7 +489,7 @@ namespace PRoCon.Core.Plugin
             {
                 if (slotType == SpecializationSlots.None || slotType == specialization.Value.Slot)
                 {
-                    if (returnSpecializationList.Contains(specialization.Key) == false)
+                    if (!returnSpecializationList.Contains(specialization.Key))
                     {
                         returnSpecializationList.Add(specialization.Key);
                     }
@@ -515,7 +515,7 @@ namespace PRoCon.Core.Plugin
         {
             Specialization returnSpecialization = null;
 
-            if (SpecializationDictionaryByLocalizedName.ContainsKey(localizedName) == true)
+            if (SpecializationDictionaryByLocalizedName.ContainsKey(localizedName))
             {
                 returnSpecialization = SpecializationDictionaryByLocalizedName[localizedName];
             }
@@ -566,11 +566,11 @@ namespace PRoCon.Core.Plugin
 
             foreach (CMap map in GetMapDefines())
             {
-                if (IsValidPlaylist(map.PlayList, playList) == true)
+                if (IsValidPlaylist(map.PlayList, playList))
                 {
                     string formattedMap = format.Replace("{PublicLevelName}", map.PublicLevelName).Replace("{GameMode}", map.GameMode).Replace("{FileName}", map.FileName).Replace("{PlayList}", map.PlayList);
 
-                    if (returnMapList.Contains(formattedMap) == false)
+                    if (!returnMapList.Contains(formattedMap))
                     {
                         returnMapList.Add(formattedMap);
                     }
@@ -623,13 +623,13 @@ namespace PRoCon.Core.Plugin
 
             foreach (CMap map in GetMapDefines())
             {
-                if (IsValidPlaylist(map.PlayList, playList) == true)
+                if (IsValidPlaylist(map.PlayList, playList))
                 {
                     foreach (CTeamName teamname in map.TeamNames)
                     {
                         string formattedTeamName = format.Replace("{PublicLevelName}", map.PublicLevelName).Replace("{GameMode}", map.GameMode).Replace("{FileName}", map.FileName).Replace("{TeamName}", GetLocalized(teamname.LocalizationKey, teamname.LocalizationKey));
 
-                        if (returnMapList.Contains(formattedTeamName) == false)
+                        if (!returnMapList.Contains(formattedTeamName))
                         {
                             returnMapList.Add(formattedTeamName);
                         }
@@ -646,7 +646,7 @@ namespace PRoCon.Core.Plugin
 
             foreach (CMap map in GetMapDefines())
             {
-                if (IsValidPlaylist(map.PlayList, playList) == true)
+                if (IsValidPlaylist(map.PlayList, playList))
                 {
                     foreach (CTeamName teamname in map.TeamNames)
                     {
@@ -654,7 +654,7 @@ namespace PRoCon.Core.Plugin
                         {
                             string formattedTeamName = format.Replace("{PublicLevelName}", map.PublicLevelName).Replace("{GameMode}", map.GameMode).Replace("{FileName}", map.FileName).Replace("{TeamName}", GetLocalized(teamname.LocalizationKey, teamname.LocalizationKey));
 
-                            if (returnMapList.Contains(formattedTeamName) == false)
+                            if (!returnMapList.Contains(formattedTeamName))
                             {
                                 returnMapList.Add(formattedTeamName);
                             }
@@ -672,7 +672,7 @@ namespace PRoCon.Core.Plugin
 
             foreach (CMap map in GetMapDefines())
             {
-                if (IsValidPlaylist(map.PlayList, playList) == true)
+                if (IsValidPlaylist(map.PlayList, playList))
                 {
                     if (String.CompareOrdinal(map.FileName, FileName) == 0)
                     {
@@ -682,7 +682,7 @@ namespace PRoCon.Core.Plugin
                             {
                                 string formattedTeamName = format.Replace("{PublicLevelName}", map.PublicLevelName).Replace("{GameMode}", map.GameMode).Replace("{FileName}", map.FileName).Replace("{TeamName}", GetLocalized(teamname.LocalizationKey, teamname.LocalizationKey));
 
-                                if (returnMapList.Contains(formattedTeamName) == false)
+                                if (!returnMapList.Contains(formattedTeamName))
                                 {
                                     returnMapList.Add(formattedTeamName);
                                 }

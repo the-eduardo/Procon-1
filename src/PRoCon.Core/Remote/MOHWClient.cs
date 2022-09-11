@@ -1,4 +1,4 @@
-﻿using PRoCon.Core.Maps;
+using PRoCon.Core.Maps;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -330,7 +330,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendEventsEnabledPacket(bool isEventsEnabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("admin.eventsEnabled", Packet.Bltos(isEventsEnabled));
             }
@@ -338,7 +338,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendHelpPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("admin.help");
             }
@@ -348,7 +348,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendAdminRestartRoundPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("mapList.restartRound");
             }
@@ -356,7 +356,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendAdminRunNextRoundPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("mapList.runNextRound");
             }
@@ -364,7 +364,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendMapListNextLevelIndexPacket(int index)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("mapList.setNextMapIndex", index.ToString(CultureInfo.InvariantCulture));
             }
@@ -376,7 +376,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendMapListListRoundsPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("mapList.list");
             }
@@ -384,7 +384,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendMapListListRoundsPacket(int startIndex)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 if (startIndex >= 0)
                 {
@@ -399,7 +399,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendMapListAppendPacket(MaplistEntry map)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("mapList.add", map.MapFileName, map.Gamemode, (map.Rounds > 0 ? map.Rounds : 2).ToString(CultureInfo.InvariantCulture));
             }
@@ -407,7 +407,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendMapListInsertPacket(MaplistEntry map)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("mapList.add", map.MapFileName, map.Gamemode, (map.Rounds > 0 ? map.Rounds : 2).ToString(CultureInfo.InvariantCulture), map.Index.ToString(CultureInfo.InvariantCulture));
             }
@@ -419,7 +419,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendReservedSlotsLoadPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("reservedSlotsList.load");
             }
@@ -427,7 +427,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendReservedSlotsListPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("reservedSlotsList.list");
             }
@@ -435,7 +435,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendReservedSlotsListPacket(int startIndex)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 if (startIndex >= 0)
                 {
@@ -450,7 +450,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendReservedSlotsAddPlayerPacket(string soldierName)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("reservedSlotsList.add", soldierName);
             }
@@ -458,7 +458,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendReservedSlotsRemovePlayerPacket(string soldierName)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("reservedSlotsList.remove", soldierName);
             }
@@ -466,7 +466,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendReservedSlotsSavePacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("reservedSlotsList.save");
             }
@@ -474,7 +474,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendReservedSlotsAggressiveJoinPacket(bool enabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("reservedSlotsList.aggressiveJoin", Packet.Bltos(enabled));
             }
@@ -488,7 +488,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendSetVarsPlayerLimitPacket(int limit)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.maxPlayers", limit.ToString(CultureInfo.InvariantCulture));
             }
@@ -496,7 +496,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsPlayerLimitPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.maxPlayers");
             }
@@ -504,7 +504,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendSetVarsTeamBalancePacket(bool enabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.autoBalance", Packet.Bltos(enabled));
             }
@@ -513,7 +513,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsTeamBalancePacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.autoBalance");
             }
@@ -521,7 +521,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendSetVarsThirdPersonVehicleCamerasPacket(bool enabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.3pCam", Packet.Bltos(enabled));
             }
@@ -529,7 +529,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsThirdPersonVehicleCamerasPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.3pCam");
             }
@@ -538,7 +538,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendSetVarsAdminPasswordPacket(string password)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("admin.password", password);
             }
@@ -546,7 +546,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsAdminPasswordPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("admin.password");
             }
@@ -554,7 +554,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendSetVarsRoundLockdownCountdownPacket(int limit)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.roundLockdownCountdown", limit.ToString(CultureInfo.InvariantCulture));
             }
@@ -562,7 +562,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsRoundLockdownCountdownPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.roundLockdownCountdown");
             }
@@ -570,7 +570,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendSetVarsRoundWarmupTimeoutPacket(int limit)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.roundWarmupTimeout", limit.ToString(CultureInfo.InvariantCulture));
             }
@@ -578,7 +578,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsRoundWarmupTimeoutPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.roundWarmupTimeout");
             }
@@ -586,7 +586,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendPremiumStatusPacket(bool enabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.premiumStatus", Packet.Bltos(enabled));
             }
@@ -599,7 +599,7 @@ namespace PRoCon.Core.Remote
         // VarsHudBuddyOutline
         public override void SendSetVarsBuddyOutlinePacket(bool enabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.buddyOutline", Packet.Bltos(enabled));
             }
@@ -607,7 +607,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsBuddyOutlinePacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.buddyOutline");
             }
@@ -616,7 +616,7 @@ namespace PRoCon.Core.Remote
         // VarsHudBuddyInfo
         public override void SendSetVarsHudBuddyInfoPacket(bool enabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudBuddyInfo", Packet.Bltos(enabled));
             }
@@ -624,7 +624,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsHudBuddyInfoPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudBuddyInfo");
             }
@@ -633,7 +633,7 @@ namespace PRoCon.Core.Remote
         // VarsHudClassAbility
         public override void SendSetVarsHudClassAbilityPacket(bool enabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudClassAbility", Packet.Bltos(enabled));
             }
@@ -641,7 +641,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsHudClassAbilityPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudClassAbility");
             }
@@ -650,7 +650,7 @@ namespace PRoCon.Core.Remote
         // VarsHudCrosshair
         public override void SendSetVarsHudCrosshairPacket(bool enabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudCrosshair", Packet.Bltos(enabled));
             }
@@ -658,7 +658,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsHudCrosshairPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudCrosshair");
             }
@@ -667,7 +667,7 @@ namespace PRoCon.Core.Remote
         // VarsHudEnemyTag
         public override void SendSetVarsHudEnemyTagPacket(bool enabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudEnemyTag", Packet.Bltos(enabled));
             }
@@ -675,7 +675,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsHudEnemyTagPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudEnemyTag");
             }
@@ -684,7 +684,7 @@ namespace PRoCon.Core.Remote
         // VarsHudExplosiveIcons
         public override void SendSetVarsHudExplosiveIconsPacket(bool enabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudExplosiveIcons", Packet.Bltos(enabled));
             }
@@ -692,7 +692,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsHudExplosiveIconsPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudExplosiveIcons");
             }
@@ -701,7 +701,7 @@ namespace PRoCon.Core.Remote
         // VarsHudGameMode
         public override void SendSetVarsHudGameModePacket(bool enabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudGameMode", Packet.Bltos(enabled));
             }
@@ -709,7 +709,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsHudGameModePacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudGameMode");
             }
@@ -718,7 +718,7 @@ namespace PRoCon.Core.Remote
         // VarsHudHealthAmmo
         public override void SendSetVarsHudHealthAmmoPacket(bool enabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudHealthAmmo", Packet.Bltos(enabled));
             }
@@ -726,7 +726,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsHudHealthAmmoPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudHealthAmmo");
             }
@@ -735,7 +735,7 @@ namespace PRoCon.Core.Remote
         // VarsHudMinimapResponse
         public override void SendSetVarsHudMinimapPacket(bool enabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudMinimap", Packet.Bltos(enabled));
             }
@@ -743,7 +743,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsHudMinimapPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudMinimap");
             }
@@ -752,7 +752,7 @@ namespace PRoCon.Core.Remote
         // VarsHudObiturary
         public override void SendSetVarsHudObituraryPacket(bool enabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudObiturary", Packet.Bltos(enabled));
             }
@@ -760,7 +760,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsHudObituraryPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudObiturary");
             }
@@ -769,7 +769,7 @@ namespace PRoCon.Core.Remote
         // VarsHudPointsTracker
         public override void SendSetVarsHudPointsTrackerPacket(bool enabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudPointsTracker", Packet.Bltos(enabled));
             }
@@ -777,7 +777,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsHudPointsTrackerPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudPointsTracker");
             }
@@ -786,7 +786,7 @@ namespace PRoCon.Core.Remote
         // VarsHudUnlocks
         public override void SendSetVarsHudUnlocksPacket(bool enabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudUnlocks", Packet.Bltos(enabled));
             }
@@ -794,7 +794,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsHudUnlocksPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.hudUnlocks");
             }
@@ -803,7 +803,7 @@ namespace PRoCon.Core.Remote
         // VarsPlaylist
         public override void SendSetVarsPlaylistPacket(string playlist)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.playlist", playlist);
             }
@@ -811,7 +811,7 @@ namespace PRoCon.Core.Remote
 
         public override void SendGetVarsPlaylistPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 BuildSendPacket("vars.playlist");
             }
@@ -886,7 +886,7 @@ namespace PRoCon.Core.Remote
             if (PlayerKilled != null)
             {
                 bool headshot = false;
-                if (bool.TryParse(cpRequestPacket.Words[4], out headshot) == true)
+                if (bool.TryParse(cpRequestPacket.Words[4], out headshot))
                 {
                     this.PlayerKilled(this, cpRequestPacket.Words[1], cpRequestPacket.Words[2], cpRequestPacket.Words[3], headshot, new Point3D(0, 0, 0), new Point3D(0, 0, 0));
                 }
@@ -1005,13 +1005,13 @@ namespace PRoCon.Core.Remote
 
                 if (cpRequestPacket.Words.Count >= 2)
                 {
-                    if (int.TryParse(cpRequestPacket.Words[1], out iRequestStartOffset) == false)
+                    if (!int.TryParse(cpRequestPacket.Words[1], out iRequestStartOffset))
                     {
                         iRequestStartOffset = 0;
                     }
                 }
 
-                if (int.TryParse(cpRecievedPacket.Words[0], out iNumReturnedMaps) == false)
+                if (!int.TryParse(cpRecievedPacket.Words[0], out iNumReturnedMaps))
                 {
                     iNumReturnedMaps = 0;
                 }
@@ -1111,7 +1111,7 @@ namespace PRoCon.Core.Remote
                 int rounds = 0;
                 int index = -1;
 
-                if (int.TryParse(cpRequestPacket.Words[3], out rounds) == true)
+                if (int.TryParse(cpRequestPacket.Words[3], out rounds))
                 {
                     mapEntry = new MaplistEntry(cpRequestPacket.Words[2], cpRequestPacket.Words[1], rounds);
                 }
@@ -1162,7 +1162,7 @@ namespace PRoCon.Core.Remote
 
                 if (cpRequestPacket.Words.Count >= 2)
                 {
-                    if (int.TryParse(cpRequestPacket.Words[1], out iRequestStartOffset) == false)
+                    if (!int.TryParse(cpRequestPacket.Words[1], out iRequestStartOffset))
                     {
                         iRequestStartOffset = 0;
                     }

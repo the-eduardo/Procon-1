@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 
 
 namespace PRoCon.Core.Localization
@@ -42,7 +42,7 @@ namespace PRoCon.Core.Localization
 
             CLocalization clocLoadedLanguage = new CLocalization(fullFilePath, localizationFileName);
 
-            if (this.Contains(clocLoadedLanguage.FileName) == false)
+            if (!this.Contains(clocLoadedLanguage.FileName))
             {
                 this.Add(clocLoadedLanguage);
             }

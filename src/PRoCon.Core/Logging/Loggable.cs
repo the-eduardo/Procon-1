@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -63,13 +63,13 @@ namespace PRoCon.Core.Logging
                 if (value != this.m_blLogging)
                 {
 
-                    if (value == true)
+                    if (value)
                     {
 
                         try
                         {
 
-                            if (Directory.Exists(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs"), this.FileHostNamePort)) == false)
+                            if (!Directory.Exists(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs"), this.FileHostNamePort)))
                             {
                                 Directory.CreateDirectory(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs"), this.FileHostNamePort));
                             }

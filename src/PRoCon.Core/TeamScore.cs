@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -86,7 +86,7 @@ namespace PRoCon.Core
                 for (int i = 0; i < iTotalScores; i++)
                 {
 
-                    if (float.TryParse(lstWords[i + 1], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out flScore) == true)
+                    if (float.TryParse(lstWords[i + 1], NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat, out flScore))
                     {
                         lstReturnScores.Add(new TeamScore(i + 1, Convert.ToInt32(flScore), iWinningScore));
                     }

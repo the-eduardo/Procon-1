@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -62,7 +62,7 @@ namespace PRoCon.Core.Plugin
         {
             Object returnValue = null;
 
-            foreach (IPRoConPluginInterface plugin in this.LoadedPlugins.Where(plugin => types.Contains(plugin.ClassName) == true))
+            foreach (IPRoConPluginInterface plugin in this.LoadedPlugins.Where(plugin => types.Contains(plugin.ClassName)))
             {
                 returnValue = plugin.Invoke(methodName, parameters);
             }

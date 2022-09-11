@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.IO;
 using System.Linq;
@@ -34,7 +34,7 @@ namespace PRoCon
             if (PRoConApplication.IsProcessOpen() == false && dotNetCheck == true)
             {
 
-                if (Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Updates")) == true)
+                if (Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Updates")))
                 {
                     AutoUpdater.Arguments = args;
                     AutoUpdater.BeginUpdateProcess(null);
@@ -71,14 +71,14 @@ namespace PRoCon
                         Application.EnableVisualStyles();
                         Application.SetCompatibleTextRenderingDefault(false);
 
-                        if (isGspUpdater == true)
+                        if (isGspUpdater)
                         {
                             Application.Run(new GspUpdater());
                         }
                         else
                         {
 
-                            if (isBasicConsole == true)
+                            if (isBasicConsole)
                             {
                                 BasicConsole basicWindow = new BasicConsole();
                                 basicWindow.WindowLoaded += new BasicConsole.WindowLoadedHandler(procon_WindowLoaded);
@@ -126,7 +126,7 @@ namespace PRoCon
         {
             Program.ProconApplication = new PRoConApplication(false, Program.Args);
 
-            if (execute == true)
+            if (execute)
             {
                 Program.ProconApplication.Execute();
             }
@@ -154,7 +154,7 @@ namespace PRoCon
                     neededNetFound = true;
                 }
 
-                if (neededNetFound == false)
+                if (!neededNetFound)
                 {
                     MessageBox.Show("You need at least .NET " + sExpectedVersion + " installed!", "Procon Frostbite .NET Check", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;

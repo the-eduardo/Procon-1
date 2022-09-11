@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.ObjectModel;
 
 namespace PRoCon.Core.Variables
@@ -51,7 +51,7 @@ namespace PRoCon.Core.Variables
         {
             T tReturn = tDefault;
 
-            if (this.Contains(strVariable) == true)
+            if (this.Contains(strVariable))
             {
                 tReturn = this[strVariable].ConvertValue<T>(tDefault);
             }
@@ -63,7 +63,7 @@ namespace PRoCon.Core.Variables
         {
             bool blReturn = true;
 
-            if (this.Contains(strVariable) == true)
+            if (this.Contains(strVariable))
             {
                 blReturn = String.IsNullOrEmpty(this[strVariable].Value);
             }
@@ -73,7 +73,7 @@ namespace PRoCon.Core.Variables
 
         public void SetVariable(string strVariable, string strValue)
         {
-            if (this.Contains(strVariable) == true)
+            if (this.Contains(strVariable))
             {
                 // TO DO: I doubt this will fire set event..
                 this[strVariable].Value = strValue;

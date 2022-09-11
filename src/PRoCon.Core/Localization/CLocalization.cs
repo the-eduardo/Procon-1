@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -72,7 +72,7 @@ namespace PRoCon.Core
             bool blFoundLocalized = false;
             strLocalizedText = String.Empty;
 
-            if (this.LocalizedStrings.ContainsKey(strVariable) == true)
+            if (this.LocalizedStrings.ContainsKey(strVariable))
             {
                 if (a_strArguements == null)
                 {
@@ -100,7 +100,7 @@ namespace PRoCon.Core
         {
             string returnText = defaultText;
 
-            if (this.TryGetLocalized(out returnText, variable, arguements) == false)
+            if (!this.TryGetLocalized(out returnText, variable, arguements))
             {
                 returnText = defaultText;
             }
@@ -112,7 +112,7 @@ namespace PRoCon.Core
         {
             string strReturn = String.Empty;
 
-            if (this.LocalizedStrings.ContainsKey(strVariable) == true)
+            if (this.LocalizedStrings.ContainsKey(strVariable))
             {
 
                 if (a_strArguements == null)
@@ -164,7 +164,7 @@ namespace PRoCon.Core
                     streamWriter.Write(strFullFileContents);
                 }
 
-                if (this.LocalizedStrings.ContainsKey(strVariable) == true)
+                if (this.LocalizedStrings.ContainsKey(strVariable))
                 {
                     this.LocalizedStrings[strVariable] = strValue;
                 }

@@ -168,7 +168,7 @@ namespace PRoCon.Core.Plugin
 
         private void InvocationTimeoutCheck()
         {
-            if (this.InvocationTimeoutCheckRunning == false)
+            if (!this.InvocationTimeoutCheckRunning)
             {
                 this.InvocationTimeoutCheckRunning = true;
 
@@ -251,7 +251,7 @@ namespace PRoCon.Core.Plugin
             {
                 if (mtcCommand.RegisteredClassname.Length > 0 && mtcCommand.RegisteredMethodName.Length > 0 && mtcCommand.Command.Length > 0)
                 {
-                    if (MatchedInGameCommands.ContainsKey(mtcCommand.ToString()) == true)
+                    if (MatchedInGameCommands.ContainsKey(mtcCommand.ToString()))
                     {
                         if (String.CompareOrdinal(MatchedInGameCommands[mtcCommand.ToString()].RegisteredClassname, mtcCommand.RegisteredClassname) != 0)
                         {
@@ -274,7 +274,7 @@ namespace PRoCon.Core.Plugin
         {
             lock (MatchedInGameCommandsLocker)
             {
-                if (MatchedInGameCommands.ContainsKey(mtcCommand.ToString()) == true)
+                if (MatchedInGameCommands.ContainsKey(mtcCommand.ToString()))
                 {
                     MatchedInGameCommands.Remove(mtcCommand.ToString());
                     InvokeOnAllEnabled("OnUnregisteredCommand", mtcCommand);
@@ -367,7 +367,7 @@ namespace PRoCon.Core.Plugin
                     this.PluginVariableAltered(GetPluginDetails(strClassName));
                 }
             }
-            else if (Plugins.IsLoaded(strClassName) == false)
+            else if (!Plugins.IsLoaded(strClassName))
             {
                 Plugins.SetCachedPluginVariable(strClassName, strVariable, strValue);
 
@@ -409,7 +409,7 @@ namespace PRoCon.Core.Plugin
                     this.PluginVariableAltered(GetPluginDetailsCon(strClassName));
                 }
             }
-            else if (Plugins.IsLoaded(strClassName) == false)
+            else if (!Plugins.IsLoaded(strClassName))
             {
                 Plugins.SetCachedPluginVariable(strClassName, strVariable, strValue);
             }
@@ -518,7 +518,7 @@ namespace PRoCon.Core.Plugin
         {
             foreach (Plugin plugin in Plugins)
             {
-                if (plugin.IsLoaded == true)
+                if (plugin.IsLoaded)
                 {
                     try
                     {
@@ -550,7 +550,7 @@ namespace PRoCon.Core.Plugin
         {
             try
             {
-                if (Directory.Exists(PluginBaseDirectory) == false)
+                if (!Directory.Exists(PluginBaseDirectory))
                 {
                     Directory.CreateDirectory(PluginBaseDirectory);
                 }
@@ -560,7 +560,7 @@ namespace PRoCon.Core.Plugin
                 File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PRoCon.Core.pdb"), Path.Combine(PluginBaseDirectory, "PRoCon.Core.pdb"), true);
 
                 // Clean up temp directory
-                if (Directory.Exists(PluginDebugTempDirectory) == true)
+                if (Directory.Exists(PluginDebugTempDirectory))
                 {
                     foreach (string file in Directory.GetFiles(PluginDebugTempDirectory))
                     {
@@ -650,7 +650,7 @@ namespace PRoCon.Core.Plugin
         private void PrintPluginResults(FileInfo pluginFile, EmitResult pluginResults)
         {
             // Produce compiler errors (if any)
-            if (pluginResults.Success == false)
+            if (!pluginResults.Success)
             {
                 WritePluginConsole("Compiling {0}... ^1Errors^0 or ^3Warnings", pluginFile.Name);
 
@@ -717,12 +717,12 @@ namespace PRoCon.Core.Plugin
 
             fullPluginSource = fullPluginSource.Replace("using PRoCon.Plugin;", "using PRoCon.Core.Plugin;");
 
-            if (fullPluginSource.Contains("using PRoCon.Core;") == false)
+            if (!fullPluginSource.Contains("using PRoCon.Core;"))
             {
                 fullPluginSource = fullPluginSource.Insert(fullPluginSource.IndexOf("using PRoCon.Core.Plugin;", StringComparison.Ordinal), "\r\nusing PRoCon.Core;\r\n");
             }
 
-            if (fullPluginSource.Contains("using PRoCon.Core.Players;") == false)
+            if (!fullPluginSource.Contains("using PRoCon.Core.Players;"))
             {
                 fullPluginSource = fullPluginSource.Insert(fullPluginSource.IndexOf("using PRoCon.Core.Plugin;", StringComparison.Ordinal), "\r\nusing PRoCon.Core.Players;\r\n");
             }
@@ -751,7 +751,7 @@ namespace PRoCon.Core.Plugin
             if (requiresRecompiling == true || File.Exists(outputAssembly) == false || this.ProconClient.Parent.OptionsSettings.EnablePluginDebugging == true)
             {
                 // 3. If a compiled plugin exists already, remove it now.
-                if (File.Exists(outputAssembly) == true)
+                if (File.Exists(outputAssembly))
                 {
                     try
                     {
@@ -807,10 +807,10 @@ namespace PRoCon.Core.Plugin
 
         private void LoadPlugin(string pluginClassName, CPRoConPluginLoaderFactory pluginFactory, bool blSandboxDisabled)
         {
-            bool blSandboxEnabled = (blSandboxDisabled == true) ? false : true;
+            bool blSandboxEnabled = (blSandboxDisabled) ? false : true;
             string outputAssembly = Path.Combine(PluginBaseDirectory, pluginClassName + ".dll");
 
-            if (File.Exists(outputAssembly) == true)
+            if (File.Exists(outputAssembly))
             {
                 IPRoConPluginInterface pluginRemoteInterface = pluginFactory.Create(outputAssembly, "PRoConEvents." + pluginClassName, null);
 
@@ -855,7 +855,7 @@ namespace PRoCon.Core.Plugin
 
         public void RegisterPluginEvents(string className, List<string> events)
         {
-            if (Plugins.IsLoaded(className) == true)
+            if (Plugins.IsLoaded(className))
             {
                 Plugins[className].RegisteredEvents = events;
             }
@@ -878,7 +878,7 @@ namespace PRoCon.Core.Plugin
             try
             {
 
-                if (File.Exists(Path.Combine(this.PluginBaseDirectory, "PluginCache.xml")) == true)
+                if (File.Exists(Path.Combine(this.PluginBaseDirectory, "PluginCache.xml")))
                 {
                     WritePluginConsole("Loading plugin cache..");
 
@@ -955,7 +955,7 @@ namespace PRoCon.Core.Plugin
 
                 WritePluginConsole("Compiling and loading plugins..");
 
-                if (this.ProconClient.Parent.OptionsSettings.EnablePluginDebugging == true)
+                if (this.ProconClient.Parent.OptionsSettings.EnablePluginDebugging)
                 {
                     WritePluginConsole("^b^1*** PLUGIN DEBUGGING ENABLED ***^0^n");
                     WritePluginConsole("^b^1If you're not actively testing or debugging a plugin, please disable this setting in Procon's options!^0^n");
@@ -979,7 +979,7 @@ namespace PRoCon.Core.Plugin
                             continue;
                         }
 
-                        if (IgnoredPluginClassNames.Contains(className) == false)
+                        if (!IgnoredPluginClassNames.Contains(className))
                         {
                             CompilePlugin(pluginFile, className, compilationOptions);
 
@@ -1825,7 +1825,7 @@ namespace PRoCon.Core.Plugin
                 CapturedCommand capMatched = null;
 
                 // If this player has a command stored that requires confirmation.
-                if (CommandsNeedingConfirmation.Contains(playerName) == true)
+                if (CommandsNeedingConfirmation.Contains(playerName))
                 {
                     if ((capMatched = CommandsNeedingConfirmation[playerName].MatchedCommand.Requirements.ConfirmationCommand.Matches(message)) != null)
                     {
@@ -1838,18 +1838,18 @@ namespace PRoCon.Core.Plugin
                 }
 
                 // If it was not a confirmation to a previously matched command.
-                if (isMatch == false)
+                if (!isMatch)
                 {
                     foreach (var kvpCommand in MatchedInGameCommands)
                     {
                         // Only care if the plugin is enabled.
-                        if (Plugins.IsEnabled(kvpCommand.Value.RegisteredClassname) == true)
+                        if (Plugins.IsEnabled(kvpCommand.Value.RegisteredClassname))
                         {
                             capMatched = kvpCommand.Value.Matches(message);
 
                             if (capMatched != null)
                             {
-                                if (kvpCommand.Value.Requirements.HasValidPermissions(ProconClient.GetAccountPrivileges(playerName)) == true)
+                                if (kvpCommand.Value.Requirements.HasValidPermissions(ProconClient.GetAccountPrivileges(playerName)))
                                 {
                                     // if (this.ValidateRequirements(playerName, kvpCommand.Value.Requirements) == true) {
 
@@ -1901,7 +1901,7 @@ namespace PRoCon.Core.Plugin
         {
             bool isConfirmationRequired = false;
 
-            if (capCommand.IsConfirmed == false)
+            if (!capCommand.IsConfirmed)
             {
                 foreach (MatchArgument mtcArgument in capCommand.MatchedArguments)
                 {
@@ -1916,7 +1916,7 @@ namespace PRoCon.Core.Plugin
 
             if (isConfirmationRequired == true && capCommand.IsConfirmed == false)
             {
-                if (CommandsNeedingConfirmation.Contains(playerName) == true)
+                if (CommandsNeedingConfirmation.Contains(playerName))
                 {
                     CommandsNeedingConfirmation.Remove(playerName);
                 }

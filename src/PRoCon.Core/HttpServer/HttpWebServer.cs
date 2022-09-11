@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -58,7 +58,7 @@ namespace PRoCon.Core.HttpServer
         {
             IPAddress ipReturn = IPAddress.None;
 
-            if (IPAddress.TryParse(strHostName, out ipReturn) == false)
+            if (!IPAddress.TryParse(strHostName, out ipReturn))
             {
                 ipReturn = IPAddress.None;
 
@@ -163,7 +163,7 @@ namespace PRoCon.Core.HttpServer
                 }
             }
 
-            if (CachedResponses.ContainsKey(sender.ToString()) == true)
+            if (CachedResponses.ContainsKey(sender.ToString()))
             {
                 sender.Respond(CachedResponses[sender.ToString()]);
             }
@@ -175,7 +175,7 @@ namespace PRoCon.Core.HttpServer
 
         private void newClient_ClientShutdown(HttpWebServerRequest sender)
         {
-            if (HttpClients.Contains(sender) == true)
+            if (HttpClients.Contains(sender))
             {
                 HttpClients.Remove(sender);
             }

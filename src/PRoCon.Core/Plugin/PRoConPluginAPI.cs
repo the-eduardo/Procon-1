@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -106,7 +106,7 @@ namespace PRoCon.Core.Plugin
             {
                 foreach (CPlayerInfo player in players)
                 {
-                    if (this.FrostbitePlayerInfoList.ContainsKey(player.SoldierName) == true)
+                    if (this.FrostbitePlayerInfoList.ContainsKey(player.SoldierName))
                     {
                         this.FrostbitePlayerInfoList[player.SoldierName] = player;
                     }
@@ -129,7 +129,7 @@ namespace PRoCon.Core.Plugin
                         }
                     }
 
-                    if (blFoundPlayer == false)
+                    if (!blFoundPlayer)
                     {
                         this.FrostbitePlayerInfoList.Remove(fpi_player);
                         this.PunkbusterPlayerInfoList.Remove(fpi_player);
@@ -397,7 +397,7 @@ namespace PRoCon.Core.Plugin
 
         public virtual void OnPlayerJoin(string soldierName)
         {
-            if (this.FrostbitePlayerInfoList.ContainsKey(soldierName) == false)
+            if (!this.FrostbitePlayerInfoList.ContainsKey(soldierName))
             {
                 this.FrostbitePlayerInfoList.Add(soldierName, new CPlayerInfo(soldierName, "", 0, 24));
             }
@@ -405,12 +405,12 @@ namespace PRoCon.Core.Plugin
 
         public virtual void OnPlayerLeft(CPlayerInfo playerInfo)
         {
-            if (this.PunkbusterPlayerInfoList.ContainsKey(playerInfo.SoldierName) == true)
+            if (this.PunkbusterPlayerInfoList.ContainsKey(playerInfo.SoldierName))
             {
                 this.PunkbusterPlayerInfoList.Remove(playerInfo.SoldierName);
             }
 
-            if (this.FrostbitePlayerInfoList.ContainsKey(playerInfo.SoldierName) == true)
+            if (this.FrostbitePlayerInfoList.ContainsKey(playerInfo.SoldierName))
             {
                 this.FrostbitePlayerInfoList.Remove(playerInfo.SoldierName);
             }
@@ -418,12 +418,12 @@ namespace PRoCon.Core.Plugin
 
         public virtual void OnPlayerDisconnected(string soldierName, string reason)
         {
-            if (this.PunkbusterPlayerInfoList.ContainsKey(soldierName) == true)
+            if (this.PunkbusterPlayerInfoList.ContainsKey(soldierName))
             {
                 this.PunkbusterPlayerInfoList.Remove(soldierName);
             }
 
-            if (this.FrostbitePlayerInfoList.ContainsKey(soldierName) == true)
+            if (this.FrostbitePlayerInfoList.ContainsKey(soldierName))
             {
                 this.FrostbitePlayerInfoList.Remove(soldierName);
             }
@@ -508,7 +508,7 @@ namespace PRoCon.Core.Plugin
         {
             if (playerInfo != null)
             {
-                if (this.PunkbusterPlayerInfoList.ContainsKey(playerInfo.SoldierName) == false)
+                if (!this.PunkbusterPlayerInfoList.ContainsKey(playerInfo.SoldierName))
                 {
                     this.PunkbusterPlayerInfoList.Add(playerInfo.SoldierName, playerInfo);
                 }

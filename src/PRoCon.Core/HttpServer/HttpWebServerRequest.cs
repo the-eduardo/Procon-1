@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -96,7 +96,7 @@ namespace PRoCon.Core.HttpServer
                 {
                     CompilePacket(iBytesRead);
 
-                    if (Stream.DataAvailable == true)
+                    if (Stream.DataAvailable)
                     {
                         Stream.BeginRead(RecievedPacket, 0, RecievedPacket.Length, ReadWebRequests, null);
                     }

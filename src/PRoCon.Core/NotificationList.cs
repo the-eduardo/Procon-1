@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -85,7 +85,7 @@ namespace PRoCon.Core
 
             foreach (T t in this)
             {
-                if (pred(t) == true)
+                if (pred(t))
                 {
                     tReturn = t;
                     break;
@@ -101,7 +101,7 @@ namespace PRoCon.Core
 
             foreach (T t in this)
             {
-                if (pred(t) == true)
+                if (pred(t))
                 {
                     tReturn.Add(t);
                 }

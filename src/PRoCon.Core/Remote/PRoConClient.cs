@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -446,11 +446,11 @@ namespace PRoCon.Core.Remote
             {
                 ConnectionState currentState = _currentState;
 
-                if (IsConnected == true)
+                if (IsConnected)
                 {
                     currentState = ConnectionState.Connected;
                 }
-                else if (IsConnecting == true)
+                else if (IsConnecting)
                 {
                     currentState = ConnectionState.Connecting;
                 }
@@ -653,7 +653,7 @@ namespace PRoCon.Core.Remote
                 Weapons = new WeaponDictionary();
                 Specializations = new SpecializationDictionary();
 
-                if (Regex.Match(HostName, @"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$").Success == true)
+                if (Regex.Match(HostName, @"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$").Success)
                 {
                     Variables.SetVariable("SERVER_COUNTRY", Parent.GetCountryName(HostName));
                     Variables.SetVariable("SERVER_COUNTRY_CODE", Parent.GetCountryCode(HostName));
@@ -701,7 +701,7 @@ namespace PRoCon.Core.Remote
                 {
                     string[] pluginConfigPaths = Directory.GetFiles(configDirectoryPath, "*.cfg");
 
-                    if (Parent.OptionsSettings.UsePluginOldStyleLoad == true)
+                    if (Parent.OptionsSettings.UsePluginOldStyleLoad)
                     {
                         foreach (string pluginConfigPath in pluginConfigPaths)
                         {
@@ -711,7 +711,7 @@ namespace PRoCon.Core.Remote
 
                     BeginLoginSequence();
 
-                    if (Parent.OptionsSettings.UsePluginOldStyleLoad == false)
+                    if (!Parent.OptionsSettings.UsePluginOldStyleLoad)
                     {
                         foreach (string pluginConfigPath in pluginConfigPaths)
                         {
@@ -723,14 +723,14 @@ namespace PRoCon.Core.Remote
                 }
                 else
                 {
-                    if (Parent.OptionsSettings.UsePluginOldStyleLoad == true)
+                    if (Parent.OptionsSettings.UsePluginOldStyleLoad)
                     {
                         ExecuteConnectionConfig(FileHostNamePort + ".cfg", 0, null, false);
                     }
 
                     BeginLoginSequence();
 
-                    if (Parent.OptionsSettings.UsePluginOldStyleLoad == false)
+                    if (!Parent.OptionsSettings.UsePluginOldStyleLoad)
                     {
                         ExecuteConnectionConfig(FileHostNamePort + ".cfg", 0, null, true);
                     }
@@ -744,7 +744,7 @@ namespace PRoCon.Core.Remote
                         {
                             try
                             {
-                                if (File.Exists(oldConfigFilePath) == true)
+                                if (File.Exists(oldConfigFilePath))
                                 {
                                     File.Delete(oldConfigFilePath);
                                 }
@@ -778,7 +778,7 @@ namespace PRoCon.Core.Remote
 
         private void Connection_PacketRecieved(FrostbiteConnection sender, bool isHandled, Packet packetBeforeDispatch)
         {
-            if (packetBeforeDispatch.OriginatedFromServer == false)
+            if (!packetBeforeDispatch.OriginatedFromServer)
             {
                 Packet request = sender.GetRequestPacket(packetBeforeDispatch);
 
@@ -885,7 +885,7 @@ namespace PRoCon.Core.Remote
 
         private void Game_Login(FrostbiteClient sender)
         {
-            if (IsGameModModified == true)
+            if (IsGameModModified)
             {
                 if (CurrentServerInfo.GameMod == GameMods.None)
                 {
@@ -907,7 +907,7 @@ namespace PRoCon.Core.Remote
                 }
             }
 
-            if (IsPRoConConnection == true)
+            if (IsPRoConConnection)
             {
                 SendRequest(new List<string>() {
                     "procon.privileges"
@@ -1127,7 +1127,7 @@ namespace PRoCon.Core.Remote
             }
             else if (cpBeforePacketDispatch.Words.Count >= 3 && String.Compare(cpBeforePacketDispatch.Words[0], "procon.account.onUidRegistered", true) == 0)
             {
-                if (m_dicUsernamesToUids.ContainsKey(cpBeforePacketDispatch.Words[2]) == true)
+                if (m_dicUsernamesToUids.ContainsKey(cpBeforePacketDispatch.Words[2]))
                 {
                     m_dicUsernamesToUids[cpBeforePacketDispatch.Words[2]] = cpBeforePacketDispatch.Words[1];
                 }
@@ -1165,7 +1165,7 @@ namespace PRoCon.Core.Remote
                 //this.SendPacket(new Packet(true, true, cpBeforePacketDispatch.SequenceNumber, new List<string>() { "OK" }));
 
                 UInt32 ui32Privileges = 0;
-                if (UInt32.TryParse(cpBeforePacketDispatch.Words[2], out ui32Privileges) == true)
+                if (UInt32.TryParse(cpBeforePacketDispatch.Words[2], out ui32Privileges))
                 {
                     var spPrivs = new CPrivileges();
                     spPrivs.PrivilegesFlags = ui32Privileges;
@@ -1226,7 +1226,7 @@ namespace PRoCon.Core.Remote
             {
                 bool restartRequired = false;
 
-                if (bool.TryParse(cpBeforePacketDispatch.Words[2], out restartRequired) == true)
+                if (bool.TryParse(cpBeforePacketDispatch.Words[2], out restartRequired))
                 {
                     if (PackageInstalled != null)
                     {
@@ -1242,7 +1242,7 @@ namespace PRoCon.Core.Remote
             {
                 long logTime = 0L;
 
-                if (long.TryParse(cpBeforePacketDispatch.Words[1], out logTime) == true)
+                if (long.TryParse(cpBeforePacketDispatch.Words[1], out logTime))
                 {
                     if (ReadRemoteChatConsole != null)
                     {
@@ -1254,7 +1254,7 @@ namespace PRoCon.Core.Remote
             {
                 long logTime = 0L;
 
-                if (long.TryParse(cpBeforePacketDispatch.Words[1], out logTime) == true)
+                if (long.TryParse(cpBeforePacketDispatch.Words[1], out logTime))
                 {
                     if (ReadRemotePluginConsole != null)
                     {
@@ -1375,7 +1375,7 @@ namespace PRoCon.Core.Remote
 
                 int iDisplayDuration = 0;
 
-                if (int.TryParse(cpBeforePacketDispatch.Words[3], out iDisplayDuration) == true)
+                if (int.TryParse(cpBeforePacketDispatch.Words[3], out iDisplayDuration))
                 {
                     if (ProconAdminYelling != null)
                     {
@@ -1396,7 +1396,7 @@ namespace PRoCon.Core.Remote
                 int iPing = 0;
                 string strSoldierName = cpBeforePacketDispatch.Words[1];
 
-                if (int.TryParse(cpBeforePacketDispatch.Words[2], out iPing) == true)
+                if (int.TryParse(cpBeforePacketDispatch.Words[2], out iPing))
                 {
                     if (iPing == 65535)
                     {
@@ -1466,7 +1466,7 @@ namespace PRoCon.Core.Remote
 
                 int iPoints = 0;
 
-                if (int.TryParse(cpBeforePacketDispatch.Words[3], out iPoints) == true)
+                if (int.TryParse(cpBeforePacketDispatch.Words[3], out iPoints))
                 {
                     var points = new Point3D[iPoints];
 
@@ -1490,7 +1490,7 @@ namespace PRoCon.Core.Remote
 
                 int iPoints = 0;
 
-                if (int.TryParse(cpBeforePacketDispatch.Words[3], out iPoints) == true)
+                if (int.TryParse(cpBeforePacketDispatch.Words[3], out iPoints))
                 {
                     var points = new Point3D[iPoints];
 
@@ -1575,7 +1575,7 @@ namespace PRoCon.Core.Remote
                     else if (cpRequestPacket.Words.Count >= 1 && String.Compare(cpRequestPacket.Words[0], "procon.privileges", true) == 0 && cpBeforePacketDispatch.Words.Count >= 2)
                     {
                         UInt32 ui32Privileges = 0;
-                        if (UInt32.TryParse(cpBeforePacketDispatch.Words[1], out ui32Privileges) == true)
+                        if (UInt32.TryParse(cpBeforePacketDispatch.Words[1], out ui32Privileges))
                         {
                             var spPrivs = new CPrivileges();
                             spPrivs.PrivilegesFlags = ui32Privileges;
@@ -1615,7 +1615,7 @@ namespace PRoCon.Core.Remote
 
                         for (int i = 1; i < cpBeforePacketDispatch.Words.Count; i += 2)
                         {
-                            if (UInt32.TryParse(cpBeforePacketDispatch.Words[i + 1], out ui32Privileges) == true)
+                            if (UInt32.TryParse(cpBeforePacketDispatch.Words[i + 1], out ui32Privileges))
                             {
                                 var spPrivs = new CPrivileges();
                                 spPrivs.PrivilegesFlags = ui32Privileges;
@@ -1641,11 +1641,11 @@ namespace PRoCon.Core.Remote
                         for (int i = 1; i < cpBeforePacketDispatch.Words.Count; i += 2)
                         {
                             vSoldier.SoldierName = cpBeforePacketDispatch.Words[i];
-                            if (int.TryParse(cpBeforePacketDispatch.Words[i + 1], out iJoinTime) == true)
+                            if (int.TryParse(cpBeforePacketDispatch.Words[i + 1], out iJoinTime))
                             {
                                 vSoldier.JoinTime = iJoinTime;
                             }
-                            if (PlayerList.Contains(vSoldier.SoldierName) == true)
+                            if (PlayerList.Contains(vSoldier.SoldierName))
                             {
                                 oPlayer = PlayerList[vSoldier.SoldierName];
                                 oPlayer.JoinTime = iJoinTime;
@@ -1663,7 +1663,7 @@ namespace PRoCon.Core.Remote
                         int iZones = 0;
                         int iOffset = 1;
 
-                        if (int.TryParse(cpBeforePacketDispatch.Words[iOffset++], out iZones) == true)
+                        if (int.TryParse(cpBeforePacketDispatch.Words[iOffset++], out iZones))
                         {
                             for (int iZoneCount = 0; iZoneCount < iZones; iZoneCount++)
                             {
@@ -1722,7 +1722,7 @@ namespace PRoCon.Core.Remote
 
                                 if (containsUids == true && i + 1 < cpBeforePacketDispatch.Words.Count)
                                 {
-                                    if (m_dicUsernamesToUids.ContainsKey(cpBeforePacketDispatch.Words[i]) == true)
+                                    if (m_dicUsernamesToUids.ContainsKey(cpBeforePacketDispatch.Words[i]))
                                     {
                                         m_dicUsernamesToUids[cpBeforePacketDispatch.Words[i]] = cpBeforePacketDispatch.Words[i + 1];
                                     }
@@ -1792,7 +1792,7 @@ namespace PRoCon.Core.Remote
                                         }
                                     }
 
-                                    if (dicLoadedPlugins.ContainsKey(spdLoaded.ClassName) == false)
+                                    if (!dicLoadedPlugins.ContainsKey(spdLoaded.ClassName))
                                     {
                                         dicLoadedPlugins.Add(spdLoaded.ClassName, spdLoaded);
                                     }
@@ -1860,7 +1860,7 @@ namespace PRoCon.Core.Remote
                         {
                             m_dicForwardedPackets[cpBeforePacketDispatch.SequenceNumber].m_lstWords[0] = "procon.admin.onSay";
 
-                            if (IsPRoConConnection == false)
+                            if (!IsPRoConConnection)
                             {
                                 List<string> lstWords = m_dicForwardedPackets[cpBeforePacketDispatch.SequenceNumber].m_lstWords;
 
@@ -1888,13 +1888,13 @@ namespace PRoCon.Core.Remote
                             m_dicForwardedPackets[cpBeforePacketDispatch.SequenceNumber].m_lstWords[0] = "procon.admin.onYell";
 
                             // If we're at the top of the tree, simulate the event coming from a layer above.
-                            if (IsPRoConConnection == false)
+                            if (!IsPRoConConnection)
                             {
                                 List<string> lstWords = m_dicForwardedPackets[cpBeforePacketDispatch.SequenceNumber].m_lstWords;
 
                                 int iDisplayDuration = 0;
 
-                                if (int.TryParse(lstWords[3], out iDisplayDuration) == true)
+                                if (int.TryParse(lstWords[3], out iDisplayDuration))
                                 {
                                     if (ProconAdminYelling != null)
                                     {
@@ -1922,12 +1922,12 @@ namespace PRoCon.Core.Remote
                             m_dicForwardedPackets[cpBeforePacketDispatch.SequenceNumber].m_lstWords[0] = "procon.admin.onYell";
 
                             // If we're at the top of the tree, simulate the event coming from a layer above.
-                            if (IsPRoConConnection == false)
+                            if (!IsPRoConConnection)
                             {
                                 List<string> lstWords = m_dicForwardedPackets[cpBeforePacketDispatch.SequenceNumber].m_lstWords;
 
                                 int iDisplayDuration = 0;
-                                if (int.TryParse(lstWords[3], out iDisplayDuration) == true)
+                                if (int.TryParse(lstWords[3], out iDisplayDuration))
                                 {
                                     iDisplayDuration = 0;
                                     if (ProconAdminYelling != null)
@@ -1961,7 +1961,7 @@ namespace PRoCon.Core.Remote
                         // Now we pass on the packet to all the clients as an event so they can remain in sync.
 
                         // Don't pass on anything regarding login
-                        if ((lstProconUpdatedWords.Count >= 4 && (String.Compare(lstProconUpdatedWords[2], "login.plainText", true) == 0 || String.Compare(lstProconUpdatedWords[2], "login.hashed", true) == 0)) == false)
+                        if (!(lstProconUpdatedWords.Count >= 4 && (String.Compare(lstProconUpdatedWords[2], "login.plainText", true) == 0 || String.Compare(lstProconUpdatedWords[2], "login.hashed", true) == 0)))
                         {
                             if (PassLayerEvent != null)
                             {
@@ -1969,12 +1969,12 @@ namespace PRoCon.Core.Remote
                             }
                         }
                     }
-                    if (blCancelUpdateEvent == false)
+                    if (!blCancelUpdateEvent)
                     {
                         string strProconEventsUid = String.Empty;
 
                         // If a layer client sent this packet..
-                        if (m_dicForwardedPackets.ContainsKey(cpBeforePacketDispatch.SequenceNumber) == true)
+                        if (m_dicForwardedPackets.ContainsKey(cpBeforePacketDispatch.SequenceNumber))
                         {
                             if (m_dicForwardedPackets[cpBeforePacketDispatch.SequenceNumber].m_sender != null)
                             {
@@ -2001,7 +2001,7 @@ namespace PRoCon.Core.Remote
                             // Now we pass on the packet to all the clients as an event so they can remain in sync.
 
                             // Don't pass on anything regarding login
-                            if ((lstProconUpdatedWords.Count >= 4 && (String.Compare(lstProconUpdatedWords[2], "login.plainText", true) == 0 || String.Compare(lstProconUpdatedWords[2], "login.hashed", true) == 0)) == false)
+                            if (!(lstProconUpdatedWords.Count >= 4 && (String.Compare(lstProconUpdatedWords[2], "login.plainText", true) == 0 || String.Compare(lstProconUpdatedWords[2], "login.hashed", true) == 0)))
                             {
                                 if (PassLayerEvent != null)
                                 {
@@ -2274,7 +2274,7 @@ namespace PRoCon.Core.Remote
                     }
                 }
 
-                if (isGamemodeAdded == false)
+                if (!isGamemodeAdded)
                 {
                     returnList.Add(map);
                 }
@@ -2480,7 +2480,7 @@ namespace PRoCon.Core.Remote
         {
             if (PluginsManager != null && PluginsManager.Plugins.LoadedClassNames.Contains(strClassName) == true)
             {
-                if (blEnabled == true)
+                if (blEnabled)
                 {
                     PluginsManager.EnablePlugin(strClassName);
                 }
@@ -2510,7 +2510,7 @@ namespace PRoCon.Core.Remote
 
         public void ProconProtectedLayerSetPrivileges(Account account, CPrivileges sprvPrivileges)
         {
-            if (Layer.AccountPrivileges.Contains(account.Name) == true)
+            if (Layer.AccountPrivileges.Contains(account.Name))
             {
                 Layer.AccountPrivileges[account.Name].SetPrivileges(sprvPrivileges);
             }
@@ -2668,7 +2668,7 @@ namespace PRoCon.Core.Remote
 
                 else if (Game is MOHWClient && words.Count >= 4 && String.Compare(words[0], "admin.say", true) == 0 && String.Compare(words[2], "player", true) == 0)
                 {
-                    if (PlayerList.Contains(words[3]) == true)
+                    if (PlayerList.Contains(words[3]))
                     {
                         CPlayerInfo player = PlayerList[words[3]];
 
@@ -2694,7 +2694,7 @@ namespace PRoCon.Core.Remote
                 // MoHW yell hack
                 else if (Game is MOHWClient && words.Count >= 4 && String.Compare(words[0], "admin.yell", true) == 0 && String.Compare(words[2], "player", true) == 0)
                 {
-                    if (PlayerList.Contains(words[3]) == true)
+                    if (PlayerList.Contains(words[3]))
                     {
                         CPlayerInfo player = PlayerList[words[3]];
 
@@ -2795,7 +2795,7 @@ namespace PRoCon.Core.Remote
             {
                 UInt32 ui32MainConnSequence = Game.Connection.AcquireSequenceNumber;
 
-                if (m_dicForwardedPackets.ContainsKey(ui32MainConnSequence) == false)
+                if (!m_dicForwardedPackets.ContainsKey(ui32MainConnSequence))
                 {
                     var spopForwardedPacket = new SOriginalForwardedPacket();
                     spopForwardedPacket.m_ui32OriginalSequence = cpPassOn.SequenceNumber;
@@ -2807,7 +2807,7 @@ namespace PRoCon.Core.Remote
 
                     if (cpPassOn.Words.Count >= 5 && String.Compare(cpPassOn.Words[0], "procon.admin.yell") == 0)
                     {
-                        if (IsPRoConConnection == false)
+                        if (!IsPRoConConnection)
                         {
                             if (Game is MOHWClient)
                             {
@@ -2821,7 +2821,7 @@ namespace PRoCon.Core.Remote
                     }
                     else if (cpPassOn.Words.Count >= 4 && String.Compare(cpPassOn.Words[0], "procon.admin.say") == 0)
                     {
-                        if (IsPRoConConnection == false)
+                        if (!IsPRoConConnection)
                         {
                             // Just yell it, we'll capture it and process the return in OnBeforePacketRecv
                             cpPassOn.Words.RemoveAt(1);
@@ -2850,7 +2850,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendProconBattlemapListZonesPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 SendRequest("procon.battlemap.listZones");
             }
@@ -2858,7 +2858,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendGetProconVarsPacket(string variable)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 SendRequest("procon.vars", variable);
             }
@@ -2866,7 +2866,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendProconPluginSetVariablePacket(string strClassName, string strVariable, string strValue)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 SendRequest("procon.plugin.setVariable", strClassName, strVariable, strValue);
             }
@@ -2874,7 +2874,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendProconPluginEnablePacket(string strClassName, bool blEnabled)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 SendRequest("procon.plugin.enable", strClassName, Packet.Bltos(blEnabled));
             }
@@ -2884,7 +2884,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendProconBattlemapModifyZonePointsPacket(string uid, Point3D[] zonePoints)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 var list = new List<string>() {
                     "procon.battlemap.modifyZonePoints",
@@ -2899,7 +2899,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendProconBattlemapDeleteZonePacket(string uid)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 SendRequest("procon.battlemap.deleteZone", uid);
             }
@@ -2907,7 +2907,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendProconBattlemapCreateZonePacket(string mapFileName, Point3D[] zonePoints)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 var list = new List<string>() {
                     "procon.battlemap.createZone",
@@ -2922,7 +2922,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendProconBattlemapModifyZoneTagsPacket(string uid, string tagList)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 SendRequest("procon.battlemap.modifyZoneTags", uid, tagList);
             }
@@ -2934,7 +2934,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendProconLayerSetPrivilegesPacket(string username, UInt32 privileges)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 SendRequest("procon.layer.setPrivileges", username, privileges.ToString());
             }
@@ -2946,7 +2946,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendProconAccountListAccountsPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 SendRequest("procon.account.listAccounts");
             }
@@ -2954,7 +2954,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendProconAccountListLoggedInPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 SendRequest("procon.account.listLoggedIn", "uids");
             }
@@ -2962,7 +2962,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendProconAccountSetPasswordPacket(string username, string password)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 SendRequest("procon.account.setPassword", username, password);
             }
@@ -2970,7 +2970,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendProconAccountCreatePacket(string username, string password)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 SendRequest("procon.account.create", username, password);
             }
@@ -2978,7 +2978,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendProconAccountDeletePacket(string username)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 SendRequest("procon.account.delete", username);
             }
@@ -2990,7 +2990,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendProconPluginListLoadedPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 SendRequest("procon.plugin.listLoaded");
             }
@@ -2998,7 +2998,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendProconPluginListEnabledPacket()
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 SendRequest("procon.plugin.listEnabled");
             }
@@ -3010,7 +3010,7 @@ namespace PRoCon.Core.Remote
 
         public virtual void SendProconPackagesInstallPacket(string uid, string version, string md5)
         {
-            if (IsLoggedIn == true)
+            if (IsLoggedIn)
             {
                 SendRequest("procon.packages.install", uid, version, md5);
             }
@@ -3030,7 +3030,7 @@ namespace PRoCon.Core.Remote
             {
                 CPlayerInfo cpKiller = null, cpVictim = null;
 
-                if (PlayerList.Contains(strKiller) == true)
+                if (PlayerList.Contains(strKiller))
                 {
                     cpKiller = PlayerList[strKiller];
                 }
@@ -3039,7 +3039,7 @@ namespace PRoCon.Core.Remote
                     cpKiller = new CPlayerInfo(strKiller, String.Empty, 0, 0);
                 }
 
-                if (PlayerList.Contains(strVictim) == true)
+                if (PlayerList.Contains(strVictim))
                 {
                     cpVictim = PlayerList[strVictim];
                 }
@@ -3056,13 +3056,13 @@ namespace PRoCon.Core.Remote
         {
             if (PlayerSpawned != null)
             {
-                if (Enum.IsDefined(typeof(Kits), strKit) == true)
+                if (Enum.IsDefined(typeof(Kits), strKit))
                 {
                     var inv = new Inventory((Kits)Enum.Parse(typeof(Kits), strKit));
 
                     foreach (string strWeapon in lstWeapons)
                     {
-                        if (Weapons.Contains(strWeapon) == true)
+                        if (Weapons.Contains(strWeapon))
                         {
                             inv.Weapons.Add(Weapons[strWeapon]);
                         }
@@ -3070,7 +3070,7 @@ namespace PRoCon.Core.Remote
 
                     foreach (string strSpecialization in lstSpecializations)
                     {
-                        if (Specializations.Contains(strSpecialization) == true)
+                        if (Specializations.Contains(strSpecialization))
                         {
                             inv.Specializations.Add(Specializations[strSpecialization]);
                         }
@@ -3087,7 +3087,7 @@ namespace PRoCon.Core.Remote
 
         private void PRoConClient_ReservedSlotsPlayerRemoved(FrostbiteClient sender, string strSoldierName)
         {
-            if (ReservedSlotList.Contains(strSoldierName) == true)
+            if (ReservedSlotList.Contains(strSoldierName))
             {
                 ReservedSlotList.Remove(strSoldierName);
             }
@@ -3095,7 +3095,7 @@ namespace PRoCon.Core.Remote
 
         private void PRoConClient_ReservedSlotsPlayerAdded(FrostbiteClient sender, string strSoldierName)
         {
-            if (ReservedSlotList.Contains(strSoldierName) == false)
+            if (!ReservedSlotList.Contains(strSoldierName))
             {
                 ReservedSlotList.Add(strSoldierName);
             }
@@ -3112,7 +3112,7 @@ namespace PRoCon.Core.Remote
             {
                 foreach (string strSoldierName in soldierNames)
                 {
-                    if (ReservedSlotList.Contains(strSoldierName) == false)
+                    if (!ReservedSlotList.Contains(strSoldierName))
                     {
                         ReservedSlotList.Add(strSoldierName);
                     }
@@ -3120,7 +3120,7 @@ namespace PRoCon.Core.Remote
 
                 foreach (string strSoldierName in ReservedSlotList)
                 {
-                    if (soldierNames.Contains(strSoldierName) == false)
+                    if (!soldierNames.Contains(strSoldierName))
                     {
                         ReservedSlotList.Remove(strSoldierName);
                     }
@@ -3130,7 +3130,7 @@ namespace PRoCon.Core.Remote
 
         private void PRoConClient_SpectatorListPlayerRemoved(FrostbiteClient sender, string strSoldierName)
         {
-            if (SpectatorList.Contains(strSoldierName) == true)
+            if (SpectatorList.Contains(strSoldierName))
             {
                 SpectatorList.Remove(strSoldierName);
             }
@@ -3138,7 +3138,7 @@ namespace PRoCon.Core.Remote
 
         private void PRoConClient_SpectatorListPlayerAdded(FrostbiteClient sender, string strSoldierName)
         {
-            if (SpectatorList.Contains(strSoldierName) == false)
+            if (!SpectatorList.Contains(strSoldierName))
             {
                 SpectatorList.Add(strSoldierName);
             }
@@ -3155,7 +3155,7 @@ namespace PRoCon.Core.Remote
             {
                 foreach (string strSoldierName in soldierNames)
                 {
-                    if (SpectatorList.Contains(strSoldierName) == false)
+                    if (!SpectatorList.Contains(strSoldierName))
                     {
                         SpectatorList.Add(strSoldierName);
                     }
@@ -3163,7 +3163,7 @@ namespace PRoCon.Core.Remote
 
                 foreach (string strSoldierName in ReservedSlotList)
                 {
-                    if (soldierNames.Contains(strSoldierName) == false)
+                    if (!soldierNames.Contains(strSoldierName))
                     {
                         SpectatorList.Remove(strSoldierName);
                     }
@@ -3206,7 +3206,7 @@ namespace PRoCon.Core.Remote
 
         protected void OnPlayerLeft(FrostbiteClient sender, string strSoldierName, CPlayerInfo cpiPlayer)
         {
-            if (PlayerList.Contains(strSoldierName) == true)
+            if (PlayerList.Contains(strSoldierName))
             {
                 PlayerList.Remove(strSoldierName);
             }
@@ -3214,7 +3214,7 @@ namespace PRoCon.Core.Remote
 
         protected void OnPlayerDisconnected(FrostbiteClient sender, string strSoldierName, string reason)
         {
-            if (PlayerList.Contains(strSoldierName) == true)
+            if (PlayerList.Contains(strSoldierName))
             {
                 PlayerList.Remove(strSoldierName);
             }
@@ -3361,7 +3361,7 @@ namespace PRoCon.Core.Remote
                 // Add or update players.
                 foreach (CPlayerInfo cpiPlayer in lstPlayers)
                 {
-                    if (PlayerList.Contains(cpiPlayer.SoldierName) == true)
+                    if (PlayerList.Contains(cpiPlayer.SoldierName))
                     {
                         CPlayerInfo storedPlayer = PlayerList[PlayerList.IndexOf(PlayerList[cpiPlayer.SoldierName])];
                         cpiPlayer.JoinTime = CurrentServerInfo.ServerUptime;
@@ -3385,7 +3385,7 @@ namespace PRoCon.Core.Remote
                 foreach (CPlayerInfo storedPlayer in new List<CPlayerInfo>(PlayerList))
                 {
                     // If the stored player is not in the list we recieved
-                    if (recievedPlayerList.Contains(storedPlayer.SoldierName) == false)
+                    if (!recievedPlayerList.Contains(storedPlayer.SoldierName))
                     {
                         // They have left the server, remove them from the master stored list.
                         PlayerList.Remove(storedPlayer.SoldierName);
@@ -3571,12 +3571,12 @@ namespace PRoCon.Core.Remote
                     {
                         configDirectoryPath = Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs"), FileHostNamePort);
 
-                        if (Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs")) == false)
+                        if (!Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs")))
                         {
                             Directory.CreateDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs"));
                         }
 
-                        if (Directory.Exists(configDirectoryPath) == false)
+                        if (!Directory.Exists(configDirectoryPath))
                         {
                             Directory.CreateDirectory(configDirectoryPath);
                         }
@@ -3585,7 +3585,7 @@ namespace PRoCon.Core.Remote
 
                         stmConnectionConfigFile = new FileStream(strSaveFile + ".temp", FileMode.Create);
 
-                        if (stmConnectionConfigFile.CanWrite == true)
+                        if (stmConnectionConfigFile.CanWrite)
                         {
                             var stwConfig = new StreamWriter(stmConnectionConfigFile, Encoding.UTF8);
 
@@ -3643,7 +3643,7 @@ namespace PRoCon.Core.Remote
                             {
                                 pluginConfigFileStream = new FileStream(string.Format("{0}.temp", pluginConfigPath), FileMode.Create);
 
-                                if (pluginConfigFileStream.CanWrite == true)
+                                if (pluginConfigFileStream.CanWrite)
                                 {
                                     StreamWriter pluginConfigWriter = new StreamWriter(pluginConfigFileStream, Encoding.UTF8);
 
@@ -3653,7 +3653,7 @@ namespace PRoCon.Core.Remote
 
                                     pluginConfigWriter.WriteLine("procon.protected.plugins.enable \"{0}\" {1}", plugin.ClassName, plugin.IsEnabled);
 
-                                    if (plugin.IsLoaded == true)
+                                    if (plugin.IsLoaded)
                                     {
                                         PluginDetails pluginDetails = PluginsManager.GetPluginDetails(plugin.ClassName);
 
@@ -3702,7 +3702,7 @@ namespace PRoCon.Core.Remote
             //FileStream stmConfigFile = null;
             try
             {
-                if (File.Exists(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs"), strConfigFile)) == true)
+                if (File.Exists(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs"), strConfigFile)))
                 {
                     //stmConfigFile = new FileStream(String.Format(@"{0}Configs\{1}", AppDomain.CurrentDomain.BaseDirectory, strConfigFile), FileMode.Open);
 
@@ -3731,7 +3731,7 @@ namespace PRoCon.Core.Remote
                                     {
                                         UInt32 ui32PrivilegesFlags = 0;
 
-                                        if (UInt32.TryParse(lstWordifiedCommand[1], out ui32PrivilegesFlags) == true)
+                                        if (UInt32.TryParse(lstWordifiedCommand[1], out ui32PrivilegesFlags))
                                         {
                                             var cpConfigPrivs = new CPrivileges(ui32PrivilegesFlags);
                                             bool blHasPrivileges = false;
@@ -3749,12 +3749,12 @@ namespace PRoCon.Core.Remote
                                                     }
                                                 }
 
-                                                if (blHasPrivileges == false)
+                                                if (!blHasPrivileges)
                                                 {
                                                     // If they have asked for a command on failure..
                                                     if (lstWordifiedCommand.Count > 3)
                                                     {
-                                                        if (blIncPlugin == true)
+                                                        if (blIncPlugin)
                                                         {
                                                             Parent.ExecutePRoConCommandCon(this, lstWordifiedCommand.GetRange(3, lstWordifiedCommand.Count - 3), iRecursion++);
                                                         }
@@ -3782,7 +3782,7 @@ namespace PRoCon.Core.Remote
                                     }
                                     else
                                     {
-                                        if (blIncPlugin == true)
+                                        if (blIncPlugin)
                                         {
                                             Parent.ExecutePRoConCommandCon(this, lstWordifiedCommand, iRecursion++);
                                         }
@@ -3794,7 +3794,7 @@ namespace PRoCon.Core.Remote
                                 }
                                 else
                                 {
-                                    if (blIncPlugin == true)
+                                    if (blIncPlugin)
                                     {
                                         Parent.ExecutePRoConCommandCon(this, Packet.Wordify(strLine), iRecursion++);
                                     }
@@ -3819,7 +3819,7 @@ namespace PRoCon.Core.Remote
             //FileStream stmConfigFile = null;
             try
             {
-                if (File.Exists(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs"), strConfigFile)) == true)
+                if (File.Exists(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs"), strConfigFile)))
                 {
                     string[] a_strConfigData = File.ReadAllLines(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs"), strConfigFile));
 
@@ -3857,7 +3857,7 @@ namespace PRoCon.Core.Remote
             {
                 foreach (String strClassName in PluginsManager.Plugins.LoadedClassNames)
                 {
-                    if (dicClassSavedVariables.ContainsKey(strClassName) == false)
+                    if (!dicClassSavedVariables.ContainsKey(strClassName))
                     {
                         dicClassSavedVariables.Add(strClassName, PluginsManager.GetPluginVariables(strClassName));
                         //dicClassSavedVariables.Add(strClassName, ProConClient.GetSvVariables(this.m_cpPlugins.InvokeOnLoaded(strClassName, "GetPluginVariables", null)));
@@ -3956,7 +3956,7 @@ namespace PRoCon.Core.Remote
         {
             CPrivileges spReturn = default(CPrivileges);
 
-            if (Layer.AccountPrivileges.Contains(strAccountName) == true)
+            if (Layer.AccountPrivileges.Contains(strAccountName))
             {
                 spReturn = Layer.AccountPrivileges[strAccountName].Privileges;
             }
