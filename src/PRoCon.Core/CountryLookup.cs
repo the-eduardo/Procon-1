@@ -132,7 +132,7 @@ namespace MaxMind
         // Create function to make a async web request. Expecting a json response.
         private async Task<string> makeWebRequest(string url)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = new();
             HttpResponseMessage response = await client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
@@ -149,12 +149,8 @@ namespace MaxMind
             // Decode the json response into a Hashtable
             Hashtable ht = JsonConvert.DeserializeObject<Hashtable>(response);
 
-            PIP apipc = new PIP()
-            {
-                CountryCode = ((Hashtable)ht[addr.ToString()])["isocode"].ToString(),
-                CountryName = ((Hashtable)ht[addr.ToString()])["country"].ToString(),
-                IP_Address = addr.ToString()
-            };
+            PIP apipc = new()
+{CountryCode = ((Hashtable)ht[addr.ToString()])["isocode"].ToString(), CountryName = ((Hashtable)ht[addr.ToString()])["country"].ToString(), IP_Address = addr.ToString()};
 
             IPs.Add(addr.ToString(), apipc);
 

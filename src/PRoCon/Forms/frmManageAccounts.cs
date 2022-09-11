@@ -75,13 +75,13 @@ namespace PRoCon.Forms
 
             this.m_frmMainWindow = frmMainWindow;
 
-            Rectangle recWindow = new Rectangle();
+            Rectangle recWindow = new();
             recWindow.Location = new Point(0, 0);
             recWindow.Height = 540;
             recWindow.Width = 600;
             this.Bounds = recWindow;
 
-            Rectangle recPanels = new Rectangle();
+            Rectangle recPanels = new();
             recPanels.Location = new Point(0, 0);
             recPanels.Height = 500;
             recPanels.Width = 600;
@@ -190,7 +190,7 @@ namespace PRoCon.Forms
         {
             if (!this.lstAccounts.Items.ContainsKey(item.Name))
             {
-                ListViewItem lviNewAccount = new ListViewItem(item.Name);
+                ListViewItem lviNewAccount = new(item.Name);
                 lviNewAccount.Tag = item.Password;
                 lviNewAccount.Name = item.Name;
                 lviNewAccount.ImageIndex = 0;
@@ -490,7 +490,7 @@ namespace PRoCon.Forms
         public CPrivileges CollectLowestPrivileges(string strAccountName)
         {
 
-            CPrivileges spLowestPrivileges = new CPrivileges();
+            CPrivileges spLowestPrivileges = new();
 
             if (this.m_paProcon.AccountsList.Contains(strAccountName))
             {

@@ -14,7 +14,7 @@ namespace PRoCon.Core.Logging
         private FileStream m_stmFile;
         private StreamWriter m_stwFileWriter;
 
-        private static Regex RemoveCaretCodes = new Regex(@"\^[0-9]|\^b|\^i|\^n", RegexOptions.Compiled);
+        private static Regex RemoveCaretCodes = new(@"\^[0-9]|\^b|\^i|\^n", RegexOptions.Compiled);
 
         public Loggable()
         {

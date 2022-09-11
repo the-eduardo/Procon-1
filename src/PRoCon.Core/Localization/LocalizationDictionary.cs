@@ -40,7 +40,7 @@ namespace PRoCon.Core.Localization
         public CLocalization LoadLocalizationFile(string fullFilePath, string localizationFileName)
         {
 
-            CLocalization clocLoadedLanguage = new CLocalization(fullFilePath, localizationFileName);
+            CLocalization clocLoadedLanguage = new(fullFilePath, localizationFileName);
 
             if (!this.Contains(clocLoadedLanguage.FileName))
             {

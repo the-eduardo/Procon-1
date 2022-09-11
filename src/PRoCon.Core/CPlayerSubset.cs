@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -137,7 +137,7 @@ namespace PRoCon.Core
         public Hashtable ToHashtable()
         {
 
-            Hashtable subset = new Hashtable();
+            Hashtable subset = new();
 
             subset.Add("type", this.m_enPlayerSubset.ToString());
             subset.Add("target", this.SoldierName);

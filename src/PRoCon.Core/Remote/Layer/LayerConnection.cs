@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Net;
 using System.Net.Sockets;
@@ -13,7 +13,7 @@ namespace PRoCon.Core.Remote.Layer
         /// <summary>
         ///     Lock used when aquiring a sequence #
         /// </summary>
-        protected readonly Object AcquireSequenceNumberLock = new Object();
+        protected readonly Object AcquireSequenceNumberLock = new();
 
         /// <summary>
         /// The underlying tcp client
@@ -37,7 +37,7 @@ namespace PRoCon.Core.Remote.Layer
         /// <summary>
         /// Lock used when shutting down the connection
         /// </summary>
-        protected Object ShutdownConnectionLock = new Object();
+        protected Object ShutdownConnectionLock = new();
 
         /// <summary>
         /// The stream from Client

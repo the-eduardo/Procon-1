@@ -44,7 +44,7 @@ namespace PRoCon.Controls
 
         private PRoConApplication m_praApplication;
 
-        private ListViewColumnSorter m_lvwColumnSorter = new ListViewColumnSorter();
+        private ListViewColumnSorter m_lvwColumnSorter = new();
 
         private TabPage m_tabParentLayerControl;
         private uscParentLayerControl m_uscParentLayerControl;
@@ -956,7 +956,7 @@ namespace PRoCon.Controls
 
         private PluginDetails uscPlugins_GetPluginDetails(string strClassName)
         {
-            PluginDetails spdReturn = new PluginDetails();
+            PluginDetails spdReturn = new();
             spdReturn.ClassName = strClassName;
             spdReturn.Name = strClassName;
 

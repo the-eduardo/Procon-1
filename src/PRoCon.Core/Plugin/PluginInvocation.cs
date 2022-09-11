@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 
 namespace PRoCon.Core.Plugin
@@ -19,7 +19,7 @@ namespace PRoCon.Core.Plugin
         /// 
         /// Default to 10 seconds.
         /// </summary>
-        public static TimeSpan MaximumRuntime = new TimeSpan(0, 0, 10);
+        public static TimeSpan MaximumRuntime = new(0, 0, 10);
 
         /// <summary>
         /// When this class was instantiated
@@ -72,7 +72,7 @@ namespace PRoCon.Core.Plugin
         /// <returns>Returns the formatted fault output for logging</returns>
         public string FormatInvocationFault(String format = null, params object[] parameters)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
 
             sb.AppendFormat("Fault in plugin call to {0}.{1}", this.Plugin.ClassName, this.MethodName);
             sb.AppendLine();

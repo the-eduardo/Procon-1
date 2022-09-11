@@ -17,7 +17,7 @@ namespace PRoCon.Core.Remote.Cache
         /// <summary>
         /// Lock used whenever we interact with the cache.
         /// </summary>
-        public readonly Object CacheLock = new Object();
+        public readonly Object CacheLock = new();
 
         /// <summary>
         /// Ticks every second, checking if any cached items have expired and removing them.

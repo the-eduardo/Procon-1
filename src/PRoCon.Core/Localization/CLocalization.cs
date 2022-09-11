@@ -152,14 +152,14 @@ namespace PRoCon.Core
 
                 string strFullFileContents;
 
-                using (StreamReader streamReader = new StreamReader(this.FilePath, Encoding.Unicode))
+                using (StreamReader streamReader = new(this.FilePath, Encoding.Unicode))
                 {
                     strFullFileContents = streamReader.ReadToEnd();
                 }
 
                 strFullFileContents = Regex.Replace(strFullFileContents, String.Format("^{0}=(.*?)[\\r]?$", strVariable), String.Format("{0}={1}", strVariable, strValue), RegexOptions.Multiline);
 
-                using (StreamWriter streamWriter = new StreamWriter(this.FilePath, false, Encoding.Unicode))
+                using (StreamWriter streamWriter = new(this.FilePath, false, Encoding.Unicode))
                 {
                     streamWriter.Write(strFullFileContents);
                 }

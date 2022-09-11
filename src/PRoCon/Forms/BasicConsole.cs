@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using System.Windows.Forms;
 
@@ -58,7 +58,7 @@ namespace PRoCon.Forms
         {
             this.InvokeIfRequired(() =>
             {
-                StringBuilder builder = new StringBuilder();
+                StringBuilder builder = new();
 
                 foreach (PRoConClient client in this._application.Connections)
                 {

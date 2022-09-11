@@ -110,7 +110,7 @@ namespace PRoCon.Forms
             }
             else
             {
-                ListViewItem newProcon = new ListViewItem();
+                ListViewItem newProcon = new();
                 newProcon.Name = proconPath;
                 newProcon.Text = status.ToString();
                 newProcon.Tag = status;
@@ -205,7 +205,7 @@ namespace PRoCon.Forms
 
                 try
                 {
-                    DirectoryInfo dirInfo = new DirectoryInfo(proconPath);
+                    DirectoryInfo dirInfo = new(proconPath);
 
                     directory = dirInfo.Parent.Name;
                 }
@@ -231,7 +231,7 @@ namespace PRoCon.Forms
                 // Search sub directories, ignoring any updates directories 
                 foreach (string directory in lstDirectories)
                 {
-                    DirectoryInfo dirInfo = new DirectoryInfo(directory);
+                    DirectoryInfo dirInfo = new(directory);
                     if (!this.m_lstIgnoreDirectories.Contains(dirInfo.Name.ToLower()))
                     {
                         this.DiscoverProcons(directory);
@@ -489,7 +489,7 @@ namespace PRoCon.Forms
             if (this.lsvInstalls.SelectedItems.Count > 0)
             {
 
-                DirectoryInfo info = new DirectoryInfo(Path.GetDirectoryName(this.lsvInstalls.SelectedItems[0].Name));
+                DirectoryInfo info = new(Path.GetDirectoryName(this.lsvInstalls.SelectedItems[0].Name));
 
                 Process.Start(info.ToString());
             }
@@ -499,7 +499,7 @@ namespace PRoCon.Forms
         {
             if (this.lsvInstalls.SelectedItems.Count > 0)
             {
-                DirectoryInfo info = new DirectoryInfo(Path.GetDirectoryName(this.lsvInstalls.SelectedItems[0].Name));
+                DirectoryInfo info = new(Path.GetDirectoryName(this.lsvInstalls.SelectedItems[0].Name));
 
                 Process.Start(info.ToString());
             }

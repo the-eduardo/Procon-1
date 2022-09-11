@@ -455,18 +455,11 @@ namespace PRoCon.Controls
 
         private ListViewItem CreatePlayer(CPlayerInfo player)
         {
-            ListViewItem newListPlayer = new ListViewItem("")
-            {
-                Name = player.SoldierName,
-                Tag = null,
-                UseItemStyleForSubItems = true
-            };
+            ListViewItem newListPlayer = new("")
+{Name = player.SoldierName, Tag = null, UseItemStyleForSubItems = true};
 
-            AdditionalPlayerInfo additional = new AdditionalPlayerInfo
-            {
-                Player = player,
-                ResolvedHostName = String.Empty
-            };
+            AdditionalPlayerInfo additional = new()
+{Player = player, ResolvedHostName = String.Empty};
             newListPlayer.Tag = additional;
 
             ListViewItem.ListViewSubItem tags = new ListViewItem.ListViewSubItem
@@ -1546,7 +1539,7 @@ namespace PRoCon.Controls
                             {
                                 try
                                 {
-                                    SResolvePlayerIP srpResolve = new SResolvePlayerIP();
+                                    SResolvePlayerIP srpResolve = new();
                                     srpResolve.lviPlayer = ((PRoCon.Controls.ControlsEx.ListViewNF)sender).SelectedItems[0];
                                     srpResolve.plpListPanel = this;
 
@@ -1723,7 +1716,7 @@ namespace PRoCon.Controls
             //this.lsvTeamOnePlayers.
         }
 
-        private AsyncCallback m_asyncResolvePlayerIP = new AsyncCallback(uscPlayerListPanel.ResolvePlayerIP);
+        private AsyncCallback m_asyncResolvePlayerIP = new(uscPlayerListPanel.ResolvePlayerIP);
 
         private struct SResolvePlayerIP
         {
@@ -1905,11 +1898,11 @@ namespace PRoCon.Controls
 
         private ListViewItem CreatePlaceHolder(PRoCon.Controls.ControlsEx.ListViewNF lsvList, int iTeamID)
         {
-            ListViewItem lviPlaceHolder = new ListViewItem(".");
+            ListViewItem lviPlaceHolder = new(".");
             lviPlaceHolder.ForeColor = SystemColors.WindowText;
             lviPlaceHolder.UseItemStyleForSubItems = true;
 
-            AdditionalPlayerInfo sapiInfo = new AdditionalPlayerInfo();
+            AdditionalPlayerInfo sapiInfo = new();
             sapiInfo.ResolvedHostName = String.Empty;
             sapiInfo.Punkbuster = null;
             sapiInfo.Player = new CPlayerInfo("", String.Empty, iTeamID, 0);
@@ -2281,7 +2274,7 @@ namespace PRoCon.Controls
                         {
                             if (String.Compare(team.MapFilename, this.Client.CurrentServerInfo.Map, true) == 0 && team.TeamID != uscPlayerListPanel.NeutralTeam)
                             {
-                                ToolStripMenuItem teamChange = new ToolStripMenuItem(this.Language.GetDefaultLocalized(String.Format("Team {0}", team.TeamID), "uscPlayerListPanel.ctxPlayerOptions.moveToSquadToolStripMenuItem.Team", this.Language.GetLocalized(team.LocalizationKey)));
+                                ToolStripMenuItem teamChange = new(this.Language.GetDefaultLocalized(String.Format("Team {0}", team.TeamID), "uscPlayerListPanel.ctxPlayerOptions.moveToSquadToolStripMenuItem.Team", this.Language.GetLocalized(team.LocalizationKey)));
                                 teamChange.Tag = new object[] { player, team };
                                 teamChange.Click += new EventHandler(teamChange_Click);
                                 if (team.TeamID == player.TeamID)
@@ -2297,7 +2290,7 @@ namespace PRoCon.Controls
                             if (String.Compare(team.MapFilename, this.Client.CurrentServerInfo.Map, true) == 0 && String.Compare(team.Playlist, this.Client.CurrentServerInfo.GameMode, true) == 0 && team.TeamID != uscPlayerListPanel.NeutralTeam)
                             {
 
-                                ToolStripMenuItem teamChange = new ToolStripMenuItem(this.Language.GetDefaultLocalized(String.Format("Team {0}", team.TeamID), "uscPlayerListPanel.ctxPlayerOptions.moveToSquadToolStripMenuItem.Team", this.Language.GetLocalized(team.LocalizationKey)));
+                                ToolStripMenuItem teamChange = new(this.Language.GetDefaultLocalized(String.Format("Team {0}", team.TeamID), "uscPlayerListPanel.ctxPlayerOptions.moveToSquadToolStripMenuItem.Team", this.Language.GetLocalized(team.LocalizationKey)));
                                 teamChange.Tag = new object[] { player, team };
                                 teamChange.Click += new EventHandler(teamChange_Click);
 
@@ -2330,7 +2323,7 @@ namespace PRoCon.Controls
                         for (int i = 0; i <= iMaxSquadID; i++)
                         {
 
-                            ToolStripMenuItem squadChange = new ToolStripMenuItem(this.Language.GetDefaultLocalized(String.Format("Squad {0}", i), "uscPlayerListPanel.ctxPlayerOptions.moveToSquadToolStripMenuItem.Squad", this.Language.GetLocalized(String.Format("global.Squad{0}", i))));
+                            ToolStripMenuItem squadChange = new(this.Language.GetDefaultLocalized(String.Format("Squad {0}", i), "uscPlayerListPanel.ctxPlayerOptions.moveToSquadToolStripMenuItem.Squad", this.Language.GetLocalized(String.Format("global.Squad{0}", i))));
                             squadChange.Tag = new object[] { player, i };
                             squadChange.Click += new EventHandler(squadChange_Click);
 
@@ -2380,7 +2373,7 @@ namespace PRoCon.Controls
                         // _PK_
                         foreach (StatsLinkNameUrl statsLink in Program.ProconApplication.OptionsSettings.StatsLinkNameUrl)
                         {
-                            ToolStripMenuItem statsLookup = new ToolStripMenuItem(statsLink.LinkName);
+                            ToolStripMenuItem statsLookup = new(statsLink.LinkName);
                             statsLookup.Tag = new object[] { player, statsLink.LinkUrl };
                             statsLookup.Click += new EventHandler(statsLookupToolStripMenuItemCustom_Click);
                             this.statsLookupToolStripMenuItem.DropDownItems.Add(statsLookup);
@@ -2722,7 +2715,7 @@ namespace PRoCon.Controls
             {
                 try
                 {
-                    XmlDocument document = new XmlDocument();
+                    XmlDocument document = new();
                     document.Load("https://myrcon.com/procon/streams/developers/format/xml");
 
                     foreach (XmlElement developer in document.GetElementsByTagName("developer"))

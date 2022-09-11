@@ -53,7 +53,7 @@ namespace PRoCon.Core.Remote
         /// <summary>
         /// Lock used when aquiring a sequence #
         /// </summary>
-        protected readonly Object AcquireSequenceNumberLock = new Object();
+        protected readonly Object AcquireSequenceNumberLock = new();
 
         /// <summary>
         /// The last packet that was receieved by this connection.
@@ -85,7 +85,7 @@ namespace PRoCon.Core.Remote
             }
         }
 
-        protected Object ShutdownConnectionLock = new Object();
+        protected Object ShutdownConnectionLock = new();
 
         public string Hostname
         {
@@ -124,7 +124,7 @@ namespace PRoCon.Core.Remote
         /// <summary>
         /// Lock for processing new queue items
         /// </summary>
-        protected readonly Object QueueUnqueuePacketLock = new Object();
+        protected readonly Object QueueUnqueuePacketLock = new();
 
         #region Events
 
@@ -212,7 +212,7 @@ namespace PRoCon.Core.Remote
             {
                 string strOutput = "=======================================" + Environment.NewLine + Environment.NewLine;
 
-                StackTrace stTracer = new StackTrace(e, true);
+                StackTrace stTracer = new(e, true);
                 strOutput += "Exception caught at: " + Environment.NewLine;
                 strOutput += String.Format("{0}{1}", stTracer.GetFrame((stTracer.FrameCount - 1)).GetFileName(), Environment.NewLine);
                 strOutput += String.Format("Line {0}{1}", stTracer.GetFrame((stTracer.FrameCount - 1)).GetFileLineNumber(), Environment.NewLine);
@@ -470,7 +470,7 @@ namespace PRoCon.Core.Remote
                             byte[] completePacket = new byte[ui32PacketSize];
                             Array.Copy(this.PacketStream, completePacket, ui32PacketSize);
 
-                            Packet packet = new Packet(completePacket);
+                            Packet packet = new(completePacket);
                             //cbfConnection.m_ui32SequenceNumber = Math.Max(cbfConnection.m_ui32SequenceNumber, cpCompletePacket.SequenceNumber) + 1;
 
                             // Dispatch the completed packet.

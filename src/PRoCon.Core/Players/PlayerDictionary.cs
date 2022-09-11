@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -84,13 +84,13 @@ namespace PRoCon.Core.Players
         public string ToJsonString()
         {
 
-            Hashtable players = new Hashtable();
+            Hashtable players = new();
 
-            ArrayList playersList = new ArrayList();
+            ArrayList playersList = new();
             foreach (CPlayerInfo playerInfo in this)
             {
 
-                Hashtable player = new Hashtable();
+                Hashtable player = new();
 
                 player.Add("clan_tag", playerInfo.ClanTag);
                 player.Add("deaths", playerInfo.Deaths);

@@ -81,7 +81,7 @@ namespace PRoCon.Core.Remote
         /// <summary>
         /// The maximum number of seconds/minutes that a plugin can execute a single command before it is disabled.
         /// </summary>
-        public TimeSpan PluginMaxRuntimeSpan = new TimeSpan(0, 0, 59);
+        public TimeSpan PluginMaxRuntimeSpan = new(0, 0, 59);
 
         private bool PlayTimesSynced = false;
 
@@ -2287,7 +2287,7 @@ namespace PRoCon.Core.Remote
 
         #region Playing Sounds
 
-        private readonly SoundPlayer m_spPlayer = new SoundPlayer();
+        private readonly SoundPlayer m_spPlayer = new();
         private bool m_blPlaySound;
 
         private Thread m_thSound;
@@ -3645,7 +3645,7 @@ namespace PRoCon.Core.Remote
 
                                 if (pluginConfigFileStream.CanWrite)
                                 {
-                                    StreamWriter pluginConfigWriter = new StreamWriter(pluginConfigFileStream, Encoding.UTF8);
+                                    StreamWriter pluginConfigWriter = new(pluginConfigFileStream, Encoding.UTF8);
 
                                     pluginConfigWriter.WriteLine("/////////////////////////////////////////////");
                                     pluginConfigWriter.WriteLine("// This config will be overwritten by procon.");

@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -243,7 +243,7 @@ namespace PRoCon.Core
 
             bool hasPrivileges = false;
 
-            CPrivileges cpriv = new CPrivileges((UInt32)flags);
+            CPrivileges cpriv = new((UInt32)flags);
             cpriv.SetLowestPrivileges(this);
 
             if ((cpriv.PrivilegesFlags & (UInt32)flags) == (UInt32)flags)

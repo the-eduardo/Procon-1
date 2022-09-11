@@ -211,7 +211,7 @@ namespace PRoCon.Forms
         public void SetupStartPage()
         {
 
-            uscStartPage startPage = new uscStartPage(this.m_paProcon);
+            uscStartPage startPage = new(this.m_paProcon);
             startPage.ConnectionPage += new uscStartPage.ConnectionPageHandler(startPage_ConnectionPage);
 
             this.pnlWindows.Controls.Add(startPage);

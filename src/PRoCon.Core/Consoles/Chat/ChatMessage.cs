@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -75,7 +75,7 @@ namespace PRoCon.Core.Consoles.Chat
         public Hashtable ToHashtable()
         {
 
-            Hashtable message = new Hashtable();
+            Hashtable message = new();
 
             message.Add("date_time", JSON.DateTimeToISO8601(this.LoggedTime.ToUniversalTime()));
             message.Add("speaker", this.Speaker);

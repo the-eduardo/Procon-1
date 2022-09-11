@@ -561,7 +561,7 @@ namespace PRoCon.Core
         {
 
             string[] directories = sender.Data.RequestPath.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries);
-            HttpWebServerResponseData response = new HttpWebServerResponseData(String.Empty);
+            HttpWebServerResponseData response = new(String.Empty);
 
             if (directories.Length == 0)
             {
@@ -752,7 +752,7 @@ namespace PRoCon.Core
                 try
                 {
 
-                    DirectoryInfo diLocalizationDir = new DirectoryInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Localization"));
+                    DirectoryInfo diLocalizationDir = new(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Localization"));
                     FileInfo[] a_fiLocalizations = diLocalizationDir.GetFiles("*.loc");
 
                     foreach (FileInfo fiLocalization in a_fiLocalizations)
@@ -819,7 +819,7 @@ namespace PRoCon.Core
 
                     if (stmProconConfigFile != null)
                     {
-                        StreamWriter stwConfig = new StreamWriter(stmProconConfigFile, Encoding.UTF8);
+                        StreamWriter stwConfig = new(stmProconConfigFile, Encoding.UTF8);
 
                         stwConfig.WriteLine("/////////////////////////////////////////////");
                         stwConfig.WriteLine("// This config will be overwritten by procon.");
@@ -1069,7 +1069,7 @@ namespace PRoCon.Core
             else if (lstWords.Count >= 3 && String.Compare(lstWords[0], "procon.protected.layer.setPrivileges", true) == 0 && objSender is PRoConClient)
             {
 
-                CPrivileges sprPrivs = new CPrivileges();
+                CPrivileges sprPrivs = new();
                 UInt32 ui32Privileges = 0;
 
                 if (UInt32.TryParse(lstWords[2], out ui32Privileges))
@@ -1133,7 +1133,7 @@ namespace PRoCon.Core
                     EventType type = (EventType)Enum.Parse(typeof(EventType), lstWords[1]);
                     CapturableEvents cappedEventType = (CapturableEvents)Enum.Parse(typeof(CapturableEvents), lstWords[2]);
 
-                    CapturedEvent cappedEvent = new CapturedEvent(type, cappedEventType, lstWords[3], DateTime.Now, lstWords[4]);
+                    CapturedEvent cappedEvent = new(type, cappedEventType, lstWords[3], DateTime.Now, lstWords[4]);
 
                     ((PRoConClient)objSender).EventsLogging.ProcessEvent(cappedEvent);
                 }
@@ -1262,7 +1262,7 @@ namespace PRoCon.Core
             else if (lstWords.Count >= 6 && String.Compare(lstWords[0], "procon.private.window.position", true) == 0 && objSender == this)
             {
 
-                Rectangle recWindowBounds = new Rectangle(0, 0, 1024, 768);
+                Rectangle recWindowBounds = new(0, 0, 1024, 768);
                 int iPositionVar = 0;
 
                 if (Enum.IsDefined(typeof(System.Windows.Forms.FormWindowState), lstWords[1]))
@@ -1820,7 +1820,7 @@ namespace PRoCon.Core
                 if (this.Connections.Contains(String.Format("{0}:{1}", lstWords[1], lstWords[2])))
                 {
 
-                    CPrivileges sprPrivs = new CPrivileges();
+                    CPrivileges sprPrivs = new();
                     UInt32 ui32Privileges = 0;
 
                     if (UInt32.TryParse(lstWords[4], out ui32Privileges) == true && this.AccountsList.Contains(lstWords[3]) == true)
@@ -1944,7 +1944,7 @@ namespace PRoCon.Core
             else if (lstWords.Count >= 3 && String.Compare(lstWords[0], "procon.protected.layer.setPrivileges", true) == 0 && objSender is PRoConClient)
             {
 
-                CPrivileges sprPrivs = new CPrivileges();
+                CPrivileges sprPrivs = new();
                 UInt32 ui32Privileges = 0;
 
                 if (UInt32.TryParse(lstWords[2], out ui32Privileges))
@@ -2008,7 +2008,7 @@ namespace PRoCon.Core
                     EventType type = (EventType)Enum.Parse(typeof(EventType), lstWords[1]);
                     CapturableEvents cappedEventType = (CapturableEvents)Enum.Parse(typeof(CapturableEvents), lstWords[2]);
 
-                    CapturedEvent cappedEvent = new CapturedEvent(type, cappedEventType, lstWords[3], DateTime.Now, lstWords[4]);
+                    CapturedEvent cappedEvent = new(type, cappedEventType, lstWords[3], DateTime.Now, lstWords[4]);
 
                     ((PRoConClient)objSender).EventsLogging.ProcessEvent(cappedEvent);
                 }
@@ -2137,7 +2137,7 @@ namespace PRoCon.Core
             else if (lstWords.Count >= 6 && String.Compare(lstWords[0], "procon.private.window.position", true) == 0 && objSender == this)
             {
 
-                Rectangle recWindowBounds = new Rectangle(0, 0, 1024, 768);
+                Rectangle recWindowBounds = new(0, 0, 1024, 768);
                 int iPositionVar = 0;
 
                 if (Enum.IsDefined(typeof(System.Windows.Forms.FormWindowState), lstWords[1]))
@@ -2635,7 +2635,7 @@ namespace PRoCon.Core
                 if (this.Connections.Contains(String.Format("{0}:{1}", lstWords[1], lstWords[2])))
                 {
 
-                    CPrivileges sprPrivs = new CPrivileges();
+                    CPrivileges sprPrivs = new();
                     UInt32 ui32Privileges = 0;
 
                     if (UInt32.TryParse(lstWords[4], out ui32Privileges) == true && this.AccountsList.Contains(lstWords[3]) == true)
@@ -2675,7 +2675,7 @@ namespace PRoCon.Core
                 this.BeginRssUpdate(this);
             }
 
-            CDownloadFile downloadRssFeed = new CDownloadFile("https://myrcon.net/rss/1-procon-news.xml/");
+            CDownloadFile downloadRssFeed = new("https://myrcon.net/rss/1-procon-news.xml/");
             downloadRssFeed.DownloadComplete += new CDownloadFile.DownloadFileEventDelegate(downloadRssFeed_DownloadComplete);
             downloadRssFeed.DownloadError += new CDownloadFile.DownloadFileEventDelegate(downloadRssFeed_DownloadError);
             downloadRssFeed.BeginDownload();
@@ -2690,7 +2690,7 @@ namespace PRoCon.Core
         {
             string xmlDocumentText = Encoding.UTF8.GetString(cdfSender.CompleteFileData);
 
-            XmlDocument rssDocument = new XmlDocument();
+            XmlDocument rssDocument = new();
 
             try
             {
@@ -2726,7 +2726,7 @@ namespace PRoCon.Core
 
             string xmlDocumentText = Encoding.UTF8.GetString(cdfSender.CompleteFileData);
 
-            XmlDocument rssDocument = new XmlDocument();
+            XmlDocument rssDocument = new();
 
             try
             {
@@ -2832,7 +2832,7 @@ namespace PRoCon.Core
 
                     if (stmProconConfigFile != null)
                     {
-                        StreamWriter stwConfig = new StreamWriter(stmProconConfigFile, Encoding.UTF8);
+                        StreamWriter stwConfig = new(stmProconConfigFile, Encoding.UTF8);
 
                         stwConfig.WriteLine("/////////////////////////////////////////////");
                         stwConfig.WriteLine("// This config will be overwritten by procon.");
@@ -2896,11 +2896,11 @@ namespace PRoCon.Core
             return node;
         }
 
-        private static Regex version_regex = new Regex(@"(?<major>\d+)(\.(?<minor>\d+)(\.(?<build>\d+)(\.(?<revision>\d+))?)?)?", RegexOptions.Compiled);
+        private static Regex version_regex = new(@"(?<major>\d+)(\.(?<minor>\d+)(\.(?<build>\d+)(\.(?<revision>\d+))?)?)?", RegexOptions.Compiled);
 
         private Version HighestNetFrameworkVersion()
         {
-            Version highest_version = new Version();
+            Version highest_version = new();
 
             try
             {
@@ -2920,7 +2920,7 @@ namespace PRoCon.Core
                         int major = Int32.Parse(parts[0]);
                         int minor = Int32.Parse(parts[1]);
                         int revision = Int32.Parse(parts[2].Substring(0, parts[2].IndexOf(' ')));
-                        Version MonoVersion = new Version(major, minor, revision);
+                        Version MonoVersion = new(major, minor, revision);
 
                         highest_version = MonoVersion;
                     }
@@ -2940,12 +2940,7 @@ namespace PRoCon.Core
                         {
                             int service_pack = Convert.ToInt32(installed_versions.OpenSubKey(version_key).GetValue("SP", 0));
 
-                            Version version = new Version(
-                                version_match.Groups["major"].Value.Length > 0 ? int.Parse(version_match.Groups["major"].Value) : 0,
-                                version_match.Groups["minor"].Value.Length > 0 ? int.Parse(version_match.Groups["minor"].Value) : 0,
-                                version_match.Groups["build"].Value.Length > 0 ? int.Parse(version_match.Groups["build"].Value) : 0,
-                                service_pack
-                            );
+                            Version version = new(version_match.Groups["major"].Value.Length > 0 ? int.Parse(version_match.Groups["major"].Value) : 0, version_match.Groups["minor"].Value.Length > 0 ? int.Parse(version_match.Groups["minor"].Value) : 0, version_match.Groups["build"].Value.Length > 0 ? int.Parse(version_match.Groups["build"].Value) : 0, service_pack);
 
                             if (version > highest_version)
                             {

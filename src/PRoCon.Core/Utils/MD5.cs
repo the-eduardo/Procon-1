@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 
 namespace PRoCon.Core.Utils
@@ -19,7 +19,7 @@ namespace PRoCon.Core.Utils
 
         public static String Data(byte[] data)
         {
-            StringBuilder stringifyHash = new StringBuilder();
+            StringBuilder stringifyHash = new();
 
             byte[] hash = Hasher.ComputeHash(data);
             for (int x = 0; x < hash.Length; x++)

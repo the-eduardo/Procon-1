@@ -971,7 +971,7 @@ namespace PRoCon.Core.Remote.Layer
                         if (this.Application.AccountsList.Contains(packet.Words[1]))
                         {
 
-                            CPrivileges sprvPrivs = new CPrivileges();
+                            CPrivileges sprvPrivs = new();
 
                             sender.SendResponse(packet, LayerClient.ResponseOk);
 
@@ -1788,10 +1788,8 @@ namespace PRoCon.Core.Remote.Layer
         private CPrivileges GetAccountPrivileges(String username)
         {
 
-            CPrivileges privileges = new CPrivileges
-            {
-                PrivilegesFlags = 0
-            };
+            CPrivileges privileges = new()
+{PrivilegesFlags = 0};
 
             if (this.Layer.AccountPrivileges.Contains(username))
             {
@@ -1835,7 +1833,7 @@ namespace PRoCon.Core.Remote.Layer
         private void CPRoConLayerClient_AccountPrivilegesChanged(AccountPrivilege item)
         {
 
-            CPrivileges cpPrivs = new CPrivileges(item.Privileges.PrivilegesFlags);
+            CPrivileges cpPrivs = new(item.Privileges.PrivilegesFlags);
 
             cpPrivs.SetLowestPrivileges(this.Client.Privileges);
 

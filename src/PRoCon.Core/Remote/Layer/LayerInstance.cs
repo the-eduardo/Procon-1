@@ -13,7 +13,7 @@ namespace PRoCon.Core.Remote.Layer
     {
 
         private TcpListener _layerListener;
-        protected readonly Object LayerListenerLock = new Object();
+        protected readonly Object LayerListenerLock = new();
 
         private PRoConApplication _application;
         private PRoConClient _client;
@@ -65,7 +65,7 @@ namespace PRoCon.Core.Remote.Layer
 
                 if (!this.AccountPrivileges.Contains(accAccount.Name))
                 {
-                    AccountPrivilege apPrivs = new AccountPrivilege(accAccount, new CPrivileges());
+                    AccountPrivilege apPrivs = new(accAccount, new CPrivileges());
                     apPrivs.AccountPrivilegesChanged += new AccountPrivilege.AccountPrivilegesChangedHandler(apPrivs_AccountPrivilegesChanged);
                     this.AccountPrivileges.Add(apPrivs);
                 }
@@ -141,7 +141,7 @@ namespace PRoCon.Core.Remote.Layer
 
         private void AccountsList_AccountAdded(Account item)
         {
-            AccountPrivilege apPrivs = new AccountPrivilege(item, new CPrivileges());
+            AccountPrivilege apPrivs = new(item, new CPrivileges());
 
             this.AccountPrivileges.Add(apPrivs);
 

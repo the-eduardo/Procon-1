@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Globalization;
 using System.Text;
@@ -30,7 +30,7 @@ namespace PRoCon.Core
 
         private const int BUILDER_CAPACITY = 2000;
 
-        protected static JSON instance = new JSON();
+        protected static JSON instance = new();
 
         /// <summary>
         /// On decoding, this value holds the position at which the parse failed (-1 = no error).
@@ -77,7 +77,7 @@ namespace PRoCon.Core
         /// <returns>A JSON encoded string, or null if object 'json' is not serializable</returns>
         public static string JsonEncode(object json)
         {
-            StringBuilder builder = new StringBuilder(BUILDER_CAPACITY);
+            StringBuilder builder = new(BUILDER_CAPACITY);
             bool success = JSON.instance.SerializeValue(json, builder);
             return (success ? builder.ToString() : null);
         }
@@ -140,7 +140,7 @@ namespace PRoCon.Core
 
         protected Hashtable ParseObject(char[] json, ref int index)
         {
-            Hashtable table = new Hashtable();
+            Hashtable table = new();
             int token;
 
             // {
@@ -197,7 +197,7 @@ namespace PRoCon.Core
 
         protected ArrayList ParseArray(char[] json, ref int index)
         {
-            ArrayList array = new ArrayList();
+            ArrayList array = new();
 
             // [
             NextToken(json, ref index);
@@ -266,7 +266,7 @@ namespace PRoCon.Core
 
         protected string ParseString(char[] json, ref int index)
         {
-            StringBuilder s = new StringBuilder(BUILDER_CAPACITY);
+            StringBuilder s = new(BUILDER_CAPACITY);
             char c;
 
             EatWhitespace(json, ref index);
