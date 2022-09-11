@@ -1,4 +1,4 @@
-﻿using PRoCon.Core.Remote;
+using PRoCon.Core.Remote;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -58,65 +58,65 @@ namespace PRoCon.Core.Events
             switch (strOperator)
             {
                 case "/":
-                    if (isNumeric == true)
+                    if (isNumeric)
                     {
                         objReturn = (dblLeft / dblRight);
                     }
                     break;
                 case "*":
-                    if (isNumeric == true)
+                    if (isNumeric)
                     {
                         objReturn = (dblLeft * dblRight);
                     }
                     break;
                 case "-":
-                    if (isNumeric == true)
+                    if (isNumeric)
                     {
                         objReturn = (dblLeft - dblRight);
                     }
                     break;
                 case "+":
-                    if (isNumeric == true)
+                    if (isNumeric)
                     {
                         objReturn = (dblLeft + dblRight);
                     }
                     break;
                 case "%":
-                    if (isNumeric == true)
+                    if (isNumeric)
                     {
                         objReturn = (dblLeft % dblRight);
                     }
                     break;
                 case "<":
-                    if (isNumeric == true)
+                    if (isNumeric)
                     {
                         objReturn = (dblLeft < dblRight);
                     }
                     break;
                 case "<=":
-                    if (isNumeric == true)
+                    if (isNumeric)
                     {
                         objReturn = (dblLeft <= dblRight);
                     }
                     break;
                 case ">":
-                    if (isNumeric == true)
+                    if (isNumeric)
                     {
                         objReturn = (dblLeft > dblRight);
                     }
                     break;
                 case ">=":
-                    if (isNumeric == true)
+                    if (isNumeric)
                     {
                         objReturn = (dblLeft >= dblRight);
                     }
                     break;
                 case "==":
-                    if (isNumeric == true)
+                    if (isNumeric)
                     {
                         objReturn = (dblLeft == dblRight);
                     }
-                    else if (isBoolean == true)
+                    else if (isBoolean)
                     {
                         objReturn = (blLeft == blRight);
                     }
@@ -126,23 +126,23 @@ namespace PRoCon.Core.Events
                     }
                     break;
                 case "!=":
-                    if (isNumeric == true)
+                    if (isNumeric)
                     {
                         objReturn = (dblLeft != dblRight);
                     }
-                    else if (isBoolean == true)
+                    else if (isBoolean)
                     {
                         objReturn = (blLeft != blRight);
                     }
                     break;
                 case "&&":
-                    if (isBoolean == true)
+                    if (isBoolean)
                     {
                         objReturn = (blLeft && blRight);
                     }
                     break;
                 case "||":
-                    if (isBoolean == true)
+                    if (isBoolean)
                     {
                         objReturn = (blLeft || blRight);
                     }
@@ -150,7 +150,7 @@ namespace PRoCon.Core.Events
                 case "=":
                     Match mtcVariable;
 
-                    if ((mtcVariable = Regex.Match(strLeft, "^procon\\.vars\\.(?<variable>.*)$", RegexOptions.IgnoreCase)).Success == true)
+                    if ((mtcVariable = Regex.Match(strLeft, "^procon\\.vars\\.(?<variable>.*)$", RegexOptions.IgnoreCase)).Success)
                     {
                         if (mtcVariable.Groups.Count >= 2)
                         {
@@ -192,7 +192,7 @@ namespace PRoCon.Core.Events
                             }
                         }
 
-                        if ((mtcVariable = Regex.Match(lstExpression[i + 2], "^procon\\.vars\\.(?<variable>.*)$", RegexOptions.IgnoreCase)).Success == true)
+                        if ((mtcVariable = Regex.Match(lstExpression[i + 2], "^procon\\.vars\\.(?<variable>.*)$", RegexOptions.IgnoreCase)).Success)
                         {
                             if (mtcVariable.Groups.Count >= 2)
                             {

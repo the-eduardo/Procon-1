@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -68,7 +68,7 @@ namespace PRoCon.Core.Accounts
 
         public void CreateAccount(string strUsername, string strPassword)
         {
-            if (Contains(strUsername) == true)
+            if (Contains(strUsername))
             {
                 this[strUsername].Password = strPassword;
             }
@@ -80,7 +80,7 @@ namespace PRoCon.Core.Accounts
 
         public void DeleteAccount(string strUsername)
         {
-            if (Contains(strUsername) == true)
+            if (Contains(strUsername))
             {
                 Remove(strUsername);
             }
@@ -88,7 +88,7 @@ namespace PRoCon.Core.Accounts
 
         public void ChangePassword(string strUsername, string strPassword)
         {
-            if (Contains(strUsername) == true)
+            if (Contains(strUsername))
             {
                 this[strUsername].Password = strPassword;
             }

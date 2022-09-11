@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -88,7 +88,7 @@ namespace PRoCon.Core.Battlemap
                 {
                     for (pntVisible.Y = recIntersection.Y; pntVisible.Y <= recIntersection.Bottom; pntVisible.Y++)
                     {
-                        if (regZone.IsVisible(pntVisible) == true)
+                        if (regZone.IsVisible(pntVisible))
                         {
                             iPixelCount++;
                         }

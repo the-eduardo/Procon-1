@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -159,7 +159,7 @@ namespace PRoCon.Core
 
                         int scoresCount = 0;
 
-                        if (int.TryParse(variables[varCount], out scoresCount) == true)
+                        if (int.TryParse(variables[varCount], out scoresCount))
                         {
                             scoresCount++;
 
@@ -175,7 +175,7 @@ namespace PRoCon.Core
                         break;
                     case "GameMod":
 
-                        if (Enum.IsDefined(typeof(GameMods), variables[varCount]) == true)
+                        if (Enum.IsDefined(typeof(GameMods), variables[varCount]))
                         {
                             this.GameMod = (GameMods)Enum.Parse(typeof(GameMods), variables[varCount]);
                         }

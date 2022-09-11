@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace PRoCon.Core.Events
@@ -101,7 +101,7 @@ namespace PRoCon.Core.Events
                 lstReturnSettings.Add(this.IsListModified.ToString());
                 lstReturnSettings.Add(this.ScrollingEnabled.ToString());
 
-                if (this.IsListModified == true)
+                if (this.IsListModified)
                 {
                     foreach (CapturableEvents ceEvent in this.CapturedEvents)
                     {
@@ -141,7 +141,7 @@ namespace PRoCon.Core.Events
                         this.ScrollingEnabled = scrollingEnabled;
                     }
 
-                    if (this.IsListModified == true)
+                    if (this.IsListModified)
                     {
                         this.CapturedEvents.Clear();
 
@@ -246,7 +246,7 @@ namespace PRoCon.Core.Events
 
         private void m_prcClient_PlayerChangedSquad(FrostbiteClient sender, string strSoldierName, int iTeamID, int iSquadID)
         {
-            if (this.m_prcClient.PlayerList.Contains(strSoldierName) == true)
+            if (this.m_prcClient.PlayerList.Contains(strSoldierName))
             {
                 if (this.m_prcClient.PlayerList[strSoldierName].SquadID > 0)
                 {
@@ -273,7 +273,7 @@ namespace PRoCon.Core.Events
 
         private void m_prcClient_PlayerChangedTeam(FrostbiteClient sender, string strSoldierName, int iTeamID, int iSquadID)
         {
-            if (this.m_prcClient.PlayerList.Contains(strSoldierName) == true)
+            if (this.m_prcClient.PlayerList.Contains(strSoldierName))
             {
                 this.ProcessEvent(EventType.Playerlist, CapturableEvents.PlayerSwitchedTeams, strSoldierName, this.m_prcClient.GetLocalizedTeamName(this.m_prcClient.PlayerList[strSoldierName].TeamID, this.m_prcClient.CurrentServerInfo.Map, this.m_prcClient.CurrentServerInfo.GameMode), this.m_prcClient.GetLocalizedTeamName(iTeamID, this.m_prcClient.CurrentServerInfo.Map, this.m_prcClient.CurrentServerInfo.GameMode));
             }
@@ -532,10 +532,10 @@ namespace PRoCon.Core.Events
         public void ProcessEvent(CapturedEvent capture)
         {
 
-            if (this.CapturedEvents.Contains(capture.Event) == true)
+            if (this.CapturedEvents.Contains(capture.Event))
             {
                 capture.LoggedTime = capture.LoggedTime.ToUniversalTime().AddHours(m_prcClient.Game.UtcOffset).ToLocalTime();
-                if (this.Logging == true)
+                if (this.Logging)
                 {
                     this.WriteLogLine(String.Format("{0}\t{1}\t{2}\t{3}\t{4}", capture.EventType.ToString(), capture.LoggedTime.ToString("MM/dd/yyyy HH:mm:ss"), capture.InstigatingAdmin, capture.Event.ToString(), capture.EventText.Replace("{", "{{").Replace("}", "}}")));
                 }
@@ -556,13 +556,13 @@ namespace PRoCon.Core.Events
 
         public void ProcessEvent(EventType etType, CapturableEvents ceEvent, params string[] a_strMessageParams)
         {
-            if (this.CapturedEvents.Contains(ceEvent) == true)
+            if (this.CapturedEvents.Contains(ceEvent))
             {
 
                 DateTime dtLoggedTime = DateTime.Now; // UtcNow.AddHours(m_prcClient.Game.UTCoffset).ToLocalTime();
                 string strEventText = String.Empty;
 
-                if (this.m_prcClient.Language.LocalizedExists("uscEvents.lsvEvents." + ceEvent.ToString()) == true)
+                if (this.m_prcClient.Language.LocalizedExists("uscEvents.lsvEvents." + ceEvent.ToString()))
                 {
                     strEventText = this.m_prcClient.Language.GetLocalized("uscEvents.lsvEvents." + ceEvent.ToString(), a_strMessageParams);
                 }

@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -476,14 +476,14 @@ namespace PRoCon.Core.Consoles
                 }
                 else if (rawChat.Count >= 4 && System.String.Compare(rawChat[2], "team", System.StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    if (int.TryParse(rawChat[3], out iTeamID) == true)
+                    if (int.TryParse(rawChat[3], out iTeamID))
                     {
                         formattedMessage = String.Format(commoroseMessage ? "^6{0}^0 - ^6{1}^0 > ^6{2}^0" : "^b^4{0}^0 - ^4{1}^0 >^4 {2}", rawChat[0], Client.GetLocalizedTeamName(iTeamID, Client.CurrentServerInfo.Map, Client.CurrentServerInfo.GameMode), rawChat[1]);
                     }
                 }
                 else if (rawChat.Count >= 5 && System.String.Compare(rawChat[2], "squad", System.StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    if (int.TryParse(rawChat[3], out iTeamID) == true)
+                    if (int.TryParse(rawChat[3], out iTeamID))
                     {
                         if (System.String.CompareOrdinal(rawChat[4], "0") != 0)
                         {
@@ -511,7 +511,7 @@ namespace PRoCon.Core.Consoles
 
         private void m_prcClient_PlayerJoin(FrostbiteClient sender, string playerName)
         {
-            if (LogJoinLeaving == true)
+            if (LogJoinLeaving)
             {
                 Write(DateTime.UtcNow.ToUniversalTime().AddHours(Client.Game.UtcOffset).ToLocalTime(), String.Format("^4{0}", Client.Language.GetLocalized("uscChatPanel.chkDisplayOnJoinLeaveEvents.Joined", playerName)));
             }
@@ -534,7 +534,7 @@ namespace PRoCon.Core.Consoles
 
         private void m_prcClient_PlayerDisconnected(FrostbiteClient sender, string playerName, string reason)
         {
-            if (LogPlayerDisconnected == true)
+            if (LogPlayerDisconnected)
             {
                 Write(DateTime.UtcNow.ToUniversalTime().AddHours(Client.Game.UtcOffset).ToLocalTime(), String.IsNullOrEmpty(reason) ? String.Format("^1{0}", Client.Language.GetLocalized("uscChatPanel.chkDisplayPlayerDisconnected.Disconnected", playerName)) : String.Format("^1{0}", Client.Language.GetLocalized("uscChatPanel.chkDisplayPlayerDisconnected.DisconnectedReason", playerName, Client.Language.GetDefaultLocalized(reason, String.Format("uscChatPanel.{0}", reason)))));
             }
@@ -542,7 +542,7 @@ namespace PRoCon.Core.Consoles
 
         private void m_prcClient_PlayerKilled(PRoConClient sender, Kill kKillerVictimDetails)
         {
-            if (LogKills == true)
+            if (LogKills)
             {
                 string strKillerName = kKillerVictimDetails.Killer.SoldierName, strVictimName = kKillerVictimDetails.Victim.SoldierName;
 
@@ -558,11 +558,11 @@ namespace PRoCon.Core.Consoles
                     strVictimName = String.Format("{0} {1}", Client.PlayerList[kKillerVictimDetails.Victim.SoldierName].ClanTag, kKillerVictimDetails.Victim.SoldierName);
                 }
 
-                if (kKillerVictimDetails.Headshot == false)
+                if (!kKillerVictimDetails.Headshot)
                 {
                     if (kKillerVictimDetails.DamageType.Length > 0)
                     {
-                        if (isTk == true)
+                        if (isTk)
                         {
                             Write(DateTime.UtcNow.ToUniversalTime().AddHours(Client.Game.UtcOffset).ToLocalTime(), String.Format("{0} [^3{1}^0] {2} [^8{3}^0]", strKillerName, Client.Language.GetLocalized(String.Format("global.Weapons.{0}", kKillerVictimDetails.DamageType.ToLower())), strVictimName, Client.Language.GetLocalized("uscChatPanel.chkDisplayOnKilledEvents.TeamKill")));
                         }
@@ -573,7 +573,7 @@ namespace PRoCon.Core.Consoles
                     }
                     else
                     {
-                        if (isTk == true)
+                        if (isTk)
                         {
                             Write(DateTime.UtcNow.ToUniversalTime().AddHours(Client.Game.UtcOffset).ToLocalTime(), String.Format("{0} [^3{1}^0] {2} [^8{3}^0]", strKillerName, Client.Language.GetLocalized("uscChatPanel.chkDisplayOnKilledEvents.Killed"), strVictimName, Client.Language.GetLocalized("uscChatPanel.chkDisplayOnKilledEvents.TeamKill")));
                         }
@@ -588,7 +588,7 @@ namespace PRoCon.Core.Consoles
                     // show headshot
                     if (kKillerVictimDetails.DamageType.Length > 0)
                     {
-                        if (isTk == true)
+                        if (isTk)
                         {
                             Write(DateTime.UtcNow.ToUniversalTime().AddHours(Client.Game.UtcOffset).ToLocalTime(), String.Format("{0} [^3{1}^0] {2} [^2{3}^0] [^8{4}^0]", strKillerName, Client.Language.GetLocalized(String.Format("global.Weapons.{0}", kKillerVictimDetails.DamageType.ToLower())), strVictimName, Client.Language.GetLocalized("uscChatPanel.chkDisplayOnKilledEvents.HeadShot"), Client.Language.GetLocalized("uscChatPanel.chkDisplayOnKilledEvents.TeamKill")));
                         }
@@ -599,7 +599,7 @@ namespace PRoCon.Core.Consoles
                     }
                     else
                     {
-                        if (isTk == true)
+                        if (isTk)
                         {
                             Write(DateTime.UtcNow.ToUniversalTime().AddHours(Client.Game.UtcOffset).ToLocalTime(), String.Format("{0} [^3{1}^0] {2} [^2{3}^0] [^8{4}^0]", strKillerName, Client.Language.GetLocalized("uscChatPanel.chkDisplayOnKilledEvents.Killed"), strVictimName, Client.Language.GetLocalized("uscChatPanel.chkDisplayOnKilledEvents.HeadShot"), Client.Language.GetLocalized("uscChatPanel.chkDisplayOnKilledEvents.TeamKill")));
                         }
