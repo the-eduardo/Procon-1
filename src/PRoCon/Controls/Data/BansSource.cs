@@ -142,9 +142,8 @@ namespace PRoCon.Controls.Data
             bool appended = false;
 
             if (typeof(T) != typeof(CBanInfo)) throw new InvalidCastException();
-            var cast = item as CBanInfo;
 
-            if (cast != null)
+            if (item is CBanInfo cast)
             {
                 if (!this.Items.Any(ban => ban.SoldierName == cast.SoldierName && ban.IpAddress == cast.IpAddress && ban.Guid == cast.Guid))
                 {
@@ -177,9 +176,7 @@ namespace PRoCon.Controls.Data
             bool removed = false;
             if (typeof(T) != typeof(CBanInfo)) throw new InvalidCastException();
 
-            var cast = item as CBanInfo;
-
-            if (cast != null)
+            if (item is CBanInfo cast)
             {
                 if (cast.IdType == "pbguid")
                 {
