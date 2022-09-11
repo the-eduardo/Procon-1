@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -304,7 +304,7 @@ namespace PRoCon.Controls
 
                         foreach (CPlayerInfo cpiPlayer in lstPlayers)
                         {
-                            if (this.isInComboList(cpiPlayer) == false)
+                            if (!this.isInComboList(cpiPlayer))
                             {
                                 this.cboPlayerList.Items.Add(cpiPlayer);
                             }
@@ -338,7 +338,7 @@ namespace PRoCon.Controls
 
         private void rtbChatBox_Flushed(object arg1, EventArgs arg2)
         {
-            if (this.m_prcClient.ChatConsole.Scrolling == true)
+            if (this.m_prcClient.ChatConsole.Scrolling)
             {
                 this.rtbChatBox.ScrollToCaret();
             }

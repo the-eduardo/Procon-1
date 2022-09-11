@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -305,7 +305,7 @@ namespace PRoCon.Controls
 
                 foreach (CMap map in value)
                 {
-                    if (this.m_dicTeamLegends.ContainsKey(map.FileName.ToLower()) == false)
+                    if (!this.m_dicTeamLegends.ContainsKey(map.FileName.ToLower()))
                     {
                         this.m_dicTeamLegends.Add(map.PlayList.ToLower() + map.FileName.ToLower() + KillDisplayColours.TeamColours.ToString(), new TeamNamesDisplayLegend(KillDisplayColours.TeamColours, this.m_dicTeamColours, this.m_clocLanguage, map));
                         this.m_dicTeamLegends.Add(map.PlayList.ToLower() + map.FileName.ToLower() + KillDisplayColours.EnemyColours.ToString(), new TeamNamesDisplayLegend(KillDisplayColours.EnemyColours, this.m_dicTeamColours, this.m_clocLanguage, map));
@@ -402,7 +402,7 @@ namespace PRoCon.Controls
 
             //Point mousePosition = Cursor.Position;
             MouseButtons mouseButtonsPressed = MouseButtons;
-            if (this.Focused == false)
+            if (!this.Focused)
             {
                 //mousePosition = new Point(int.MaxValue, int.MaxValue);
                 mouseButtonsPressed = MouseButtons.None;
@@ -461,7 +461,7 @@ namespace PRoCon.Controls
                 lock (this.objKillDictionaryLocker)
                 {
 
-                    if (this.DisplayCalibrationGrid == true)
+                    if (this.DisplayCalibrationGrid)
                     {
                         this.DrawCalibrationGrid(g);
                     }
@@ -484,7 +484,7 @@ namespace PRoCon.Controls
                         {
                             this.DrawKillCircles(g, kvpKill.Key, kvpKill.Value);
 
-                            if (kvpKill.Value.IsMouseOver == true)
+                            if (kvpKill.Value.IsMouseOver)
                             {
                                 kMouseOveredKill = kvpKill.Key;
                                 kddDisplayDetails = kvpKill.Value;
@@ -506,7 +506,7 @@ namespace PRoCon.Controls
                 this.DrawScale(g);
                 this.DrawCoordinates(g);
 
-                if (this.m_isBeingDragged == false)
+                if (!this.m_isBeingDragged)
                 {
                     this.Timeline.Draw(g, new Point(235, (int)g.ClipBounds.Height - 55), this.PointToClient(Cursor.Position), mouseButtonsPressed, this.m_dicKills, this.m_lstRoundChanges, this.KillColours, this.m_dicTeamColours);
                 }
@@ -515,7 +515,7 @@ namespace PRoCon.Controls
                     this.Timeline.Draw(g, new Point(235, (int)g.ClipBounds.Height - 55), new Point(0, 0), mouseButtonsPressed, this.m_dicKills, this.m_lstRoundChanges, this.KillColours, this.m_dicTeamColours);
                 }
 
-                if (this.m_dicTeamLegends.ContainsKey(this.m_mipMapImagePack.LoadedMapFileName.ToLower() + this.m_KillColours.ToString()) == true)
+                if (this.m_dicTeamLegends.ContainsKey(this.m_mipMapImagePack.LoadedMapFileName.ToLower() + this.m_KillColours.ToString()))
                 {
 
                     TeamNamesDisplayLegend teamLegend = this.m_dicTeamLegends[this.m_mipMapImagePack.LoadedMapFileName.ToLower() + this.m_KillColours.ToString()];
@@ -541,7 +541,7 @@ namespace PRoCon.Controls
                 KillDisplayPopup kdp = new KillDisplayPopup();
 
                 string strDamageType = String.Empty;
-                if (this.m_clocLanguage.TryGetLocalized(out strDamageType, "global.Weapons." + kMouseOveredKill.DamageType.ToLower()) == false)
+                if (!this.m_clocLanguage.TryGetLocalized(out strDamageType, "global.Weapons." + kMouseOveredKill.DamageType.ToLower()))
                 {
                     strDamageType = kMouseOveredKill.DamageType;
                 }
@@ -788,7 +788,7 @@ namespace PRoCon.Controls
             //reKillDropshadow.Union(reKillOutline);
             //reKillDropshadow.Translate(0.4F, 1.0F);
 
-            if (reKill.IsVisible(this.ClientPointToGame(this.PointToClient(Cursor.Position))) == true)
+            if (reKill.IsVisible(this.ClientPointToGame(this.PointToClient(Cursor.Position))))
             {
                 kddKillDetails.IsMouseOver = true;
                 kddKillDetails.Opacity = 1.0F;
@@ -806,7 +806,7 @@ namespace PRoCon.Controls
             {
 
                 Image imgDeathIcon = null;
-                if (kKill.Headshot == true)
+                if (kKill.Headshot)
                 {
                     imgDeathIcon = this.LoadedMapImagePack.CompensateImageRotation(this.LoadedMapImagePack.GetIcon("Headshot"));
                 }
@@ -891,7 +891,7 @@ namespace PRoCon.Controls
 
         private void ProgressiveZoomImage(bool ZoomIn)
         {
-            if (ZoomIn == true)
+            if (ZoomIn)
             {
                 this.ZoomImage((float)Math.Round((this.ZoomFactor * 1.18), 2));
             }
@@ -1016,7 +1016,7 @@ namespace PRoCon.Controls
                 {
                     this.Cursor = Cursor.Current;
 
-                    if (this.Timeline.IsMouseOver == false)
+                    if (!this.Timeline.IsMouseOver)
                     {
                         this.m_isBeingDragged = true;
                     }
@@ -1059,7 +1059,7 @@ namespace PRoCon.Controls
 
                 if (this.SelectedTool == BattlemapViewTools.Zones && e.Button == MouseButtons.Right)
                 {
-                    if (this.IsMouseOverZone() == true)
+                    if (this.IsMouseOverZone())
                     {
                         this.ctxZones.Show(this, e.X, e.Y);
                     }
@@ -1110,7 +1110,7 @@ namespace PRoCon.Controls
                         // Force a paint
                         this.Invalidate();
                     }
-                    else if (this.Timeline.IsSeekerSelected == true)
+                    else if (this.Timeline.IsSeekerSelected)
                     {
                         this.Invalidate();
                     }
@@ -1132,7 +1132,7 @@ namespace PRoCon.Controls
                     this.Invalidate();
                 }
 
-                if (this.Timeline.IsSeekerMouseOvered == true)
+                if (this.Timeline.IsSeekerMouseOvered)
                 {
                     this.Cursor = Cursors.Hand;
                 }
@@ -1270,7 +1270,7 @@ namespace PRoCon.Controls
 
                 for (int i = 0; i < lstKills.Count; i++)
                 {
-                    if (this.m_dicKills[lstKills[i]].IsMouseOver == false)
+                    if (!this.m_dicKills[lstKills[i]].IsMouseOver)
                     {
                         TimeSpan tsDifference = dtCurrent - this.m_dicKills[lstKills[i]].TimeOfFadeoutStart;
 
@@ -1335,7 +1335,7 @@ namespace PRoCon.Controls
 
                 foreach (MapZoneControl mapZone in new List<MapZoneControl>(this.MapZoneControls.Values))
                 {
-                    if (mapZone.IsSelected == true)
+                    if (mapZone.IsSelected)
                     {
 
                         if (e.KeyCode == Keys.Delete)
@@ -1358,7 +1358,7 @@ namespace PRoCon.Controls
         {
             foreach (MapZoneControl mapZone in new List<MapZoneControl>(this.MapZoneControls.Values))
             {
-                if (mapZone.IsSelected == true)
+                if (mapZone.IsSelected)
                 {
 
                     if (this.DeleteMapZone != null)
@@ -1377,7 +1377,7 @@ namespace PRoCon.Controls
         public void AddMapZone(MapZoneDrawing zone)
         {
 
-            if (this.MapZoneControls.ContainsKey(zone.UID) == false)
+            if (!this.MapZoneControls.ContainsKey(zone.UID))
             {
                 MapZoneControl newZone = new MapZoneControl(zone);
 
@@ -1394,7 +1394,7 @@ namespace PRoCon.Controls
 
         public void SetMapZoneTags(MapZoneDrawing zone)
         {
-            if (this.MapZoneControls.ContainsKey(zone.UID) == true)
+            if (this.MapZoneControls.ContainsKey(zone.UID))
             {
                 this.MapZoneControls[zone.UID].SetZoneTags(zone.Tags);
                 //this.MapZoneControls[zone.UID].ZoneDetails.ZonePolygon = zone.ZonePolygon;
@@ -1404,7 +1404,7 @@ namespace PRoCon.Controls
 
         public void SetMapZonePoints(MapZoneDrawing zone)
         {
-            if (this.MapZoneControls.ContainsKey(zone.UID) == true)
+            if (this.MapZoneControls.ContainsKey(zone.UID))
             {
                 this.MapZoneControls[zone.UID].SetZonePoints(zone.ZonePolygon);
             }
@@ -1413,7 +1413,7 @@ namespace PRoCon.Controls
         public void RemoveMapZone(MapZoneDrawing zone)
         {
 
-            if (this.MapZoneControls.ContainsKey(zone.UID) == true)
+            if (this.MapZoneControls.ContainsKey(zone.UID))
             {
 
                 this.MapZoneControls[zone.UID].MapZoneSelected -= new MapZoneControl.MapZoneHandler(newZone_MapZoneSelected);

@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -53,7 +53,7 @@ namespace PRoCon.Controls.ServerSettings.BF3
             this.AsyncSettingControls.Add("vars.gamepassword", new AsyncStyleSetting(this.picSettingsGamePassword, this.txtSettingsGamePassword, new Control[] { this.lblSettingsGamePassword, this.txtSettingsGamePassword, this.lnkSettingsSetGamePassword }, true));
             this.AsyncSettingControls.Add("vars.adminpassword", new AsyncStyleSetting(this.picSettingsAdminPassword, this.txtSettingsAdminPassword, new Control[] { this.lblSettingsAdminPassword, this.txtSettingsAdminPassword, this.lnkSettingsSetAdminPassword }, true));
 
-            if (Program.ProconApplication.OptionsSettings.ShowDICESpecialOptions == true)
+            if (Program.ProconApplication.OptionsSettings.ShowDICESpecialOptions)
             {
                 this.chkSettingsPremiumStatus.Enabled = Program.ProconApplication.OptionsSettings.ShowDICESpecialOptions;
                 this.AsyncSettingControls.Add("vars.premiumstatus", new AsyncStyleSetting(this.picSettingsPremiumStatus, this.chkSettingsPremiumStatus, new Control[] { this.chkSettingsPremiumStatus }, true));
@@ -326,14 +326,14 @@ namespace PRoCon.Controls.ServerSettings.BF3
 
             if (this.IgnoreEvents == false && this.AsyncSettingControls["vars.idletimeout 0"].IgnoreEvent == false)
             {
-                if (this.chkSettingsNoIdleKickLimit.Checked == true)
+                if (this.chkSettingsNoIdleKickLimit.Checked)
                 {
                     this.WaitForSettingResponse("vars.idletimeout 0", !this.chkSettingsNoIdleKickLimit.Checked);
 
                     this.Client.Game.SendSetVarsIdleTimeoutPacket(0);
                     //this.SendCommand("vars.idleTimeout", "0");
                 }
-                if (this.chkSettingsNoIdleKickLimit.Checked == false)
+                if (!this.chkSettingsNoIdleKickLimit.Checked)
                 {
                     this.WaitForSettingResponse("vars.idletimeout 300", this.chkSettingsNoIdleKickLimit.Checked);
 
@@ -381,13 +381,13 @@ namespace PRoCon.Controls.ServerSettings.BF3
 
             if (this.IgnoreEvents == false && this.AsyncSettingControls["vars.idlebanrounds 0"].IgnoreEvent == false)
             {
-                if (this.chkSettingsNoIdleBanRoundsLimit.Checked == true)
+                if (this.chkSettingsNoIdleBanRoundsLimit.Checked)
                 {
                     this.WaitForSettingResponse("vars.idlebanrounds 0", !this.chkSettingsNoIdleBanRoundsLimit.Checked);
 
                     this.Client.Game.SendSetVarsIdleBanRoundsPacket(0);
                 }
-                if (this.chkSettingsNoIdleBanRoundsLimit.Checked == false)
+                if (!this.chkSettingsNoIdleBanRoundsLimit.Checked)
                 {
                     this.WaitForSettingResponse("vars.idlebanrounds 2", this.chkSettingsNoIdleBanRoundsLimit.Checked);
 

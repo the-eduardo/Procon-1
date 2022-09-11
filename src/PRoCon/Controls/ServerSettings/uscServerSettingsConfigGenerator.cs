@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -131,7 +131,7 @@ namespace PRoCon.Controls.ServerSettings
 
         protected virtual void AppendAdminPassword()
         {
-            if (this.Client.IsPRoConConnection == false)
+            if (!this.Client.IsPRoConConnection)
             {
                 this.AppendSetting("admin.password", this.Client.Password);
             }
@@ -278,11 +278,11 @@ namespace PRoCon.Controls.ServerSettings
                 int iValue = 0;
                 bool blValue = false;
 
-                if (int.TryParse(valueList[i], out iValue) == true)
+                if (int.TryParse(valueList[i], out iValue))
                 {
                     formattedValueList[i] = valueList[i];
                 }
-                else if (bool.TryParse(valueList[i], out blValue) == true)
+                else if (bool.TryParse(valueList[i], out blValue))
                 {
                     formattedValueList[i] = Packet.Bltos(blValue);
                 }
@@ -299,7 +299,7 @@ namespace PRoCon.Controls.ServerSettings
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.m_dicSettings.ContainsKey(settingName) == true)
+                if (this.m_dicSettings.ContainsKey(settingName))
                 {
                     this.m_dicSettings[settingName] = settingValue;
 

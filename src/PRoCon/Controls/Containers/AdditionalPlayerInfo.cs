@@ -1,4 +1,4 @@
-﻿using PRoCon.Core;
+using PRoCon.Core;
 using PRoCon.Core.Players;
 using PRoCon.Core.Players.Items;
 using System;
@@ -23,7 +23,7 @@ namespace PRoCon.Controls.Containers
         public void AddKitCount(Kits kit)
         {
 
-            if (this.KitCounter.ContainsKey(kit) == true)
+            if (this.KitCounter.ContainsKey(kit))
             {
                 this.KitCounter[kit] = this.KitCounter[kit] + 1;
             }

@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -118,7 +118,7 @@ namespace PRoCon.Controls.ServerSettings
 
                 if (this.IgnoreEvents == false && this.AsyncSettingControls["vars.teamkillcountforkick 0"].IgnoreEvent == false)
                 {
-                    if (this.chkSettingsTeamkillCountLimit.Checked == true)
+                    if (this.chkSettingsTeamkillCountLimit.Checked)
                     {
                         this.WaitForSettingResponse("vars.teamkillcountforkick 0", !this.chkSettingsTeamkillCountLimit.Checked);
 
@@ -169,7 +169,7 @@ namespace PRoCon.Controls.ServerSettings
 
                 if (this.IgnoreEvents == false && this.AsyncSettingControls["vars.teamkillvalueforkick 0"].IgnoreEvent == false)
                 {
-                    if (this.chkSettingsTeamkillValueLimit.Checked == true)
+                    if (this.chkSettingsTeamkillValueLimit.Checked)
                     {
                         this.WaitForSettingResponse("vars.teamkillvalueforkick 0", !this.chkSettingsTeamkillValueLimit.Checked);
 

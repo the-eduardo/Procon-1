@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -311,7 +311,7 @@ namespace PRoCon.Controls.ServerSettings.BF4
 
         void Game_FairFight(FrostbiteClient sender, bool isEnabled)
         {
-            if (isEnabled == true)
+            if (isEnabled)
             {
                 this.AppendSetting("fairFight.activate");
             }

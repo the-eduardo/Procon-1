@@ -1,4 +1,4 @@
-﻿using PRoCon.Controls.ControlsEx;
+using PRoCon.Controls.ControlsEx;
 using PRoCon.Controls.Data;
 using PRoCon.Core;
 using PRoCon.Core.Remote;
@@ -437,7 +437,7 @@ namespace PRoCon.Controls
 
         public void SetTabIndexes(Stack<string> stkTabIndexes)
         {
-            if (tbcLists.TabPages.ContainsKey(stkTabIndexes.Peek()) == true)
+            if (tbcLists.TabPages.ContainsKey(stkTabIndexes.Peek()))
             {
                 this.tbcLists.SelectedTab = tbcLists.TabPages[stkTabIndexes.Pop()];
             }
@@ -480,7 +480,7 @@ namespace PRoCon.Controls
         private void WaitForSettingResponse(string strResponseCommand)
         {
 
-            if (this.m_dicAsyncSettingControls.ContainsKey(strResponseCommand) == true)
+            if (this.m_dicAsyncSettingControls.ContainsKey(strResponseCommand))
             {
                 //this.m_dicAsyncSettingControls[strResponseCommand].m_objOriginalValue = String.Empty;
                 this.m_dicAsyncSettingControls[strResponseCommand].m_picStatus.Image = this.m_frmMain.picAjaxStyleLoading.Image;
@@ -506,10 +506,10 @@ namespace PRoCon.Controls
         public void OnSettingResponse(string strResponseCommand, bool blSuccess)
         {
 
-            if (this.m_dicAsyncSettingControls.ContainsKey(strResponseCommand) == true)
+            if (this.m_dicAsyncSettingControls.ContainsKey(strResponseCommand))
             {
 
-                if (this.m_dicAsyncSettingControls[strResponseCommand].m_blReEnableControls == true)
+                if (this.m_dicAsyncSettingControls[strResponseCommand].m_blReEnableControls)
                 {
                     foreach (Control ctrlEnable in this.m_dicAsyncSettingControls[strResponseCommand].ma_ctrlEnabledInputs)
                     {
@@ -526,7 +526,7 @@ namespace PRoCon.Controls
 
                 this.m_dicAsyncSettingControls[strResponseCommand].IgnoreEvent = true;
 
-                if (blSuccess == true)
+                if (blSuccess)
                 {
                     this.m_dicAsyncSettingControls[strResponseCommand].m_picStatus.Image = this.m_frmMain.picAjaxStyleSuccess.Image;
                     this.m_dicAsyncSettingControls[strResponseCommand].m_iTimeout = AsyncStyleSetting.INT_ANIMATEDSETTING_SHOWRESULT_TICKS;
@@ -581,7 +581,7 @@ namespace PRoCon.Controls
                     {
                         kvpAsyncSetting.Value.m_picStatus.Image = null;
 
-                        if (kvpAsyncSetting.Value.m_blReEnableControls == true)
+                        if (kvpAsyncSetting.Value.m_blReEnableControls)
                         {
                             foreach (Control ctrlEnable in kvpAsyncSetting.Value.ma_ctrlEnabledInputs)
                             {
@@ -616,7 +616,7 @@ namespace PRoCon.Controls
                 this.lsvReservedList.Items.Clear();
                 foreach (string strSoldierName in lstSoldierNames)
                 {
-                    if (this.lsvReservedList.Items.ContainsKey(strSoldierName) == false)
+                    if (!this.lsvReservedList.Items.ContainsKey(strSoldierName))
                     {
 
                         ListViewItem lsvNewSoldier = new ListViewItem(strSoldierName);
@@ -633,7 +633,7 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.lsvReservedList.Items.ContainsKey(strSoldierName) == true)
+                if (this.lsvReservedList.Items.ContainsKey(strSoldierName))
                 {
                     this.lsvReservedList.Items.RemoveByKey(strSoldierName);
                 }
@@ -644,7 +644,7 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.lsvReservedList.Items.ContainsKey(strSoldierName) == false)
+                if (!this.lsvReservedList.Items.ContainsKey(strSoldierName))
                 {
 
                     ListViewItem lsvNewSoldier = new ListViewItem(strSoldierName);
@@ -659,12 +659,12 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.m_blSettingAppendingReservedPlayer == true)
+                if (this.m_blSettingAppendingReservedPlayer)
                 {
                     this.OnSettingResponse("local.reservedlist.append", true);
                     this.m_blSettingAppendingReservedPlayer = false;
                 }
-                else if (this.m_blSettingRemovingReservedPlayer == true)
+                else if (this.m_blSettingRemovingReservedPlayer)
                 {
                     this.OnSettingResponse("local.reservedlist.remove", true);
                     this.m_blSettingRemovingReservedPlayer = false;
@@ -784,7 +784,7 @@ namespace PRoCon.Controls
                 this.lsvSpectatorList.Items.Clear();
                 foreach (string strSoldierName in lstSoldierNames)
                 {
-                    if (this.lsvSpectatorList.Items.ContainsKey(strSoldierName) == false)
+                    if (!this.lsvSpectatorList.Items.ContainsKey(strSoldierName))
                     {
 
                         ListViewItem lsvNewSoldier = new ListViewItem(strSoldierName);
@@ -801,7 +801,7 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.lsvSpectatorList.Items.ContainsKey(strSoldierName) == true)
+                if (this.lsvSpectatorList.Items.ContainsKey(strSoldierName))
                 {
                     this.lsvSpectatorList.Items.RemoveByKey(strSoldierName);
                 }
@@ -812,7 +812,7 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.lsvSpectatorList.Items.ContainsKey(strSoldierName) == false)
+                if (!this.lsvSpectatorList.Items.ContainsKey(strSoldierName))
                 {
 
                     ListViewItem lsvNewSoldier = new ListViewItem(strSoldierName);
@@ -827,12 +827,12 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.m_blSettingAppendingSpectatorPlayer == true)
+                if (this.m_blSettingAppendingSpectatorPlayer)
                 {
                     this.OnSettingResponse("local.spectatorlist.append", true);
                     this.m_blSettingAppendingSpectatorPlayer = false;
                 }
-                else if (this.m_blSettingRemovingSpectatorPlayer == true)
+                else if (this.m_blSettingRemovingSpectatorPlayer)
                 {
                     this.OnSettingResponse("local.spectatorlist.remove", true);
                     this.m_blSettingRemovingSpectatorPlayer = false;
@@ -947,7 +947,7 @@ namespace PRoCon.Controls
 
         private void Reasons_ItemRemoved(int iIndex, string item)
         {
-            if (this.cboBanlistReason.Items.Contains(item) == true)
+            if (this.cboBanlistReason.Items.Contains(item))
             {
                 this.cboBanlistReason.Items.Remove(item);
             }
@@ -1097,7 +1097,7 @@ namespace PRoCon.Controls
             if (String.Compare("name", cbiPlayerBan.IdType, true) == 0 || String.Compare("persona", cbiPlayerBan.IdType, true) == 0)
             {
                 lviNewBanEntry = this.CreateBlankBanEntry(String.Format("{0}\r\n\r\n", cbiPlayerBan.SoldierName));
-                lviNewBanEntry.Text = cbiPlayerBan.Offset.HasValue == true ? (cbiPlayerBan.Offset.Value + 1).ToString(CultureInfo.InvariantCulture) : "-";
+                lviNewBanEntry.Text = cbiPlayerBan.Offset.HasValue? (cbiPlayerBan.Offset.Value + 1).ToString(CultureInfo.InvariantCulture) : "-";
 
                 lviNewBanEntry.SubItems["name"].Text = cbiPlayerBan.SoldierName;
 
@@ -1113,7 +1113,7 @@ namespace PRoCon.Controls
             {
 
                 lviNewBanEntry = this.CreateBlankBanEntry(String.Format("\r\n{0}\r\n", cbiPlayerBan.IpAddress));
-                lviNewBanEntry.Text = cbiPlayerBan.Offset.HasValue == true ? (cbiPlayerBan.Offset.Value + 1).ToString(CultureInfo.InvariantCulture) : "-";
+                lviNewBanEntry.Text = cbiPlayerBan.Offset.HasValue? (cbiPlayerBan.Offset.Value + 1).ToString(CultureInfo.InvariantCulture) : "-";
 
                 lviNewBanEntry.SubItems["name"].Text = cbiPlayerBan.SoldierName;
                 lviNewBanEntry.SubItems["ip"].Text = cbiPlayerBan.IpAddress;
@@ -1131,7 +1131,7 @@ namespace PRoCon.Controls
             {
 
                 lviNewBanEntry = this.CreateBlankBanEntry(String.Format("\r\n\r\n{0}", cbiPlayerBan.Guid));
-                lviNewBanEntry.Text = cbiPlayerBan.Offset.HasValue == true ? (cbiPlayerBan.Offset.Value + 1).ToString(CultureInfo.InvariantCulture) : "-";
+                lviNewBanEntry.Text = cbiPlayerBan.Offset.HasValue? (cbiPlayerBan.Offset.Value + 1).ToString(CultureInfo.InvariantCulture) : "-";
 
                 lviNewBanEntry.SubItems["name"].Text = cbiPlayerBan.SoldierName;
                 lviNewBanEntry.SubItems["guid"].Text = cbiPlayerBan.Guid;
@@ -1192,13 +1192,13 @@ namespace PRoCon.Controls
                             break;
                     }
 
-                    if (blFoundBan == true)
+                    if (blFoundBan)
                     {
                         break;
                     }
                 }
 
-                if (blFoundBan == false)
+                if (!blFoundBan)
                 {
                     this.lsvBanlist.Items.Remove(this.lsvBanlist.Items[i]);
                     i--;
@@ -1233,14 +1233,14 @@ namespace PRoCon.Controls
                         strKey = String.Format("\r\n\r\n{0}", cbiBan.Guid);
                     }
 
-                    if (this.lsvBanlist.Items.ContainsKey(strKey) == false)
+                    if (!this.lsvBanlist.Items.ContainsKey(strKey))
                     {
                         this.lsvBanlist.Items.Add(this.CreateBanEntry(cbiBan));
                     }
                     else
                     {
                         ListViewItem lviBanEntry = this.lsvBanlist.Items[strKey];
-                        lviBanEntry.Text = cbiBan.Offset.HasValue == true ? (cbiBan.Offset.Value + 1).ToString(CultureInfo.InvariantCulture) : "-";
+                        lviBanEntry.Text = cbiBan.Offset.HasValue? (cbiBan.Offset.Value + 1).ToString(CultureInfo.InvariantCulture) : "-";
                         lviBanEntry.SubItems["name"].Text = cbiBan.SoldierName;
                         lviBanEntry.SubItems["type"].Tag = cbiBan.IdType;
                         lviBanEntry.SubItems["type"].Text = this.GetFriendlyTypeName(cbiBan.IdType);
@@ -1450,7 +1450,7 @@ namespace PRoCon.Controls
 
         private void rdoBanlistName_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.rdoBanlistName.Checked == true)
+            if (this.rdoBanlistName.Checked)
             {
                 //this.ValidateManualBan();
                 this.txtBanlistManualBanName.Focus();
@@ -1468,7 +1468,7 @@ namespace PRoCon.Controls
 
         private void rdoBanlistIP_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.rdoBanlistIP.Checked == true)
+            if (this.rdoBanlistIP.Checked)
             {
                 this.txtBanlistManualBanIP.Focus();
                 this.txtBanlistManualBanName.Enabled = false;
@@ -1485,7 +1485,7 @@ namespace PRoCon.Controls
 
         private void rdoBanlistBc2GUID_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.rdoBanlistBc2GUID.Checked == true)
+            if (this.rdoBanlistBc2GUID.Checked)
             {
                 this.txtBanlistManualBanGUID.Focus();
                 this.txtBanlistManualBanName.Enabled = false;
@@ -1504,7 +1504,7 @@ namespace PRoCon.Controls
 
         private void rdoBanlistGUID_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.rdoBanlistPbGUID.Checked == true)
+            if (this.rdoBanlistPbGUID.Checked)
             {
                 this.txtBanlistManualBanGUID.Focus();
                 this.txtBanlistManualBanName.Enabled = true;
@@ -1523,7 +1523,7 @@ namespace PRoCon.Controls
 
         private void ListSettings_ManualBansVisibleChange(bool isVisible)
         {
-            if (isVisible == true)
+            if (isVisible)
             {
                 this.lnkCloseOpenManualBans.Text = this.m_prcClient.Language.GetLocalized("uscListControlPanel.tabBanlist.lnkCloseOpenManualBans.Close", null);
                 this.picCloseOpenManualBans.Image = this.m_frmMain.iglIcons.Images["arrow_down.png"];
@@ -1570,12 +1570,12 @@ namespace PRoCon.Controls
                 m_strReasonAdmin = m_strReasonAdmin + " (" + accountName + ")";
             }
 
-            if (this.rdoBanlistName.Checked == true)
+            if (this.rdoBanlistName.Checked)
             {
                 // obsolete with BF3 R-8 string name = this.m_prcClient.Game is BF3Client ? "persona" : "name";
                 string name = "name";
 
-                if (this.rdoBanlistPermanent.Checked == true)
+                if (this.rdoBanlistPermanent.Checked)
                 {
                     this.SendCommand("banList.add", name, this.txtBanlistManualBanName.Text, "perm", m_strReasonAdmin);
                 }
@@ -1584,9 +1584,9 @@ namespace PRoCon.Controls
                     this.SendCommand("banList.add", name, this.txtBanlistManualBanName.Text, "seconds", (uscPlayerPunishPanel.GetBanLength(this.txtBanlistTime, this.cboBanlistTimeMultiplier) * 60).ToString(), m_strReasonAdmin);
                 }
             }
-            else if (this.rdoBanlistIP.Checked == true)
+            else if (this.rdoBanlistIP.Checked)
             {
-                if (this.rdoBanlistPermanent.Checked == true)
+                if (this.rdoBanlistPermanent.Checked)
                 {
                     this.SendCommand("banList.add", "ip", this.txtBanlistManualBanIP.Text, "perm", m_strReasonAdmin);
                 }
@@ -1595,9 +1595,9 @@ namespace PRoCon.Controls
                     this.SendCommand("banList.add", "ip", this.txtBanlistManualBanIP.Text, "seconds", (uscPlayerPunishPanel.GetBanLength(this.txtBanlistTime, this.cboBanlistTimeMultiplier) * 60).ToString(), m_strReasonAdmin);
                 }
             }
-            else if (this.rdoBanlistBc2GUID.Checked == true)
+            else if (this.rdoBanlistBc2GUID.Checked)
             {
-                if (this.rdoBanlistPermanent.Checked == true)
+                if (this.rdoBanlistPermanent.Checked)
                 {
                     this.SendCommand("banList.add", "guid", this.txtBanlistManualBanGUID.Text.ToUpper(), "perm", m_strReasonAdmin);
                 }
@@ -1606,7 +1606,7 @@ namespace PRoCon.Controls
                     this.SendCommand("banList.add", "guid", this.txtBanlistManualBanGUID.Text.ToUpper(), "seconds", (uscPlayerPunishPanel.GetBanLength(this.txtBanlistTime, this.cboBanlistTimeMultiplier) * 60).ToString(), m_strReasonAdmin);
                 }
             }
-            else if (this.rdoBanlistPbGUID.Checked == true)
+            else if (this.rdoBanlistPbGUID.Checked)
             {
                 this.SendCommand("punkBuster.pb_sv_command", String.Format("pb_sv_banguid {0} \"{1}\" \"{2}\" \"BC2! {3}\"", this.txtBanlistManualBanGUID.Text, this.txtBanlistManualBanName.Text.Length > 0 ? this.txtBanlistManualBanName.Text : "???", this.txtBanlistManualBanIP.Text.Length > 0 ? this.txtBanlistManualBanIP.Text : "???", m_strReasonAdmin));
                 this.SendCommand("punkBuster.pb_sv_command", this.m_prcClient.Variables.GetVariable<string>("PUNKBUSTER_BANLIST_REFRESH", "pb_sv_banlist BC2! "));
@@ -1689,19 +1689,19 @@ namespace PRoCon.Controls
 
             string strBanDescription = String.Empty;
 
-            if (this.rdoBanlistPbGUID.Checked == true)
+            if (this.rdoBanlistPbGUID.Checked)
             {
                 strBanDescription = this.txtBanlistManualBanGUID.Text;
             }
-            else if (this.rdoBanlistBc2GUID.Checked == true)
+            else if (this.rdoBanlistBc2GUID.Checked)
             {
                 strBanDescription = this.txtBanlistManualBanGUID.Text.ToUpper();
             }
-            else if (this.rdoBanlistIP.Checked == true)
+            else if (this.rdoBanlistIP.Checked)
             {
                 strBanDescription = this.txtBanlistManualBanIP.Text;
             }
-            else if (this.rdoBanlistName.Checked == true)
+            else if (this.rdoBanlistName.Checked)
             {
                 strBanDescription = this.txtBanlistManualBanName.Text;
             }
@@ -1716,7 +1716,7 @@ namespace PRoCon.Controls
                                                                                              this.ma_strTimeDescriptionsLong, this.m_prcClient.SV_Variables.GetVariable<int>("TEMP_BAN_CEILING", 3600));
             }
 
-            if (this.rdoBanlistIP.Checked == true)
+            if (this.rdoBanlistIP.Checked)
             {
                 this.btnBanlistAddBan.Enabled = (this.txtBanlistManualBanIP.Text.Length > 0 && this.m_regIP.Match(this.txtBanlistManualBanIP.Text).Success) && blAbleToPunish == true;
                 this.picBanlistIPError.Visible = !this.btnBanlistAddBan.Enabled && blAbleToPunish == true;
@@ -1735,7 +1735,7 @@ namespace PRoCon.Controls
                 this.picBanlistIPError.Visible = false;
             }
 
-            if (this.rdoBanlistPbGUID.Checked == true)
+            if (this.rdoBanlistPbGUID.Checked)
             {
                 this.btnBanlistAddBan.Enabled = (this.txtBanlistManualBanGUID.Text.Length > 0 && this.m_regPbGUID.Match(this.txtBanlistManualBanGUID.Text).Success) && blAbleToPunish == true;
                 this.picBanlistGUIDError.Visible = !this.btnBanlistAddBan.Enabled && blAbleToPunish == true;
@@ -1749,7 +1749,7 @@ namespace PRoCon.Controls
                     this.txtBanlistManualBanGUID.ForeColor = SystemColors.WindowText;
                 }
             }
-            else if (this.rdoBanlistBc2GUID.Checked == true)
+            else if (this.rdoBanlistBc2GUID.Checked)
             {
                 this.btnBanlistAddBan.Enabled = (this.txtBanlistManualBanGUID.Text.Length > 0 && this.m_regBc2GUID.Match(this.txtBanlistManualBanGUID.Text).Success) && blAbleToPunish == true;
                 this.picBanlistGUIDError.Visible = !this.btnBanlistAddBan.Enabled && blAbleToPunish == true;
@@ -1768,7 +1768,7 @@ namespace PRoCon.Controls
                 this.picBanlistGUIDError.Visible = false;
             }
 
-            if (this.rdoBanlistName.Checked == true)
+            if (this.rdoBanlistName.Checked)
             {
                 this.btnBanlistAddBan.Enabled = (this.txtBanlistManualBanName.Text.Length > 0) && blAbleToPunish == true;
             }

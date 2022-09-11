@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -162,7 +162,7 @@ namespace PRoCon.Controls
 
         public void SetTabIndexes(Stack<string> stkTabIndexes)
         {
-            if (tbcLayerControl.TabPages.ContainsKey(stkTabIndexes.Peek()) == true)
+            if (tbcLayerControl.TabPages.ContainsKey(stkTabIndexes.Peek()))
             {
                 this.tbcLayerControl.SelectedTab = tbcLayerControl.TabPages[stkTabIndexes.Pop()];
 
@@ -221,7 +221,7 @@ namespace PRoCon.Controls
             if (this.m_dicRemotePlugins != null)
             {
 
-                if (this.m_dicRemotePlugins.ContainsKey(strClassName) == true)
+                if (this.m_dicRemotePlugins.ContainsKey(strClassName))
                 {
                     spdReturnDetails = this.m_dicRemotePlugins[strClassName];
                 }
@@ -239,7 +239,7 @@ namespace PRoCon.Controls
                 foreach (ListViewItem lviPlugin in this.uscPlugins.LoadedPlugins)
                 {
 
-                    if (enabledPluginClasses.Contains(lviPlugin.Name) == true)
+                    if (enabledPluginClasses.Contains(lviPlugin.Name))
                     {
                         lviPlugin.Checked = true;
                     }
@@ -265,7 +265,7 @@ namespace PRoCon.Controls
             this.InvokeIfRequired(() =>
             {
 
-                if (this.m_dicRemotePlugins.ContainsKey(spdDetails.ClassName) == true)
+                if (this.m_dicRemotePlugins.ContainsKey(spdDetails.ClassName))
                 {
                     this.m_dicRemotePlugins[spdDetails.ClassName] = spdDetails;
                 }
@@ -292,7 +292,7 @@ namespace PRoCon.Controls
             {
                 this.m_blUpdatingPlugins = true;
 
-                if (this.uscPlugins.LoadedPlugins.ContainsKey(strClassName) == true)
+                if (this.uscPlugins.LoadedPlugins.ContainsKey(strClassName))
                 {
                     this.uscPlugins.LoadedPlugins[strClassName].Checked = isEnabled;
                 }
@@ -311,7 +311,7 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.m_dicRemotePlugins.ContainsKey(strClassName) == true)
+                if (this.m_dicRemotePlugins.ContainsKey(strClassName))
                 {
                     PluginDetails spdUpdatedDetails = this.m_dicRemotePlugins[strClassName];
                     spdUpdatedDetails.DisplayPluginVariables = lstVariables;
@@ -327,7 +327,7 @@ namespace PRoCon.Controls
         private void uscPlugins_SetPluginVariable(string strClassName, string strVariable, string strValue)
         {
 
-            if (this.m_blUpdatingPlugins == false)
+            if (!this.m_blUpdatingPlugins)
             {
                 this.m_prcClient.SendProconPluginSetVariablePacket(strClassName, strVariable, strValue);
             }
@@ -336,7 +336,7 @@ namespace PRoCon.Controls
         private void uscPlugins_PluginEnabled(string strClassName, bool blEnabled)
         {
 
-            if (this.m_blUpdatingPlugins == false)
+            if (!this.m_blUpdatingPlugins)
             {
 
                 this.m_prcClient.SendProconPluginEnablePacket(strClassName, blEnabled);
@@ -379,7 +379,7 @@ namespace PRoCon.Controls
         private void WaitForSettingResponse(string strResponseCommand)
         {
 
-            if (this.m_dicAsyncSettingControls.ContainsKey(strResponseCommand) == true)
+            if (this.m_dicAsyncSettingControls.ContainsKey(strResponseCommand))
             {
                 //this.m_dicAsyncSettingControls[strResponseCommand].m_objOriginalValue = String.Empty;
                 this.m_dicAsyncSettingControls[strResponseCommand].m_picStatus.Image = this.m_frmMain.picAjaxStyleLoading.Image;
@@ -404,10 +404,10 @@ namespace PRoCon.Controls
         public void OnSettingResponse(string strResponseCommand, bool blSuccess)
         {
 
-            if (this.m_dicAsyncSettingControls.ContainsKey(strResponseCommand) == true)
+            if (this.m_dicAsyncSettingControls.ContainsKey(strResponseCommand))
             {
 
-                if (this.m_dicAsyncSettingControls[strResponseCommand].m_blReEnableControls == true)
+                if (this.m_dicAsyncSettingControls[strResponseCommand].m_blReEnableControls)
                 {
                     foreach (Control ctrlEnable in this.m_dicAsyncSettingControls[strResponseCommand].ma_ctrlEnabledInputs)
                     {
@@ -424,7 +424,7 @@ namespace PRoCon.Controls
 
                 this.m_dicAsyncSettingControls[strResponseCommand].IgnoreEvent = true;
 
-                if (blSuccess == true)
+                if (blSuccess)
                 {
                     this.m_dicAsyncSettingControls[strResponseCommand].m_picStatus.Image = this.m_frmMain.picAjaxStyleSuccess.Image;
                     this.m_dicAsyncSettingControls[strResponseCommand].m_iTimeout = AsyncStyleSetting.INT_ANIMATEDSETTING_SHOWRESULT_TICKS;
@@ -479,7 +479,7 @@ namespace PRoCon.Controls
                     {
                         kvpAsyncSetting.Value.m_picStatus.Image = null;
 
-                        if (kvpAsyncSetting.Value.m_blReEnableControls == true)
+                        if (kvpAsyncSetting.Value.m_blReEnableControls)
                         {
                             foreach (Control ctrlEnable in kvpAsyncSetting.Value.ma_ctrlEnabledInputs)
                             {
@@ -551,11 +551,11 @@ namespace PRoCon.Controls
                 {
                     CPrivileges spDetails = (CPrivileges)lviItem.SubItems[1].Tag;
 
-                    if (spDetails.HasNoRconAccess == true)
+                    if (spDetails.HasNoRconAccess)
                     {
                         lviItem.SubItems["rconaccess"].Text = this.m_clocLanguage.GetLocalized("uscAccountsPanel.lstLayerAccounts.Privileges.None", null);
                     }
-                    else if (spDetails.HasLimitedRconAccess == true)
+                    else if (spDetails.HasLimitedRconAccess)
                     {
                         lviItem.SubItems["rconaccess"].Text = this.m_clocLanguage.GetLocalized("uscAccountsPanel.lstLayerAccounts.Privileges.Limited", null);
                     }
@@ -564,11 +564,11 @@ namespace PRoCon.Controls
                         lviItem.SubItems["rconaccess"].Text = this.m_clocLanguage.GetLocalized("uscAccountsPanel.lstLayerAccounts.Privileges.Full", null);
                     }
 
-                    if (spDetails.HasNoLocalAccess == true)
+                    if (spDetails.HasNoLocalAccess)
                     {
                         lviItem.SubItems["localaccess"].Text = this.m_clocLanguage.GetLocalized("uscAccountsPanel.lstLayerAccounts.Privileges.None", null);
                     }
-                    else if (spDetails.HasLimitedLocalAccess == true)
+                    else if (spDetails.HasLimitedLocalAccess)
                     {
                         lviItem.SubItems["localaccess"].Text = this.m_clocLanguage.GetLocalized("uscAccountsPanel.lstLayerAccounts.Privileges.Limited", null);
                     }
@@ -580,7 +580,7 @@ namespace PRoCon.Controls
                 }
             }
 
-            if (this.m_blEditingPrivileges == true)
+            if (this.m_blEditingPrivileges)
             {
                 this.ShowLayerPanel(this.pnlAccountPrivileges);
             }
@@ -596,7 +596,7 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.lsvLayerAccounts.Items.ContainsKey(accountName) == false)
+                if (!this.lsvLayerAccounts.Items.ContainsKey(accountName))
                 {
 
                     this.OnSettingResponse("procon.account.create", true);
@@ -640,7 +640,7 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.lsvLayerAccounts.Items.ContainsKey(accountName) == true)
+                if (this.lsvLayerAccounts.Items.ContainsKey(accountName))
                 {
                     this.OnSettingResponse("procon.account.delete", true);
                     this.lsvLayerAccounts.Items.Remove(this.lsvLayerAccounts.Items[accountName]);
@@ -656,7 +656,7 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.lsvLayerAccounts.Items.ContainsKey(accountName) == true)
+                if (this.lsvLayerAccounts.Items.ContainsKey(accountName))
                 {
                     this.OnSettingResponse("procon.layer.setPrivileges", true);
                     this.lsvLayerAccounts.Items[accountName].SubItems["rconaccess"].Tag = accountPrivileges;
@@ -674,9 +674,9 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.lsvLayerAccounts.Items.ContainsKey(accountName) == true)
+                if (this.lsvLayerAccounts.Items.ContainsKey(accountName))
                 {
-                    this.lsvLayerAccounts.Items[accountName].ImageKey = isOnline == true ? "status_online.png" : "status_offline.png";
+                    this.lsvLayerAccounts.Items[accountName].ImageKey = isOnline? "status_online.png" : "status_offline.png";
                 }
             });
         }
@@ -782,7 +782,7 @@ namespace PRoCon.Controls
 
             if (this.txtUsername.Text.Length > 0)
             {
-                if (this.lsvLayerAccounts.Items.ContainsKey(this.txtUsername.Text) == true)
+                if (this.lsvLayerAccounts.Items.ContainsKey(this.txtUsername.Text))
                 {
                     this.lblUserNameExistsError.Visible = true;
                     this.lnkCreateAccount.Enabled = false;

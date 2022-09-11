@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 
 namespace PRoCon.Controls.ServerSettings.MOH
@@ -273,7 +273,7 @@ namespace PRoCon.Controls.ServerSettings.MOH
 
             if (this.IgnoreEvents == false && this.AsyncSettingControls["vars.tdmScoreCounterMaxScore -1"].IgnoreEvent == false)
             {
-                if (this.chkSettingsTDMScoreCounterLimit.Checked == true)
+                if (this.chkSettingsTDMScoreCounterLimit.Checked)
                 {
                     this.WaitForSettingResponse("vars.tdmScoreCounterMaxScore -1", !this.chkSettingsTDMScoreCounterLimit.Checked);
 
@@ -320,7 +320,7 @@ namespace PRoCon.Controls.ServerSettings.MOH
 
             if (this.IgnoreEvents == false && this.AsyncSettingControls["vars.skillLimit 0 0"].IgnoreEvent == false)
             {
-                if (this.chkSettingsNoSkillLimit.Checked == true)
+                if (this.chkSettingsNoSkillLimit.Checked)
                 {
                     this.WaitForSettingResponse("vars.skillLimit 0 0", !this.chkSettingsNoSkillLimit.Checked);
 
@@ -383,7 +383,7 @@ namespace PRoCon.Controls.ServerSettings.MOH
 
             if (this.IgnoreEvents == false && this.AsyncSettingControls["vars.preRoundLimit 1 1"].IgnoreEvent == false)
             {
-                if (this.chkSettingsPreroundLimit.Checked == true)
+                if (this.chkSettingsPreroundLimit.Checked)
                 {
                     this.WaitForSettingResponse("vars.preRoundLimit 1 1", !this.chkSettingsPreroundLimit.Checked);
 
@@ -445,7 +445,7 @@ namespace PRoCon.Controls.ServerSettings.MOH
 
             if (this.IgnoreEvents == false && this.AsyncSettingControls["vars.roundStartTimerDelay -1"].IgnoreEvent == false)
             {
-                if (this.chkSettingsRoundStartTimerDelay.Checked == true)
+                if (this.chkSettingsRoundStartTimerDelay.Checked)
                 {
                     this.WaitForSettingResponse("vars.roundStartTimerDelay -1", !this.chkSettingsRoundStartTimerDelay.Checked);
 
@@ -491,7 +491,7 @@ namespace PRoCon.Controls.ServerSettings.MOH
             {
                 this.lblSettingsPreroundLimitExplanation.Visible = isEnabled;
 
-                if (isEnabled == true)
+                if (isEnabled)
                 {
                     this.numSettingsPreroundLimitLower.Minimum = 2;
                     this.numSettingsPreroundLimitUpper.Minimum = 4;

@@ -1,4 +1,4 @@
-﻿using PRoCon.Core;
+using PRoCon.Core;
 using PRoCon.Core.Accounts;
 using PRoCon.Core.Remote;
 using PRoCon.Core.Remote.Layer;
@@ -57,7 +57,7 @@ namespace PRoCon.Controls
                 {
                     this.AccountsList_AccountAdded(accLoadedAccount);
 
-                    if (this._client.Layer.AccountPrivileges.Contains(accLoadedAccount.Name) == true)
+                    if (this._client.Layer.AccountPrivileges.Contains(accLoadedAccount.Name))
                     {
                         this.uscAccountsPanel_AccountPrivilegesChanged(this._client.Layer.AccountPrivileges[accLoadedAccount.Name]);
                     }
@@ -67,7 +67,7 @@ namespace PRoCon.Controls
                 this.txtLayerBindingAddress.Text = this._client.Layer.BindingAddress;
                 this.txtLayerStartPort.Text = this._client.Layer.ListeningPort.ToString(CultureInfo.InvariantCulture);
 
-                if (this._client.Layer.IsOnline == true)
+                if (this._client.Layer.IsOnline)
                 {
                     this.Layer_LayerOnline();
                 }
@@ -114,7 +114,7 @@ namespace PRoCon.Controls
                 {
                     acAccount.AccountPasswordChanged += new Account.AccountPasswordChangedHandler(acAccount_AccountPasswordChanged);
 
-                    if (this._client.Layer.AccountPrivileges.Contains(acAccount.Name) == true)
+                    if (this._client.Layer.AccountPrivileges.Contains(acAccount.Name))
                     {
                         this._client.Layer.AccountPrivileges[acAccount.Name].AccountPrivilegesChanged += new AccountPrivilege.AccountPrivilegesChangedHandler(uscAccountsPanel_AccountPrivilegesChanged);
                     }
@@ -216,15 +216,15 @@ namespace PRoCon.Controls
                 if (lviItem.SubItems[1].Tag != null && this._language != null && this._client != null)
                 {
 
-                    if (this._client.Layer.AccountPrivileges.Contains(lviItem.Text) == true)
+                    if (this._client.Layer.AccountPrivileges.Contains(lviItem.Text))
                     {
                         CPrivileges spDetails = this._client.Layer.AccountPrivileges[lviItem.Text].Privileges;
 
-                        if (spDetails.HasNoRconAccess == true)
+                        if (spDetails.HasNoRconAccess)
                         {
                             lviItem.SubItems["rconaccess"].Text = this._language.GetLocalized("uscAccountsPanel.lstLayerAccounts.Privileges.None", null);
                         }
-                        else if (spDetails.HasLimitedRconAccess == true)
+                        else if (spDetails.HasLimitedRconAccess)
                         {
                             lviItem.SubItems["rconaccess"].Text = this._language.GetLocalized("uscAccountsPanel.lstLayerAccounts.Privileges.Limited", null);
                         }
@@ -233,11 +233,11 @@ namespace PRoCon.Controls
                             lviItem.SubItems["rconaccess"].Text = this._language.GetLocalized("uscAccountsPanel.lstLayerAccounts.Privileges.Full", null);
                         }
 
-                        if (spDetails.HasNoLocalAccess == true)
+                        if (spDetails.HasNoLocalAccess)
                         {
                             lviItem.SubItems["localaccess"].Text = this._language.GetLocalized("uscAccountsPanel.lstLayerAccounts.Privileges.None", null);
                         }
-                        else if (spDetails.HasLimitedLocalAccess == true)
+                        else if (spDetails.HasLimitedLocalAccess)
                         {
                             lviItem.SubItems["localaccess"].Text = this._language.GetLocalized("uscAccountsPanel.lstLayerAccounts.Privileges.Limited", null);
                         }
@@ -249,7 +249,7 @@ namespace PRoCon.Controls
                 }
             }
 
-            if (this._editingPrivileges == true)
+            if (this._editingPrivileges)
             {
                 this.ShowLayerPanel(this.pnlAccountPrivileges);
             }
@@ -263,7 +263,7 @@ namespace PRoCon.Controls
         void uscAccountsPanel_AccountPrivilegesChanged(AccountPrivilege item)
         {
 
-            if (this.lsvLayerAccounts.Items.ContainsKey(item.Owner.Name) == true)
+            if (this.lsvLayerAccounts.Items.ContainsKey(item.Owner.Name))
             {
                 ListViewItem lviAccount = this.lsvLayerAccounts.Items[item.Owner.Name];
 
@@ -276,7 +276,7 @@ namespace PRoCon.Controls
         void acAccount_AccountPasswordChanged(Account item)
         {
 
-            if (this.lsvLayerAccounts.Items.ContainsKey(item.Name) == true)
+            if (this.lsvLayerAccounts.Items.ContainsKey(item.Name))
             {
                 this.lsvLayerAccounts.Items[item.Name].Tag = item.Password;
             }
@@ -286,7 +286,7 @@ namespace PRoCon.Controls
         {
             item.AccountPasswordChanged -= new Account.AccountPasswordChangedHandler(acAccount_AccountPasswordChanged);
 
-            if (this.lsvLayerAccounts.Items.ContainsKey(item.Name) == true)
+            if (this.lsvLayerAccounts.Items.ContainsKey(item.Name))
             {
                 this.lsvLayerAccounts.Items.Remove(this.lsvLayerAccounts.Items[item.Name]);
             }
@@ -296,7 +296,7 @@ namespace PRoCon.Controls
         {
             item.AccountPasswordChanged += new Account.AccountPasswordChangedHandler(acAccount_AccountPasswordChanged);
 
-            if (this.lsvLayerAccounts.Items.ContainsKey(item.Name) == false)
+            if (!this.lsvLayerAccounts.Items.ContainsKey(item.Name))
             {
 
                 ListViewItem lviNewAccount = new ListViewItem(item.Name)
@@ -335,7 +335,7 @@ namespace PRoCon.Controls
         private void lnkStartStopLayer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
 
-            if (this._client.Layer.IsOnline == false)
+            if (!this._client.Layer.IsOnline)
             {
                 this.ShowLayerPanel(this.pnlStartPRoConLayer);
             }
@@ -380,7 +380,7 @@ namespace PRoCon.Controls
 
         void uscPrivileges_OnUpdatePrivileges(string strAccountName, CPrivileges spUpdatedPrivs)
         {
-            if (this._client.Layer.AccountPrivileges.Contains(strAccountName) == true)
+            if (this._client.Layer.AccountPrivileges.Contains(strAccountName))
             {
                 this._client.Layer.AccountPrivileges[strAccountName].SetPrivileges(spUpdatedPrivs);
             }
@@ -438,7 +438,7 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.lsvLayerAccounts.Items.ContainsKey(sender.Username) == true)
+                if (this.lsvLayerAccounts.Items.ContainsKey(sender.Username))
                 {
                     this.lsvLayerAccounts.Items[sender.Username].ImageKey = @"status_online.png";
                 }
@@ -449,7 +449,7 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.lsvLayerAccounts.Items.ContainsKey(sender.Username) == true)
+                if (this.lsvLayerAccounts.Items.ContainsKey(sender.Username))
                 {
                     this.lsvLayerAccounts.Items[sender.Username].ImageKey = @"status_offline.png";
                 }

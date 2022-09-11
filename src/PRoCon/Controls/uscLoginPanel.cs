@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -85,7 +85,7 @@ namespace PRoCon.Controls
                 this.picConnecting.Visible = value;
                 this.lnkConnectionsConnect.Enabled = !value;
 
-                if (value == true)
+                if (value)
                 {
                     this.lblError.Text = String.Empty;
                 }
@@ -97,7 +97,7 @@ namespace PRoCon.Controls
         {
             set
             {
-                if (value == true)
+                if (value)
                 {
                     this.Hide();
                 }

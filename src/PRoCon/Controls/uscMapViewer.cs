@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -79,7 +79,7 @@ namespace PRoCon.Controls
 
                 if (this.LoadedMapImagePack != null)
                 {
-                    if (this.FullyLoadMap == true)
+                    if (this.FullyLoadMap)
                     {
                         this.LoadedMapImagePack.LoadMap(this.LoadedMapImagePack.LoadedMapFileName, true);
                     }
@@ -106,7 +106,7 @@ namespace PRoCon.Controls
 
                 if (this.LoadedMapImagePack != null)
                 {
-                    if (this.FullyLoadMap == true)
+                    if (this.FullyLoadMap)
                     {
                         this.LoadedMapImagePack.LoadMap(this.LoadedMapImagePack.LoadedMapFileName, true);
                     }
@@ -163,11 +163,11 @@ namespace PRoCon.Controls
                     this.MapZones_MapZoneAdded(zone);
                 }
 
-                if (this.m_prcClient.SV_Variables.Contains("ZONE_TAG_LIST") == true)
+                if (this.m_prcClient.SV_Variables.Contains("ZONE_TAG_LIST"))
                 {
                     this.CheckTagsVariable(this.m_prcClient.SV_Variables["ZONE_TAG_LIST"]);
                 }
-                else if (this.m_prcClient.Variables.Contains("ZONE_TAG_LIST") == true)
+                else if (this.m_prcClient.Variables.Contains("ZONE_TAG_LIST"))
                 {
                     this.CheckTagsVariable(this.m_prcClient.Variables["ZONE_TAG_LIST"]);
                 }
@@ -181,13 +181,13 @@ namespace PRoCon.Controls
 
             this.MapImagePacks.Clear();
 
-            if (Directory.Exists(this.MapPath) == true)
+            if (Directory.Exists(this.MapPath))
             {
                 string[] a_strMapImagePacks = Directory.GetDirectories(this.MapPath);
 
                 foreach (string strMapImagePack in a_strMapImagePacks)
                 {
-                    if (File.Exists(Path.Combine(Path.Combine(this.MapPath, strMapImagePack), "data.map")) == true)
+                    if (File.Exists(Path.Combine(Path.Combine(this.MapPath, strMapImagePack), "data.map")))
                     {
                         this.MapImagePacks.Add(new MapImagePack(Path.Combine(this.MapPath, strMapImagePack), new CLocalization(Path.Combine(Path.Combine(this.MapPath, strMapImagePack), "data.map"), "data.map")));
                     }
@@ -291,7 +291,7 @@ namespace PRoCon.Controls
                 this.cboPlayers.Items.Clear();
                 foreach (CPlayerInfo cpiPlayer in this.m_prcClient.PlayerList)
                 {
-                    if (this.cboPlayers.Items.Contains(cpiPlayer.SoldierName) == false)
+                    if (!this.cboPlayers.Items.Contains(cpiPlayer.SoldierName))
                     {
                         this.cboPlayers.Items.Add(cpiPlayer.SoldierName);
                     }
@@ -353,7 +353,7 @@ namespace PRoCon.Controls
                 this.m_prcClient.SendProconBattlemapListZonesPacket();
                 this.m_prcClient.SendGetProconVarsPacket("ZONE_TAG_LIST");
 
-                if ((this.tsbMapZonesTools.Enabled = spPrivs.CanEditMapZones) == false)
+                if (!(this.tsbMapZonesTools.Enabled = spPrivs.CanEditMapZones))
                 {
                     this.tsbPointer.Checked = true;
                 }
@@ -372,7 +372,7 @@ namespace PRoCon.Controls
                     this.cboPlayers.Items.Clear();
                     foreach (CPlayerInfo cpiPlayer in this.m_prcClient.PlayerList)
                     {
-                        if (this.cboPlayers.Items.Contains(cpiPlayer.SoldierName) == false)
+                        if (!this.cboPlayers.Items.Contains(cpiPlayer.SoldierName))
                         {
                             this.cboPlayers.Items.Add(cpiPlayer.SoldierName);
                         }
@@ -391,7 +391,7 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.cboPlayers.Items.Contains(playerName) == false)
+                if (!this.cboPlayers.Items.Contains(playerName))
                 {
                     this.cboPlayers.Items.Add(playerName);
                 }
@@ -402,7 +402,7 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.cboPlayers.Items.Contains(playerName) == true)
+                if (this.cboPlayers.Items.Contains(playerName))
                 {
 
                     if (String.Compare((string)this.cboPlayers.SelectedItem, playerName) == 0)
@@ -541,7 +541,7 @@ namespace PRoCon.Controls
                     this.uscBattlemap.Visible = false;
                 }
 
-                if (this.LoadedMapImagePack.Readonly == true)
+                if (this.LoadedMapImagePack.Readonly)
                 {
                     this.lblMapPackFilePath.Text = this.m_clocLanguage.GetLocalized("uscMapViewer.lblMapPackFilePath.ReadOnly");
                 }
@@ -660,7 +660,7 @@ namespace PRoCon.Controls
             if (this.LoadedMapImagePack != null)
             {
 
-                if (this.chkLockAxis.Checked == true)
+                if (this.chkLockAxis.Checked)
                 {
                     this.trkOriginY.Value = this.trkOriginX.Value;
                 }
@@ -746,7 +746,7 @@ namespace PRoCon.Controls
 
         private void tsbPointer_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.tsbPointer.Checked == true)
+            if (this.tsbPointer.Checked)
             {
                 this.DeselectTools(this.tsbPointer);
                 this.uscBattlemap.SelectedTool = BattlemapViewTools.Pointer;
@@ -755,7 +755,7 @@ namespace PRoCon.Controls
 
         private void tsbDistanceTool_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.tsbMeasuringTool.Checked == true)
+            if (this.tsbMeasuringTool.Checked)
             {
                 this.DeselectTools(this.tsbMeasuringTool);
                 this.uscBattlemap.SelectedTool = BattlemapViewTools.Measuring;
@@ -764,7 +764,7 @@ namespace PRoCon.Controls
 
         private void tsbMapZonesTools_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.tsbMapZonesTools.Checked == true)
+            if (this.tsbMapZonesTools.Checked)
             {
                 this.DeselectTools(this.tsbMapZonesTools);
                 this.uscBattlemap.SelectedTool = BattlemapViewTools.Zones;
@@ -818,7 +818,7 @@ namespace PRoCon.Controls
 
         private void Variables_VariableAdded(Variable item)
         {
-            if (this.m_prcClient.IsPRoConConnection == false)
+            if (!this.m_prcClient.IsPRoConConnection)
             {
                 this.CheckTagsVariable(item);
             }
@@ -826,7 +826,7 @@ namespace PRoCon.Controls
 
         private void Variables_VariableUpdated(Variable item)
         {
-            if (this.m_prcClient.IsPRoConConnection == false)
+            if (!this.m_prcClient.IsPRoConConnection)
             {
                 this.CheckTagsVariable(item);
             }
@@ -834,7 +834,7 @@ namespace PRoCon.Controls
 
         private void Variables_VariableRemoved(Variable item)
         {
-            if (this.m_prcClient.IsPRoConConnection == false)
+            if (!this.m_prcClient.IsPRoConConnection)
             {
                 this.CheckTagsVariable(item);
             }
@@ -878,7 +878,7 @@ namespace PRoCon.Controls
 
                 MapZoneDrawing selectedZone = (MapZoneDrawing)this.txtTagList.Tag;
 
-                if (this.m_prcClient.IsPRoConConnection == true)
+                if (this.m_prcClient.IsPRoConConnection)
                 {
                     // Send to layer
 
@@ -887,7 +887,7 @@ namespace PRoCon.Controls
                 else
                 {
 
-                    if (this.m_prcClient.MapGeometry.MapZones.Contains(selectedZone.UID) == true)
+                    if (this.m_prcClient.MapGeometry.MapZones.Contains(selectedZone.UID))
                     {
 
                         this.m_prcClient.MapGeometry.MapZones[selectedZone.UID].Tags.FromString(this.txtTagList.Text);
@@ -921,7 +921,7 @@ namespace PRoCon.Controls
             if (this.m_prcClient != null)
             {
 
-                if (this.m_prcClient.IsPRoConConnection == true)
+                if (this.m_prcClient.IsPRoConConnection)
                 {
                     //List<string> list = new List<string>() { "procon.battlemap.modifyZonePoints", strUid };
                     //list.Add(zonePoints.Length.ToString());
@@ -942,13 +942,13 @@ namespace PRoCon.Controls
             if (this.m_prcClient != null)
             {
 
-                if (this.m_prcClient.IsPRoConConnection == true)
+                if (this.m_prcClient.IsPRoConConnection)
                 {
                     this.m_prcClient.SendProconBattlemapDeleteZonePacket(strUid);
                 }
                 else
                 {
-                    if (this.m_prcClient.MapGeometry.MapZones.Contains(strUid) == true)
+                    if (this.m_prcClient.MapGeometry.MapZones.Contains(strUid))
                     {
                         this.m_prcClient.MapGeometry.MapZones.Remove(strUid);
                     }
@@ -962,7 +962,7 @@ namespace PRoCon.Controls
             if (this.m_prcClient != null)
             {
 
-                if (this.m_prcClient.IsPRoConConnection == true)
+                if (this.m_prcClient.IsPRoConConnection)
                 {
                     // Create it on the layer..
                     //List<string> list = new List<string>() { "procon.battlemap.createZone", mapFileName };
@@ -980,7 +980,7 @@ namespace PRoCon.Controls
 
         private void MapZones_MapZoneChanged(MapZoneDrawing item)
         {
-            if (this.m_isModifyingTags == false)
+            if (!this.m_isModifyingTags)
             {
                 this.m_isModifyingTags = true;
 

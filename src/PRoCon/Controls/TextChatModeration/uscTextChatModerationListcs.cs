@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -97,7 +97,7 @@ namespace PRoCon.Controls.TextChatModeration
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.lsvTextChatModerationList.Items.ContainsKey(playerEntry.SoldierName.ToLower()) == false)
+                if (!this.lsvTextChatModerationList.Items.ContainsKey(playerEntry.SoldierName.ToLower()))
                 {
 
                     ListViewItem lsvNewSoldier = new ListViewItem(playerEntry.SoldierName);
@@ -134,7 +134,7 @@ namespace PRoCon.Controls.TextChatModeration
         {
             this.InvokeIfRequired(() =>
             {
-                if (this.lsvTextChatModerationList.Items.ContainsKey(playerEntry.SoldierName.ToLower()) == true)
+                if (this.lsvTextChatModerationList.Items.ContainsKey(playerEntry.SoldierName.ToLower()))
                 {
                     this.lsvTextChatModerationList.Items.RemoveByKey(playerEntry.SoldierName.ToLower());
                 }

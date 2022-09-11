@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -332,7 +332,7 @@ namespace PRoCon.Controls
 
                 double dblAmount = 0.0;
 
-                if (Double.TryParse(txtSeconds.Text, out dblAmount) == true)
+                if (Double.TryParse(txtSeconds.Text, out dblAmount))
                 {
                     dblAmount *= a_iMultiplier[cboTimeMultiplier.SelectedIndex];
 
@@ -354,7 +354,7 @@ namespace PRoCon.Controls
 
                 double dblAmount = 0.0;
 
-                if (Double.TryParse(txtSeconds.Text, out dblAmount) == true)
+                if (Double.TryParse(txtSeconds.Text, out dblAmount))
                 {
                     dblAmount *= a_iMultiplier[cboTimeMultiplier.SelectedIndex];
 
@@ -375,22 +375,22 @@ namespace PRoCon.Controls
             if (clocLanguage != null)
             {
 
-                if (blKill == true)
+                if (blKill)
                 {
                     strLabel = clocLanguage.GetLocalized("uscPlayerPunishPanel.lblConfirmation.Kill", new string[] { strBanDescription });
                     blAbleToPunish = true && (cpPrivileges.CanKillPlayers == true);
                 }
-                else if (blKick == true)
+                else if (blKick)
                 {
                     strLabel = clocLanguage.GetLocalized("uscPlayerPunishPanel.lblConfirmation.Kick", new string[] { strBanDescription });
                     blAbleToPunish = true && (cpPrivileges.CanKickPlayers == true);
                 }
-                else if (blPerm == true)
+                else if (blPerm)
                 {
                     strLabel = clocLanguage.GetLocalized("uscPlayerPunishPanel.lblConfirmation.PermanentBan", new string[] { strBanDescription });
                     blAbleToPunish = true && (cpPrivileges.CanPermanentlyBanPlayers == true);
                 }
-                else if (blTemp == true)
+                else if (blTemp)
                 {
 
                     string strBanLength = uscPlayerPunishPanel.GetBanLength(txtTime, cboTimeMultiplier, a_strTimeDescriptionsLong);
@@ -474,7 +474,7 @@ namespace PRoCon.Controls
                 this.btnPunish.Enabled = blAbleToPunish;
             }
 
-            if (this.btnPunish.Enabled == false)
+            if (!this.btnPunish.Enabled)
             {
                 this.lblConfirmation.ForeColor = Color.Maroon;
             }
@@ -516,7 +516,7 @@ namespace PRoCon.Controls
             this.rdoPunishOnIP.Enabled = true & !this.m_blPunkbuster;
             this.rdoPunishOnGUID.Enabled = true;// &!this.m_blPunkbuster;
 
-            if (this.m_blPunkbuster == true)
+            if (this.m_blPunkbuster)
             {
                 this.rdoPunishOnGUID.Checked = true;
             }
@@ -533,7 +533,7 @@ namespace PRoCon.Controls
             this.rdoPunishOnName.Enabled = true;
             this.rdoPunishOnGUID.Enabled = true & !this.m_blPunkbuster;
 
-            if (this.m_blPunkbuster == true)
+            if (this.m_blPunkbuster)
             {
                 this.rdoPunishOnName.Checked = true;
             }
@@ -550,7 +550,7 @@ namespace PRoCon.Controls
         {
             double dblAmount = 0.0;
 
-            if (Double.TryParse(this.txtTime.Text, out dblAmount) == false)
+            if (!Double.TryParse(this.txtTime.Text, out dblAmount))
             {
                 this.txtTime.Text = String.Empty;
             }
@@ -600,7 +600,7 @@ namespace PRoCon.Controls
 
                 this.PunishPlayer(new List<string>() { "admin.killPlayer", this.m_strSoldierName });
             }
-            else if (this.rdoKick.Checked == true)
+            else if (this.rdoKick.Checked)
             {
                 /*
                 if (this.rdoPunishOnName.Checked == true) {
@@ -617,7 +617,7 @@ namespace PRoCon.Controls
                     //strBuildPacket = String.Format(@"\""pb_sv_kick {0} 0 ""{1}"" ""{2}""\""", this.m_strSlotID, this.cboReason.Text, this.cboReason.Text);
                 }
                 */
-                if (this.m_blPunkbuster == false)
+                if (!this.m_blPunkbuster)
                 {
                     lstWords.Add("admin.kickPlayer");
                     lstWords.Add(this.m_strSoldierName);
@@ -630,10 +630,10 @@ namespace PRoCon.Controls
                 }
 
             }
-            else if (this.rdoPermanentlyBan.Checked == true)
+            else if (this.rdoPermanentlyBan.Checked)
             {
 
-                if (this.rdoPunishOnName.Checked == true)
+                if (this.rdoPunishOnName.Checked)
                 {
                     lstWords.Add("banList.add");
                     lstWords.Add(name);
@@ -643,7 +643,7 @@ namespace PRoCon.Controls
 
                     //strBuildPacket = String.Format(@"admin.banPlayer ""{0}"" perm", this.m_strSoldierName);
                 }
-                else if (this.rdoPunishOnIP.Checked == true)
+                else if (this.rdoPunishOnIP.Checked)
                 {
 
                     lstWords.Add("banList.add");
@@ -654,9 +654,9 @@ namespace PRoCon.Controls
 
                     //strBuildPacket = String.Format(@"admin.banIP ""{0}"" perm", this.m_strIP);
                 }
-                else if (this.rdoPunishOnGUID.Checked == true)
+                else if (this.rdoPunishOnGUID.Checked)
                 {
-                    if (this.m_blPunkbuster == false)
+                    if (!this.m_blPunkbuster)
                     {
                         lstWords.Add("banList.add");
                         lstWords.Add("guid");
@@ -673,12 +673,12 @@ namespace PRoCon.Controls
                     //strBuildPacket = String.Format(@"pb_sv_ban {0} ""{1}"" ""{2}""", this.m_strSlotID, this.cboReason.Text, this.cboReason.Text);
                 }
             }
-            else if (this.rdoTemporaryBan.Checked == true)
+            else if (this.rdoTemporaryBan.Checked)
             {
-                if (this.rdoPunishOnName.Checked == true)
+                if (this.rdoPunishOnName.Checked)
                 {
 
-                    if (this.m_blPunkbuster == false)
+                    if (!this.m_blPunkbuster)
                     {
                         lstWords.Add("banList.add");
                         lstWords.Add(name);
@@ -694,7 +694,7 @@ namespace PRoCon.Controls
                     }
                     //strBuildPacket = String.Format(@"admin.banPlayer ""{0}"" seconds {1}", this.m_strSoldierName, this.GetBanLength() * 60);
                 }
-                else if (this.rdoPunishOnIP.Checked == true)
+                else if (this.rdoPunishOnIP.Checked)
                 {
                     lstWords.Add("banList.add");
                     lstWords.Add("ip");
@@ -705,7 +705,7 @@ namespace PRoCon.Controls
 
                     //strBuildPacket = String.Format(@"admin.banIP ""{0}"" seconds {1}", this.m_strIP, this.GetBanLength() * 60);
                 }
-                else if (this.rdoPunishOnGUID.Checked == true)
+                else if (this.rdoPunishOnGUID.Checked)
                 {
                     lstWords.Add("banList.add");
                     lstWords.Add("guid");

@@ -1,4 +1,4 @@
-﻿/*  Copyright 2010 Geoffrey 'Phogue' Green
+/*  Copyright 2010 Geoffrey 'Phogue' Green
 
     http://www.phogue.net
  
@@ -48,7 +48,7 @@ namespace PRoCon.Console
 
             PRoConApplication application = null;
 
-            if (PRoConApplication.IsProcessOpen() == false)
+            if (!PRoConApplication.IsProcessOpen())
             {
                 try
                 {
@@ -69,10 +69,10 @@ namespace PRoCon.Console
                     GC.Collect();
                     
                     // Check if we are running in a docker container
-                    if (System.IO.File.Exists("/proc/1/cgroup") == true)
+                    if (System.IO.File.Exists("/proc/1/cgroup"))
                     {
                         string strCGroup = System.IO.File.ReadAllText("/proc/1/cgroup");
-                        if (strCGroup.Contains("/docker/") == true)
+                        if (strCGroup.Contains("/docker/"))
                         {
                             System.Console.WriteLine("[PRoCon] Running in a Docker container.");
                         }
