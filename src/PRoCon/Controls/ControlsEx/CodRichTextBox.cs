@@ -19,7 +19,7 @@ namespace PRoCon.Controls.ControlsEx
         /// <summary>
         /// Lock used whenever we modify the append text buffer
         /// </summary>
-        protected readonly Object AppendTextBufferLock = new Object();
+        protected readonly Object AppendTextBufferLock = new();
 
         /// <summary>
         /// Timer to tick every 100 ms and flush the cache
@@ -227,10 +227,8 @@ namespace PRoCon.Controls.ControlsEx
                                 if (i < appendedTextLength - 1 && char.IsDigit(text[i + 1]) == true)
                                 {
 
-                                    STextChange change = new STextChange
-                                    {
-                                        Position = i
-                                    };
+                                    STextChange change = new()
+{Position = i};
 
                                     colourCode = text.Substring(i, 2);
 
@@ -253,10 +251,8 @@ namespace PRoCon.Controls.ControlsEx
                                     if (i < appendedTextLength - 1 && ((fontCode = text[i + 1]) == 'b' || text[i + 1] == 'n' || text[i + 1] == 'i'))
                                     {
 
-                                        STextChange stcChange = new STextChange
-                                        {
-                                            Position = i
-                                        };
+                                        STextChange stcChange = new()
+{Position = i};
 
                                         switch (fontCode)
                                         {

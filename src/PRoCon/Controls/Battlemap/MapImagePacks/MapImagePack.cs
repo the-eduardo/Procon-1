@@ -258,7 +258,7 @@ namespace PRoCon.Controls.Battlemap.MapImagePacks
 
                 if (overlay != null)
                 {
-                    Bitmap newMapImage = new Bitmap(this.MapImage);
+                    Bitmap newMapImage = new(this.MapImage);
 
                     Graphics g = Graphics.FromImage(newMapImage);
                     //g.DrawImage(this.MapImage, new Point(0, 0));
@@ -307,7 +307,7 @@ namespace PRoCon.Controls.Battlemap.MapImagePacks
             {
                 bmRotatedImage = new Bitmap(imgSource.Width, imgSource.Height);
                 Graphics g = Graphics.FromImage(bmRotatedImage);
-                Matrix m = new Matrix();
+                Matrix m = new();
                 m.RotateAt(-this.MapRotation, new PointF(imgSource.Width / 2, imgSource.Height / 2));
                 g.Transform = m;
 

@@ -619,7 +619,7 @@ namespace PRoCon.Controls
                     if (!this.lsvReservedList.Items.ContainsKey(strSoldierName))
                     {
 
-                        ListViewItem lsvNewSoldier = new ListViewItem(strSoldierName);
+                        ListViewItem lsvNewSoldier = new(strSoldierName);
                         lsvNewSoldier.Name = strSoldierName;
 
                         this.lsvReservedList.Items.Add(lsvNewSoldier);
@@ -647,7 +647,7 @@ namespace PRoCon.Controls
                 if (!this.lsvReservedList.Items.ContainsKey(strSoldierName))
                 {
 
-                    ListViewItem lsvNewSoldier = new ListViewItem(strSoldierName);
+                    ListViewItem lsvNewSoldier = new(strSoldierName);
                     lsvNewSoldier.Name = strSoldierName;
 
                     this.lsvReservedList.Items.Add(lsvNewSoldier);
@@ -787,7 +787,7 @@ namespace PRoCon.Controls
                     if (!this.lsvSpectatorList.Items.ContainsKey(strSoldierName))
                     {
 
-                        ListViewItem lsvNewSoldier = new ListViewItem(strSoldierName);
+                        ListViewItem lsvNewSoldier = new(strSoldierName);
                         lsvNewSoldier.Name = strSoldierName;
 
                         this.lsvSpectatorList.Items.Add(lsvNewSoldier);
@@ -815,7 +815,7 @@ namespace PRoCon.Controls
                 if (!this.lsvSpectatorList.Items.ContainsKey(strSoldierName))
                 {
 
-                    ListViewItem lsvNewSoldier = new ListViewItem(strSoldierName);
+                    ListViewItem lsvNewSoldier = new(strSoldierName);
                     lsvNewSoldier.Name = strSoldierName;
 
                     this.lsvSpectatorList.Items.Add(lsvNewSoldier);
@@ -1016,7 +1016,7 @@ namespace PRoCon.Controls
 
         private ListViewItem CreateBlankBanEntry(string strName)
         {
-            ListViewItem lviNewBanEntry = new ListViewItem();
+            ListViewItem lviNewBanEntry = new();
             lviNewBanEntry.Name = strName;
             lviNewBanEntry.Text = String.Empty;
 
@@ -1642,7 +1642,7 @@ namespace PRoCon.Controls
 
                 if (this.lsvBanlist.SelectedItems.Count > 0)
                 {
-                    Point pntMouseLocation = new Point(e.X, e.Y);
+                    Point pntMouseLocation = new(e.X, e.Y);
                     this.ctxBanlistMenuStrip.Show(this.lsvBanlist, pntMouseLocation);
                 }
             }

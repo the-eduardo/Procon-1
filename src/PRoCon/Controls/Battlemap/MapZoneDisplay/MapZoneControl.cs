@@ -138,7 +138,7 @@ namespace PRoCon.Controls.Battlemap.MapZoneDisplay
 
             foreach (Point3D point in points)
             {
-                MapZonePointControl newPoint = new MapZonePointControl(new PointF(point.X, point.Y));
+                MapZonePointControl newPoint = new(new PointF(point.X, point.Y));
                 newPoint.MapZonePointDropped += new MapZonePointControl.MapZonePointControlDragHandler(newPoint_MapZonePointDropped);
                 this.lstPoints.Add(newPoint);
             }

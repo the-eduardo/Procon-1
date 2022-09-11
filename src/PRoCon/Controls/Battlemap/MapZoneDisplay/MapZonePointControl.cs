@@ -1,4 +1,4 @@
-﻿// Copyright 2010 Geoffrey 'Phogue' Green
+// Copyright 2010 Geoffrey 'Phogue' Green
 // 
 // http://www.phogue.net
 //  
@@ -50,7 +50,7 @@ namespace PRoCon.Controls.Battlemap.MapZoneDisplay
                 this.m_zonePoint = value;
                 this.ObjectPath = new GraphicsPath();
 
-                RectangleF recPoint = new RectangleF(value.X - 3.0F, value.Y - 3.0F, 6.0F, 6.0F);
+                RectangleF recPoint = new(value.X - 3.0F, value.Y - 3.0F, 6.0F, 6.0F);
                 this.ObjectPath.AddRectangle(recPoint);
                 this.HotSpot = this.ObjectPath.GetBounds();
 

@@ -202,7 +202,7 @@ namespace PRoCon.Controls.Maplist
 
                         if (!this.lsvMaplistPool.Items.ContainsKey(map.FileName.ToLower()))
                         {
-                            ListViewItem mapPoolItem = new ListViewItem();
+                            ListViewItem mapPoolItem = new();
                             mapPoolItem.Tag = new MaplistEntry(map.PlayList, map.FileName, 0);
                             //mapPoolItem.Tag = new MaplistEntry(map.FileName);
                             mapPoolItem.Text = map.GameMode;
@@ -293,7 +293,7 @@ namespace PRoCon.Controls.Maplist
 
                 for (int i = 0; i < lstMapList.Count; i++)
                 {
-                    ListViewItem lviMap = new ListViewItem();
+                    ListViewItem lviMap = new();
                     lviMap.Tag = lstMapList[i];
                     lviMap.Name = lstMapList[i].MapFileName;
                     lviMap.Text = Convert.ToString(i + 1);
@@ -408,7 +408,7 @@ namespace PRoCon.Controls.Maplist
         {
             this.lsvMaplist.BeginUpdate();
 
-            ListViewItem lviMap = new ListViewItem();
+            ListViewItem lviMap = new();
 
             lviMap.Tag = mapEntry;
             lviMap.Name = mapEntry.MapFileName;
@@ -629,7 +629,7 @@ namespace PRoCon.Controls.Maplist
 
             Point cp = this.lsvMaplist.PointToClient(new Point(e.X, e.Y));
             ListViewItem dragToItem = this.lsvMaplist.GetItemAt(cp.X, cp.Y);
-            Rectangle itemBounds = new Rectangle();
+            Rectangle itemBounds = new();
             if (dragToItem != null)
             {
                 itemBounds = dragToItem.GetBounds(ItemBoundsPortion.Entire);
@@ -648,7 +648,7 @@ namespace PRoCon.Controls.Maplist
             {
                 Graphics g = this.lsvMaplist.CreateGraphics();
 
-                GraphicsPath gp = new GraphicsPath();
+                GraphicsPath gp = new();
                 gp.AddLines(
                     new Point[]
                     {

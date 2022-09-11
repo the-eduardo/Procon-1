@@ -68,7 +68,7 @@ namespace PRoCon.Controls.Battlemap
             this.DrawBwShape(g, this.ObjectPath, flOpacity, flOutlineWidth, clBackground, foreColourBrush);
         }
 
-        protected readonly Pen m_pOneWidth = new Pen(Brushes.Black, 1.0F);
+        protected readonly Pen m_pOneWidth = new(Brushes.Black, 1.0F);
 
         protected void DrawBwShape(Graphics g, GraphicsPath gpPass, float flOpacity, float flOutlineWidth, Color clBackground, Color clForecolour)
         {
@@ -76,14 +76,14 @@ namespace PRoCon.Controls.Battlemap
             {
                 GraphicsPath gp = (GraphicsPath)gpPass.Clone();
 
-                Matrix m = new Matrix();
+                Matrix m = new();
                 m.Translate(this.m_pntDrawOffset.X, this.m_pntDrawOffset.Y);
                 gp.Transform(m);
 
-                Pen pen = new Pen(Color.FromArgb((int)(255.0F * flOpacity), clBackground), flOutlineWidth);
+                Pen pen = new(Color.FromArgb((int)(255.0F * flOpacity), clBackground), flOutlineWidth);
                 pen.LineJoin = LineJoin.Round;
                 g.DrawPath(pen, gp);
-                SolidBrush brush = new SolidBrush(Color.FromArgb((int)(255.0F * flOpacity), clForecolour));
+                SolidBrush brush = new(Color.FromArgb((int)(255.0F * flOpacity), clForecolour));
                 g.FillPath(brush, gp);
 
                 brush.Dispose();
@@ -99,11 +99,11 @@ namespace PRoCon.Controls.Battlemap
             {
                 GraphicsPath gp = (GraphicsPath)gpPass.Clone();
 
-                Matrix m = new Matrix();
+                Matrix m = new();
                 m.Translate(this.m_pntDrawOffset.X, this.m_pntDrawOffset.Y);
                 gp.Transform(m);
 
-                Pen pen = new Pen(Color.FromArgb((int)(255.0F * flOpacity), clBackground), flOutlineWidth);
+                Pen pen = new(Color.FromArgb((int)(255.0F * flOpacity), clBackground), flOutlineWidth);
                 pen.LineJoin = LineJoin.Round;
                 g.DrawPath(pen, gp);
                 //SolidBrush brush = new SolidBrush(Color.FromArgb((int)(255.0F * flOpacity), clForecolour));

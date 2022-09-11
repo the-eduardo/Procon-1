@@ -134,7 +134,7 @@ namespace PRoCon.Controls
 
                 foreach (CapturableEvents ceCapturedEvents in this.m_prcClient.EventsLogging.CapturedEvents)
                 {
-                    ListViewItem lviNewCapture = new ListViewItem(ceCapturedEvents.ToString());
+                    ListViewItem lviNewCapture = new(ceCapturedEvents.ToString());
                     lviNewCapture.Name = ceCapturedEvents.ToString();
                     this.lsvCapturedEvents.Items.Add(lviNewCapture);
                 }
@@ -185,7 +185,7 @@ namespace PRoCon.Controls
         private ListViewItem CreateLoggedEvent(CapturedEvent ceEvent)
         {
 
-            ListViewItem lviNewEvent = new ListViewItem();
+            ListViewItem lviNewEvent = new();
 
             if (ceEvent.EventType == EventType.Game)
             {
@@ -284,7 +284,7 @@ namespace PRoCon.Controls
         {
             this.InvokeIfRequired(() =>
             {
-                ListViewItem lviNewCapture = new ListViewItem(item.ToString());
+                ListViewItem lviNewCapture = new(item.ToString());
                 lviNewCapture.Name = item.ToString();
                 this.lsvCapturedEvents.Items.Add(lviNewCapture);
             });

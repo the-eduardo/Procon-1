@@ -281,7 +281,7 @@ namespace PRoCon.Controls.ServerSettings.VU
 
             if (cdfSender != null)
             {
-                MemoryStream msImage = new MemoryStream(cdfSender.CompleteFileData);
+                MemoryStream msImage = new(cdfSender.CompleteFileData);
                 Image imgCompleted = Image.FromStream(msImage);
 
                 this.picSettingsDownloadedBannerURL.Image = imgCompleted;

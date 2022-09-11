@@ -100,7 +100,7 @@ namespace PRoCon.Controls.TextChatModeration
                 if (!this.lsvTextChatModerationList.Items.ContainsKey(playerEntry.SoldierName.ToLower()))
                 {
 
-                    ListViewItem lsvNewSoldier = new ListViewItem(playerEntry.SoldierName);
+                    ListViewItem lsvNewSoldier = new(playerEntry.SoldierName);
                     lsvNewSoldier.Group = this.lsvTextChatModerationList.Groups[playerEntry.PlayerModerationLevel.ToString().ToLower()];
                     lsvNewSoldier.Name = playerEntry.SoldierName.ToLower();
 
