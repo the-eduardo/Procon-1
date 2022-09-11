@@ -252,7 +252,7 @@ namespace PRoCon.Core
                     }
                 }
 
-                cdfParent.ma_bCompleteFile = new byte[0];
+                cdfParent.ma_bCompleteFile = Array.Empty<byte>();
 
                 cdfParent.m_stmResponseStream = cdfParent.m_wrResponse.GetResponseStream();
 

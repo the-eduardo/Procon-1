@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 
 namespace PRoCon
 {
     public static class ControlHelpers
     {
-        private readonly static object[] Empty = new object[0];
+        private readonly static object[] Empty = Array.Empty<object>();
 
         public static void InvokeIfRequired(this ISynchronizeInvoke control, Action action)
         {
