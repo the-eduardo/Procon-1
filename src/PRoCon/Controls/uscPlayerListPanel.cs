@@ -595,9 +595,8 @@ namespace PRoCon.Controls
 
         private static void SetPlayerTeamID(ListViewItem player, int iTeamID)
         {
-            var tag = player.Tag as AdditionalPlayerInfo;
 
-            if (tag != null && tag.Player != null)
+            if (player.Tag is AdditionalPlayerInfo tag&& tag.Player != null)
             {
                 tag.Player.TeamID = iTeamID;
             }
@@ -605,9 +604,8 @@ namespace PRoCon.Controls
 
         private void SetPlayerSquadID(ListViewItem player, int squadId)
         {
-            var tag = player.Tag as AdditionalPlayerInfo;
 
-            if (tag != null && tag.Player != null)
+            if (player.Tag is AdditionalPlayerInfo tag&& tag.Player != null)
             {
                 if (this.Client != null && this.Client.Game != null && this.Client.Game.HasSquads == true)
                 {
@@ -647,9 +645,8 @@ namespace PRoCon.Controls
         {
             if (this.Players.ContainsKey(String.Format("procon.playerlist.totals{0}", teamId)))
             {
-                var tag = this.Players[String.Format("procon.playerlist.totals{0}", teamId)].Tag as AdditionalPlayerInfo;
 
-                if (tag != null)
+                if (this.Players[String.Format("procon.playerlist.totals{0}", teamId)].Tag is AdditionalPlayerInfo tag)
                 {
                     tag.KitCounter.Clear();
                     tag.Player.Kills = 0;
@@ -689,9 +686,8 @@ namespace PRoCon.Controls
         {
             if (this.Players.ContainsKey(String.Format("procon.playerlist.totals{0}", iTeamID)))
             {
-                var tag = this.Players[String.Format("procon.playerlist.totals{0}", iTeamID)].Tag as AdditionalPlayerInfo;
 
-                if (tag != null)
+                if (this.Players[String.Format("procon.playerlist.totals{0}", iTeamID)].Tag is AdditionalPlayerInfo tag)
                 {
                     tag.Player.Kills += player.Player.Kills;
                     tag.Player.Deaths += player.Player.Deaths;
@@ -1788,9 +1784,8 @@ namespace PRoCon.Controls
                     // Don't award a kill for a suicide
                     if (killer != null && kill.IsSuicide == false)
                     {
-                        var tag = killer.Tag as AdditionalPlayerInfo;
 
-                        if (tag != null)
+                        if (killer.Tag is AdditionalPlayerInfo tag)
                         {
                             if (killer.Tag != null && tag.Player != null)
                             {
@@ -1821,9 +1816,8 @@ namespace PRoCon.Controls
 
                     if (victim != null)
                     {
-                        var tag = victim.Tag as AdditionalPlayerInfo;
 
-                        if (tag != null)
+                        if (victim.Tag is AdditionalPlayerInfo tag)
                         {
                             if (victim.Tag != null && tag.Player != null)
                             {
@@ -2409,8 +2403,7 @@ namespace PRoCon.Controls
 
         private void squadChange_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem item = sender as ToolStripMenuItem;
-            if (item != null)
+            if (sender is ToolStripMenuItem item)
             {
                 CPlayerInfo player = (CPlayerInfo)((object[])item.Tag)[0];
                 int destinationSquadId = (int)((object[])item.Tag)[1];
@@ -2421,8 +2414,7 @@ namespace PRoCon.Controls
 
         private void teamChange_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem item = sender as ToolStripMenuItem;
-            if (item != null)
+            if (sender is ToolStripMenuItem item)
             {
                 CPlayerInfo player = (CPlayerInfo)((object[])item.Tag)[0];
                 CTeamName destinationTeam = (CTeamName)((object[])item.Tag)[1];
@@ -2509,8 +2501,7 @@ namespace PRoCon.Controls
 
         private void statsLookupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CPlayerInfo tag = this.voiceToolStripMenuItem.Tag as CPlayerInfo;
-            if (tag != null)
+            if (this.voiceToolStripMenuItem.Tag is CPlayerInfo tag)
             {
                 if (this.Client.Game is MoHClient)
                 {
@@ -2538,9 +2529,7 @@ namespace PRoCon.Controls
         private void statsLookupToolStripMenuItemCustom_Click(object sender, EventArgs e)
         {
             string statsUrl = String.Empty;
-
-            ToolStripMenuItem item = sender as ToolStripMenuItem;
-            if (item != null)
+            if (sender is ToolStripMenuItem item)
             {
                 String statsUrlBuildError = String.Empty;
 

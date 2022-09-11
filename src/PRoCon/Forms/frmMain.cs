@@ -946,9 +946,7 @@ namespace PRoCon.Forms
 
                 Point cursor = this.PointToClient(Cursor.Position);
 
-                uscServerConnection item = this.cboServerList.SelectedItem as uscServerConnection;
-
-                if (item != null)
+                if (this.cboServerList.SelectedItem is uscServerConnection item)
                 {
                     uscServerConnection selectedServer = item;
 
