@@ -42,8 +42,8 @@ namespace PRoCon.Controls.ServerSettings.MOH
             this.AsyncSettingControls.Add("vars.preRoundLimit 1 1", new AsyncStyleSetting(this.picSettingsPreRoundLimits, this.chkSettingsPreroundLimit, new Control[] { this.chkSettingsPreroundLimit, this.numSettingsPreroundLimitLower, this.numSettingsPreroundLimitUpper, this.lnkSettingsPreroundLimitApply }, true));
             this.AsyncSettingControls.Add("vars.preRoundLimit", new AsyncStyleSetting(this.picSettingsPreRoundLimits, null, new Control[] { this.chkSettingsPreroundLimit, this.numSettingsPreroundLimitLower, this.numSettingsPreroundLimitUpper, this.lnkSettingsPreroundLimitApply }, true));
 
-            this.ma_iPreviousSuccessSkillLimit = new int[2] { 0, 5000 };
-            this.ma_iPreviousSuccessPreroundLimit = new int[2] { 1, 24 };
+            this.ma_iPreviousSuccessSkillLimit = new[]{ 0, 5000 };
+            this.ma_iPreviousSuccessPreroundLimit = new[]{ 1, 24 };
         }
 
         public override void SetLocalization(CLocalization clocLanguage)
